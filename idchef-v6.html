@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ID Chef — Иванков Денис | idchef.lv</title>
+<meta name="description" content="ID Chef — Иванков Денис. Шеф-повар, консультант. 30+ лет. Запуск ресторанов, оптимизация, разработка меню. Рига, Латвия."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Денис Иванков","jobTitle":"Шеф-повар, консультант","brand":{"@type":"Brand","name":"ID Chef"},"url":"https://idchef.lv","telephone":"+37125745745","email":"info@idchef.lv"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Barlow+Condensed:ital,wght@0,300;0,400;0,700;0,900;1,300;1,700&family=Special+Elite&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#f0ece3;--bg2:#e5e0d5;--ink:#0d0c0b;--ink2:#1e1b16;
+  --faded:#6b6257;--ghost:#b0a898;--red:#b01a0a;--off:#f5f2eb;
+  --nav:52px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Barlow Condensed',sans-serif;font-weight:400;overflow-x:hidden;cursor:crosshair}
+
+/* ── GRAIN (NO mix-blend-mode, z high but pointer-events:none) ── */
+#grain{position:fixed;inset:0;z-index:9000;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23f)' opacity='0.055'/%3E%3C/svg%3E")}
+#vig{position:fixed;inset:0;z-index:8999;pointer-events:none;background:radial-gradient(ellipse 120% 100% at 50% 50%,transparent 42%,rgba(13,12,11,.25) 100%)}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:10000;height:var(--nav);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;background:rgba(240,236,227,.95);backdrop-filter:blur(8px);border-bottom:1.5px solid rgba(13,12,11,.13);transition:background .3s}
+.n-logo{font-family:'Russo One',sans-serif;font-size:1.25rem;letter-spacing:.08em;color:var(--ink);text-decoration:none;flex-shrink:0}
+.n-logo em{color:var(--red);font-style:normal}
+.n-links{display:flex;gap:1.8rem;list-style:none;flex:1;justify-content:center}
+.n-links a{color:var(--faded);text-decoration:none;font-size:.64rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;transition:color .2s}
+.n-links a:hover{color:var(--ink)}
+.lang-sw{display:flex;border:1.5px solid rgba(13,12,11,.28);flex-shrink:0}
+.lb{background:transparent;border:none;border-right:1.5px solid rgba(13,12,11,.28);color:var(--faded);font-family:'Barlow Condensed',sans-serif;font-size:.64rem;font-weight:700;letter-spacing:.1em;padding:.3rem .6rem;cursor:crosshair;text-transform:uppercase;transition:all .15s}
+.lb:last-child{border-right:none}
+.lb.on{background:var(--ink);color:var(--bg)}
+.lb:hover:not(.on){background:rgba(13,12,11,.06)}
+
+/* ── SECTIONS base ── */
+section{position:relative;padding:5rem 2rem}
+.s-eyebrow{font-size:.6rem;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:var(--ghost);margin-bottom:.6rem;display:flex;align-items:center;gap:.6rem}
+.s-eyebrow::before{content:'///';color:var(--red);letter-spacing:0;font-size:.75rem}
+.s-title{font-family:'Russo One',sans-serif;font-size:clamp(3rem,8.5vw,9rem);line-height:.9;letter-spacing:-.01em}
+
+/* Reveal animations */
+.rv{opacity:0;transform:translateY(2rem);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+.rv-l{opacity:0;transform:translateX(-2.5rem);transition:opacity .7s ease,transform .7s ease}
+.rv-l.in{opacity:1;transform:none}
+.rv-r{opacity:0;transform:translateX(2.5rem);transition:opacity .7s ease,transform .7s ease}
+.rv-r.in{opacity:1;transform:none}
+.rv-s{opacity:0;transform:scale(.93);transition:opacity .8s ease,transform .8s ease}
+.rv-s.in{opacity:1;transform:scale(1)}
+
+/* ═══════════════════════════════════════
+   HERO — full-height right photo, text overlaps
+═══════════════════════════════════════ */
+#hero{
+  min-height:100vh;
+  padding:0;
+  overflow:hidden;
+  background:var(--bg);
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+}
+
+/* Kitchen bg — purely decorative, z:-1 */
+#hero .h-kitbg{
+  position:absolute;inset:0;
+  z-index:-1;
+  background:url('https://res.cloudinary.com/da4ctmwz5/image/upload/v1775493224/pexels-cottonbro-4790056_rvv1p6.jpg') center/cover;
+  opacity:.06;
+  pointer-events:none;
+}
+
+/* Ghost watermark — z:-1, moves on scroll */
+.h-ghost{
+  position:absolute;inset:0;
+  z-index:-1;
+  pointer-events:none;user-select:none;overflow:hidden;
+}
+.h-ghost span{
+  display:block;font-family:'Russo One',sans-serif;
+  font-size:clamp(4rem,10vw,13rem);line-height:.88;
+  white-space:nowrap;color:transparent;
+  -webkit-text-stroke:1px rgba(13,12,11,.055);
+}
+.h-ghost span:nth-child(1){padding-left:0;opacity:.8}
+.h-ghost span:nth-child(2){padding-left:9vw;opacity:.45;-webkit-text-stroke-width:.7px}
+.h-ghost span:nth-child(3){padding-left:2vw;opacity:.22;-webkit-text-stroke-width:.5px}
+.h-ghost span:nth-child(4){padding-left:14vw;opacity:.08;-webkit-text-stroke-width:.4px}
+
+/* Chef photo — full height, right side, NO border, z:0 */
+.h-photo{
+  position:absolute;
+  top:0;right:0;bottom:0;
+  width:clamp(260px,42vw,580px);
+  z-index:0;
+  overflow:hidden;
+  pointer-events:none;
+}
+.h-photo img{
+  display:block;width:100%;height:100%;
+  object-fit:cover;object-position:top center;
+  transition:transform 1.2s cubic-bezier(.22,1,.36,1);
+  will-change:transform;
+}
+/* Hover: subtle zoom — pointer-events re-enabled on section */
+#hero:hover .h-photo img{transform:scale(1.04)}
+
+/* Left-side diagonal fade so text reads cleanly */
+.h-photo::before{
+  content:'';
+  position:absolute;inset:0;
+  z-index:1;
+  /* Aggressive diagonal ink streak — not a simple gradient */
+  background:
+    linear-gradient(112deg,
+      var(--bg) 0%,
+      var(--bg) 15%,
+      rgba(240,236,227,.9) 28%,
+      rgba(240,236,227,.55) 42%,
+      rgba(240,236,227,.15) 58%,
+      transparent 72%
+    );
+  pointer-events:none;
+}
+/* Halftone dot edge for editorial texture */
+.h-photo::after{
+  content:'';
+  position:absolute;inset:0;z-index:2;
+  background-image:radial-gradient(circle,rgba(13,12,11,.12) 1px,transparent 1px);
+  background-size:10px 10px;
+  -webkit-mask-image:linear-gradient(112deg,transparent 38%,rgba(0,0,0,.6) 55%,black 72%);
+  mask-image:linear-gradient(112deg,transparent 38%,rgba(0,0,0,.6) 55%,black 72%);
+  pointer-events:none;
+}
+
+/* Content — z:1 so it sits above the photo */
+.h-type{
+  position:relative;z-index:1;
+  padding:calc(var(--nav) + 2.5rem) 0 0 2rem;
+}
+.hl{
+  display:block;
+  font-family:'Russo One',sans-serif;
+  font-size:clamp(5rem,17vw,20rem);
+  line-height:.86;letter-spacing:-.02em;
+  color:var(--ink);white-space:nowrap;
+}
+.hl.ind{padding-left:9vw}
+.hl em{color:var(--red);font-style:normal}
+
+.h-meta{
+  position:relative;z-index:1;
+  padding:1.2rem 2rem;
+  border-top:1.5px solid rgba(13,12,11,.18);
+  margin-top:.8rem;
+  display:flex;gap:2rem;flex-wrap:wrap;align-items:flex-start;
+}
+.hg{display:flex;flex-direction:column;gap:.2rem;flex-shrink:0}
+.hl2{font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ghost)}
+.hv{font-family:'Russo One',sans-serif;font-size:1.4rem;letter-spacing:.03em;color:var(--ink);line-height:1}
+.hv.r{color:var(--red)}
+.h-offer{flex:1;min-width:180px;max-width:360px;font-size:.82rem;font-weight:300;line-height:1.8;color:var(--faded);font-style:italic}
+
+.h-ctas{
+  position:relative;z-index:1;
+  padding:1rem 2rem 3.5rem;
+  display:flex;gap:1rem;flex-wrap:wrap;
+}
+.btn-ink{display:inline-block;padding:.8rem 2.2rem;background:var(--ink);color:var(--bg);font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;border:2px solid var(--ink);transition:background .2s,color .2s,transform .2s}
+.btn-ink:hover{background:transparent;color:var(--ink);transform:translateY(-2px)}
+.btn-out{display:inline-block;padding:.8rem 2.2rem;background:transparent;color:var(--ink);font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;border:2px solid var(--ink);transition:background .2s,color .2s,transform .2s}
+.btn-out:hover{background:var(--ink);color:var(--bg);transform:translateY(-2px)}
+
+/* ═══════════════════════════════════════
+   TICKER
+═══════════════════════════════════════ */
+.ticker{background:var(--ink);padding:.65rem 0;overflow:hidden}
+.t-track{display:flex;white-space:nowrap;animation:tick 22s linear infinite;width:max-content}
+.t-track:hover{animation-play-state:paused}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ti{font-family:'Russo One',sans-serif;font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;color:var(--bg);padding:0 1.5rem}
+.td{color:var(--red)}
+
+/* ═══════════════════════════════════════
+   ABOUT
+   — decor word at z:-1, content at z:1
+═══════════════════════════════════════ */
+#about{background:var(--bg2)}
+/* decorative ghost word — z:-1 so it NEVER covers content */
+#about .decor{
+  position:absolute;bottom:-5rem;right:-3rem;
+  z-index:-1;
+  font-family:'Russo One',sans-serif;font-size:32vw;
+  color:transparent;-webkit-text-stroke:1.5px rgba(13,12,11,.04);
+  pointer-events:none;user-select:none;line-height:1;
+}
+.about-w{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;position:relative;z-index:1}
+.about-text .pull{font-family:'Russo One',sans-serif;font-size:clamp(1.4rem,2.8vw,2.5rem);line-height:1.05;border-left:5px solid var(--red);padding-left:1.2rem;margin:2rem 0}
+.about-text p{font-size:.9rem;font-weight:300;line-height:1.9;color:var(--ink2);margin-bottom:1rem}
+.about-text .mono{font-family:'Special Elite',serif;font-size:.8rem;color:var(--faded);display:inline-block;transform:rotate(-1.5deg);margin-top:.5rem}
+.p-pile{position:relative;height:500px}
+.pc{position:absolute;overflow:hidden;background:#bdb5a5;border:2.5px solid var(--ink);transition:transform .4s ease,box-shadow .4s ease}
+.pc:hover{transform:rotate(0deg) scale(1.03)!important;box-shadow:8px 16px 40px rgba(13,12,11,.22);z-index:10!important}
+.pc img{display:block;width:100%;height:100%;object-fit:cover}
+.pc1{width:68%;height:370px;top:60px;left:0;transform:rotate(-4deg);z-index:1}
+.pc2{width:58%;height:290px;top:10px;right:5%;transform:rotate(5deg);z-index:2}
+.pc3{width:38%;height:190px;bottom:0;right:20%;transform:rotate(-1.5deg);z-index:3;background:var(--off)}
+
+/* ═══════════════════════════════════════
+   SERVICES
+   — bg photo at z:-1, word at z:-1, wrap at z:1
+═══════════════════════════════════════ */
+#services{background:var(--bg)}
+#services .decor-bg{
+  position:absolute;inset:0;z-index:-1;
+  background:url('https://res.cloudinary.com/da4ctmwz5/image/upload/v1775493224/pexels-cottonbro-4790056_rvv1p6.jpg') center/cover;
+  opacity:.08;pointer-events:none;
+}
+#services .decor{
+  position:absolute;right:-2rem;top:2rem;
+  z-index:-1;
+  font-family:'Russo One',sans-serif;font-size:18vw;
+  color:transparent;-webkit-text-stroke:1px rgba(13,12,11,.04);
+  pointer-events:none;user-select:none;line-height:1;
+}
+.svc-w{max-width:1280px;margin:0 auto;position:relative;z-index:1}
+.svc-hdr{margin-bottom:3.5rem}
+.svc-list{border-top:1.5px solid rgba(13,12,11,.2)}
+.svc-row{display:grid;grid-template-columns:70px 1fr 50px;align-items:center;gap:1.5rem;padding:2rem 0;border-bottom:1.5px solid rgba(13,12,11,.12);transition:background .25s,padding-left .25s;cursor:default}
+.svc-row:hover{background:rgba(13,12,11,.03);padding-left:.8rem}
+.svc-row:hover .sn{color:var(--red);-webkit-text-stroke-color:var(--red)}
+.svc-row:hover .sa{transform:translateX(7px);color:var(--red)}
+.sn{font-family:'Russo One',sans-serif;font-size:2rem;color:transparent;-webkit-text-stroke:1.5px rgba(13,12,11,.22);line-height:1;transition:color .2s,-webkit-text-stroke-color .2s}
+.st{font-family:'Russo One',sans-serif;font-size:clamp(1.3rem,3.2vw,2.8rem);line-height:.95;margin-bottom:.6rem}
+.sd{font-size:.82rem;font-weight:300;line-height:1.75;color:var(--faded);max-width:560px}
+.stags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.8rem}
+.stag{font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;border:1.5px solid rgba(13,12,11,.22);padding:.18rem .5rem;color:var(--faded);transition:border-color .2s,color .2s}
+.svc-row:hover .stag{border-color:var(--ink);color:var(--ink)}
+.sa{font-size:1.5rem;color:var(--ghost);transition:transform .25s,color .25s}
+
+/* ═══════════════════════════════════════
+   GALLERY
+═══════════════════════════════════════ */
+.gstrip{background:var(--bg2);overflow:hidden;padding:4rem 0 5rem;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+.g-lbl{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ghost);text-align:center;margin-bottom:2.5rem}
+.g-track{display:flex;align-items:center;gap:20px;animation:gscroll 38s linear infinite;width:max-content;padding:0 20px}
+.g-track:hover{animation-play-state:paused}
+@keyframes gscroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.gi{width:185px;height:280px;flex-shrink:0;position:relative;overflow:hidden;border-radius:12px;border:2.5px solid var(--ink);box-shadow:4px 8px 24px rgba(13,12,11,.18);background:#c2bab0;transition:transform .35s ease,box-shadow .35s ease}
+.gi:hover{transform:translateY(-8px) scale(1.03);box-shadow:8px 20px 40px rgba(13,12,11,.28)}
+.gi img{display:block;width:100%;height:100%;object-fit:cover;border-radius:9px}
+
+/* ═══════════════════════════════════════
+   APPROACH
+   — decor at z:-1, wrap at z:1
+═══════════════════════════════════════ */
+#approach{background:var(--ink);color:var(--bg)}
+#approach .decor{
+  position:absolute;right:-3rem;bottom:-6rem;
+  z-index:-1;
+  font-family:'Russo One',sans-serif;font-size:46vw;
+  color:transparent;-webkit-text-stroke:1px rgba(240,236,227,.04);
+  pointer-events:none;user-select:none;line-height:1;
+}
+.app-w{max-width:1280px;margin:0 auto;position:relative;z-index:1}
+.app-ey{color:rgba(240,236,227,.38)}
+.app-ey::before{color:var(--red)}
+.app-title{color:var(--bg);margin-bottom:4rem}
+.pillars{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid rgba(240,236,227,.12)}
+.pill{padding:2.5rem;border-bottom:1px solid rgba(240,236,227,.1);border-right:1px solid rgba(240,236,227,.1);transition:background .3s}
+.pill:nth-child(2n){border-right:none}
+.pill:hover{background:rgba(240,236,227,.04)}
+.pill-n{font-family:'Russo One',sans-serif;font-size:3rem;color:var(--red);line-height:1;margin-bottom:.5rem}
+.pill h3{font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:.85rem;margin-bottom:.6rem;color:var(--bg)}
+.pill p{font-size:.82rem;font-weight:300;line-height:1.8;color:rgba(240,236,227,.45)}
+.app-bq{margin-top:4rem;padding-top:3rem;border-top:1px solid rgba(240,236,227,.1);display:grid;grid-template-columns:1.2fr 1fr;gap:4rem;align-items:center}
+.app-bq blockquote{font-family:'Russo One',sans-serif;font-size:clamp(1.6rem,3.2vw,2.8rem);line-height:1.05;color:var(--bg)}
+.app-bq cite{display:block;margin-top:1.5rem;font-style:normal;font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--red)}
+.app-yr{text-align:right}
+.app-yr-big{font-family:'Russo One',sans-serif;font-size:clamp(5rem,13vw,12rem);color:transparent;-webkit-text-stroke:2px var(--red);line-height:.9;animation:pulse 3s ease-in-out infinite}
+@keyframes pulse{0%,100%{-webkit-text-stroke-width:2px}50%{-webkit-text-stroke-width:3.5px}}
+.app-yr-lbl{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(240,236,227,.3);margin-top:.5rem}
+
+/* ═══════════════════════════════════════
+   CONTACT
+   — decor at z:-1, wrap at z:1
+═══════════════════════════════════════ */
+#contact{background:var(--bg)}
+#contact .decor{
+  position:absolute;bottom:-5rem;right:-2rem;
+  z-index:-1;
+  font-family:'Russo One',sans-serif;font-size:16vw;
+  color:transparent;-webkit-text-stroke:1px rgba(13,12,11,.04);
+  pointer-events:none;user-select:none;
+}
+.ct-w{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.ct-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;margin-top:3rem}
+.ct-info p{font-size:.88rem;font-weight:300;line-height:1.85;color:var(--faded);margin-bottom:2rem}
+.ct-dets{display:flex;flex-direction:column;gap:1.1rem}
+.ct-row{display:flex;align-items:baseline;gap:1rem}
+.ct-lbl{font-size:.58rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--ghost);min-width:62px}
+.ct-v{font-size:.88rem;color:var(--ink)}
+.ct-v a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ghost);transition:border-color .2s,color .2s}
+.ct-v a:hover{color:var(--red);border-color:var(--red)}
+.ct-form{display:flex;flex-direction:column;gap:1.4rem}
+.fl{display:block;font-size:.58rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--faded);margin-bottom:.4rem}
+.fi,.ft{width:100%;background:transparent;border:none;border-bottom:1.5px solid rgba(13,12,11,.28);color:var(--ink);font-family:'Barlow Condensed',sans-serif;font-size:1rem;padding:.5rem 0;outline:none;transition:border-color .2s}
+.fi:focus,.ft:focus{border-color:var(--red)}
+.fi::placeholder,.ft::placeholder{color:rgba(13,12,11,.22)}
+.ft{min-height:90px;resize:none}
+#fsuccess{display:none;font-size:.75rem;letter-spacing:.1em;color:var(--red);margin-top:.5rem}
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+footer{background:var(--ink);color:var(--bg);padding:2.2rem 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;border-top:2px solid rgba(240,236,227,.1)}
+.fl-logo{font-family:'Russo One',sans-serif;font-size:1.4rem;letter-spacing:.08em}
+.fl-logo em{color:var(--red);font-style:normal}
+.fl-links{display:flex;gap:1.8rem;list-style:none}
+.fl-links a{font-size:.62rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(240,236,227,.35);text-decoration:none;transition:color .2s}
+.fl-links a:hover{color:var(--bg)}
+.fl-copy{font-size:.6rem;letter-spacing:.1em;color:rgba(240,236,227,.25)}
+
+/* ═══════════════════════════════════════
+   ENTRY ANIMATIONS
+═══════════════════════════════════════ */
+@keyframes fup{from{opacity:0;transform:translateY(2.5rem)}to{opacity:1;transform:none}}
+@keyframes fin{from{opacity:0}to{opacity:1}}
+.h-type .hl:nth-child(1){animation:fup .7s ease .05s both}
+.h-type .hl:nth-child(2){animation:fup .7s ease .18s both}
+.h-type .hl:nth-child(3){animation:fup .7s ease .3s both}
+.h-meta{animation:fup .65s ease .45s both}
+.h-ctas{animation:fup .65s ease .6s both}
+.h-photo{animation:fin 1.2s ease .1s both}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media(max-width:960px){
+  .h-photo{width:clamp(200px,36vw,340px)}
+  .n-links{display:none}
+  .about-w,.ct-grid,.app-bq{grid-template-columns:1fr;gap:3rem}
+  .pillars{grid-template-columns:1fr 1fr}
+  .svc-row{grid-template-columns:55px 1fr}
+  .sa{display:none}
+}
+@media(max-width:640px){
+  section{padding:3.5rem 1.2rem}
+  .h-photo{display:none}
+  .h-type{padding-top:calc(var(--nav) + 2rem)}
+  .pillars{grid-template-columns:1fr}
+  .pill{border-right:none}
+  .h-ctas{flex-direction:column;align-items:flex-start}
+  nav{padding:0 1rem}
+  .lb{padding:.28rem .5rem;font-size:.6rem}
+}
+</style>
+</head>
+<body>
+
+<div id="grain" aria-hidden="true"></div>
+<div id="vig" aria-hidden="true"></div>
+
+<nav id="main-nav">
+  <a href="#hero" class="n-logo"><em>ID</em> CHEF</a>
+  <ul class="n-links">
+    <li><a href="#about"    data-i18n="nav_about">О шефе</a></li>
+    <li><a href="#services" data-i18n="nav_services">Услуги</a></li>
+    <li><a href="#approach" data-i18n="nav_approach">Подход</a></li>
+    <li><a href="#contact"  data-i18n="nav_contact">Контакт</a></li>
+  </ul>
+  <div class="lang-sw">
+    <button class="lb on" onclick="setLang('ru')">RU</button>
+    <button class="lb"    onclick="setLang('lv')">LV</button>
+    <button class="lb"    onclick="setLang('en')">EN</button>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="h-kitbg"></div>
+  <div class="h-ghost" aria-hidden="true">
+    <span>ID CHEF ИВАНКОВ</span>
+    <span>ID CHEF ИВАНКОВ</span>
+    <span>IVANKOV ID CHEF</span>
+    <span>ID CHEF ИВАНКОВ</span>
+  </div>
+
+  <!-- Full-height vertical photo, no border, hover zoom -->
+  <div class="h-photo">
+    <img src="https://res.cloudinary.com/da4ctmwz5/image/upload/v1775494137/deniss-ivankovs_ioxej8.jpg" alt="Денис Иванков — ID Chef"/>
+  </div>
+
+  <!-- Text content sits on top of photo via z-index:1 -->
+  <div class="h-type">
+    <span class="hl"><em>ID</em></span>
+    <span class="hl ind">CHEF</span>
+    <span class="hl" data-i18n="h_line3">ИВАНКОВ</span>
+  </div>
+
+  <div class="h-meta">
+    <div class="hg"><span class="hl2" data-i18n="h_role">Роль</span><span class="hv r" data-i18n="h_role_val">Шеф-повар</span></div>
+    <div class="hg"><span class="hl2" data-i18n="h_exp">Опыт</span><span class="hv">30+</span></div>
+    <div class="hg"><span class="hl2" data-i18n="h_fmt">Форматов</span><span class="hv">∞</span></div>
+    <div class="hg"><span class="hl2" data-i18n="h_start">С нуля</span><span class="hv r">0→</span></div>
+    <p class="h-offer" data-i18n="h_offer">Запускаю рестораны с нуля, выстраиваю кухонные процессы и превращаю операционный хаос в прибыльную систему.</p>
+  </div>
+
+  <div class="h-ctas">
+    <a href="#contact" class="btn-ink"><span data-i18n="cta1">Оставить заявку</span></a>
+    <a href="#services" class="btn-out" data-i18n="cta2">Узнать больше</a>
+  </div>
+</section>
+
+<!-- ═══ TICKER ═══ -->
+<div class="ticker">
+  <div class="t-track">
+    <span class="ti" data-i18n="t1">Запуск ресторанов</span><span class="td"> ✦ </span>
+    <span class="ti" data-i18n="t2">Разработка меню</span><span class="td"> ✦ </span>
+    <span class="ti" data-i18n="t3">Оптимизация затрат</span><span class="td"> ✦ </span>
+    <span class="ti" data-i18n="t4">Обучение команды</span><span class="td"> ✦ </span>
+    <span class="ti" data-i18n="t5">Финансовый анализ</span><span class="td"> ✦ </span>
+    <span class="ti" data-i18n="t6">Работа с поставщиками</span><span class="td"> ✦ </span>
+    <span class="ti" data-i18n="t7">30+ лет экспертизы</span><span class="td"> ✦ </span>
+    <span class="ti" data-i18n="t1">Запуск ресторанов</span><span class="td"> ✦ </span>
+    <span class="ti" data-i18n="t2">Разработка меню</span><span class="td"> ✦ </span>
+    <span class="ti" data-i18n="t3">Оптимизация затрат</span><span class="td"> ✦ </span>
+    <span class="ti" data-i18n="t4">Обучение команды</span><span class="td"> ✦ </span>
+    <span class="ti" data-i18n="t5">Финансовый анализ</span><span class="td"> ✦ </span>
+    <span class="ti" data-i18n="t6">Работа с поставщиками</span><span class="td"> ✦ </span>
+    <span class="ti" data-i18n="t7">30+ лет экспертизы</span><span class="td"> ✦ </span>
+  </div>
+</div>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div class="decor" aria-hidden="true">CHEF</div>
+  <div class="about-w">
+    <div class="about-text">
+      <div class="s-eyebrow rv" data-i18n="a_ey">О себе</div>
+      <h2 class="s-title rv" data-i18n="a_title">ДЕНИС<br>ИВАНКОВ</h2>
+      <blockquote class="pull rv" data-i18n="a_pull">Кухня — не место для вдохновения. Это место для системы, результата и цифр.</blockquote>
+      <p class="rv" data-i18n="a_p1">Более 30 лет в сфере общественного питания — от линейного повара до шеф-консультанта. Прошёл через все форматы: от небольших кафе до крупных ресторанных проектов.</p>
+      <p class="rv" data-i18n="a_p2">Запускал кухни с нуля, оптимизировал действующие проекты, выводил рестораны из кризиса. Моя работа — связка между гастрономией и бизнесом: меню как инструмент продаж, кухня как производство, команда как актив.</p>
+      <span class="mono rv" data-i18n="a_mono">— системный подход. всегда.</span>
+    </div>
+    <div class="rv-r">
+      <div class="p-pile">
+        <div class="pc pc1"><img src="https://res.cloudinary.com/da4ctmwz5/image/upload/v1775496562/IMG_0108_gwsreb.jpg" alt="Денис Иванков"/></div>
+        <div class="pc pc2"><img src="https://res.cloudinary.com/da4ctmwz5/image/upload/v1775496558/1756459105183_w6rdei.jpg" alt="Кухня"/></div>
+        <div class="pc pc3"><img src="https://res.cloudinary.com/da4ctmwz5/image/upload/v1775501840/image_converted_4_yfcvie.png" alt="Блюдо"/></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SERVICES ═══ -->
+<section id="services">
+  <div class="decor-bg" aria-hidden="true"></div>
+  <div class="decor" aria-hidden="true">EXPERT</div>
+  <div class="svc-w">
+    <div class="svc-hdr">
+      <div class="s-eyebrow rv" data-i18n="sv_ey">Услуги</div>
+      <h2 class="s-title rv" data-i18n="sv_title">ЧЕМ<br>ПОМОГАЮ</h2>
+    </div>
+    <div class="svc-list">
+      <div class="svc-row rv"><div class="sn">01</div><div><h3 class="st" data-i18n="s1t">Запуск проекта</h3><p class="sd" data-i18n="s1d">Открытие кухни с нуля: процессы, оборудование, команда, стандарты.</p><div class="stags"><span class="stag" data-i18n="s1a">Кухня с нуля</span><span class="stag" data-i18n="s1b">Процессы</span><span class="stag" data-i18n="s1c">Стандарты</span></div></div><div class="sa">→</div></div>
+      <div class="svc-row rv"><div class="sn">02</div><div><h3 class="st" data-i18n="s2t">Оптимизация бизнеса</h3><p class="sd" data-i18n="s2d">Аудит ресторана: снижение себестоимости, устранение потерь, повышение эффективности.</p><div class="stags"><span class="stag" data-i18n="s2a">Снижение затрат</span><span class="stag" data-i18n="s2b">Эффективность</span><span class="stag" data-i18n="s2c">Аудит</span></div></div><div class="sa">→</div></div>
+      <div class="svc-row rv"><div class="sn">03</div><div><h3 class="st" data-i18n="s3t">Разработка меню</h3><p class="sd" data-i18n="s3d">Меню как коммерческий инструмент: концепция, калькуляция, дегустации.</p><div class="stags"><span class="stag" data-i18n="s3a">Концепция</span><span class="stag" data-i18n="s3b">Дегустации</span><span class="stag" data-i18n="s3c">Калькуляция</span></div></div><div class="sa">→</div></div>
+      <div class="svc-row rv"><div class="sn">04</div><div><h3 class="st" data-i18n="s4t">Команда и обучение</h3><p class="sd" data-i18n="s4d">Подбор, обучение персонала. Регламенты, стандарты, система контроля качества.</p><div class="stags"><span class="stag" data-i18n="s4a">Обучение</span><span class="stag" data-i18n="s4b">Стандарты</span><span class="stag" data-i18n="s4c">Контроль</span></div></div><div class="sa">→</div></div>
+      <div class="svc-row rv"><div class="sn">05</div><div><h3 class="st" data-i18n="s5t">Аналитика и закупки</h3><p class="sd" data-i18n="s5d">Финансовый анализ, управленческая отчётность, оптимизация закупок.</p><div class="stags"><span class="stag" data-i18n="s5a">Финансы</span><span class="stag" data-i18n="s5b">Закупки</span><span class="stag" data-i18n="s5c">Отчётность</span></div></div><div class="sa">→</div></div>
+      <div class="svc-row rv"><div class="sn">06</div><div><h3 class="st" data-i18n="s6t">Консалтинг</h3><p class="sd" data-i18n="s6d">Стратегическое сопровождение: позиционирование, маркетинг, управление проектом.</p><div class="stags"><span class="stag" data-i18n="s6a">Стратегия</span><span class="stag" data-i18n="s6b">Маркетинг</span><span class="stag" data-i18n="s6c">Управление</span></div></div><div class="sa">→</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ GALLERY ═══ -->
+<div class="gstrip">
+  <div class="g-lbl" data-i18n="gl_lbl">/// Блюда — Процессы — Результат</div>
+  <div class="g-track">
+    <div class="gi"><img src="https://res.cloudinary.com/da4ctmwz5/image/upload/v1775501823/image_converted_5_n2iprq.png" alt="Бургер"></div>
+    <div class="gi"><img src="https://res.cloudinary.com/da4ctmwz5/image/upload/v1775501858/image_converted_2_xsb6e1.png" alt="Креветки"></div>
+    <div class="gi"><img src="https://res.cloudinary.com/da4ctmwz5/image/upload/v1775502541/IMG_0117_og73ye.jpg" alt="Блюдо"></div>
+    <div class="gi"><img src="https://res.cloudinary.com/da4ctmwz5/image/upload/v1775501831/image_converted_ehqtqy.png" alt="Мясо"></div>
+    <div class="gi"><img src="https://res.cloudinary.com/da4ctmwz5/image/upload/v1775501840/image_converted_4_yfcvie.png" alt="Десерт"></div>
+    <div class="gi"><img src="https://res.cloudinary.com/da4ctmwz5/image/upload/v1775502528/IMG_0113_ymhmrn.jpg" alt="Мясо гриль"></div>
+    <div class="gi"><img src="https://res.cloudinary.com/da4ctmwz5/image/upload/v1775502533/IMG_0112_lfcgkg.jpg" alt="Десерт с орехами"></div>
+    <div class="gi"><img src="https://res.cloudinary.com/da4ctmwz5/image/upload/v1775502532/IMG_0114_vma1j2.jpg" alt="Тарталетки"></div>
+    <div class="gi"><img src="https://res.cloudinary.com/da4ctmwz5/image/upload/v1775502539/IMG_0116_jwjcbe.jpg" alt="Овощи гриль"></div>
+    <div class="gi"><img src="https://res.cloudinary.com/da4ctmwz5/image/upload/v1775501835/image_converted_6_hsbdxu.png" alt="Устрицы"></div>
+    <div class="gi"><img src="https://res.cloudinary.com/da4ctmwz5/image/upload/v1775502534/IMG_0115_pgqzen.jpg" alt="Пирожные"></div>
+    <div class="gi"><img src="https://res.cloudinary.com/da4ctmwz5/image/upload/v1775502522/IMG_0111_gnvbsd.jpg" alt="Закуски"></div>
+    <div class="gi"><img src="https://res.cloudinary.com/da4ctmwz5/image/upload/v1775501848/image_converted_3_o5pzjv.png" alt="Морепродукты"></div>
+    <div class="gi"><img src="https://res.cloudinary.com/da4ctmwz5/image/upload/v1775501829/image_converted_7_wfgqqo.png" alt="Гриль"></div>
+    <div class="gi"><img src="https://res.cloudinary.com/da4ctmwz5/image/upload/v1775501823/image_converted_5_n2iprq.png" alt="Бургер"></div>
+    <div class="gi"><img src="https://res.cloudinary.com/da4ctmwz5/image/upload/v1775501858/image_converted_2_xsb6e1.png" alt="Креветки"></div>
+    <div class="gi"><img src="https://res.cloudinary.com/da4ctmwz5/image/upload/v1775502541/IMG_0117_og73ye.jpg" alt="Блюдо"></div>
+    <div class="gi"><img src="https://res.cloudinary.com/da4ctmwz5/image/upload/v1775501831/image_converted_ehqtqy.png" alt="Мясо"></div>
+    <div class="gi"><img src="https://res.cloudinary.com/da4ctmwz5/image/upload/v1775501840/image_converted_4_yfcvie.png" alt="Десерт"></div>
+    <div class="gi"><img src="https://res.cloudinary.com/da4ctmwz5/image/upload/v1775502528/IMG_0113_ymhmrn.jpg" alt="Мясо гриль"></div>
+    <div class="gi"><img src="https://res.cloudinary.com/da4ctmwz5/image/upload/v1775502533/IMG_0112_lfcgkg.jpg" alt="Десерт с орехами"></div>
+    <div class="gi"><img src="https://res.cloudinary.com/da4ctmwz5/image/upload/v1775502532/IMG_0114_vma1j2.jpg" alt="Тарталетки"></div>
+    <div class="gi"><img src="https://res.cloudinary.com/da4ctmwz5/image/upload/v1775502539/IMG_0116_jwjcbe.jpg" alt="Овощи гриль"></div>
+    <div class="gi"><img src="https://res.cloudinary.com/da4ctmwz5/image/upload/v1775501835/image_converted_6_hsbdxu.png" alt="Устрицы"></div>
+    <div class="gi"><img src="https://res.cloudinary.com/da4ctmwz5/image/upload/v1775502534/IMG_0115_pgqzen.jpg" alt="Пирожные"></div>
+    <div class="gi"><img src="https://res.cloudinary.com/da4ctmwz5/image/upload/v1775502522/IMG_0111_gnvbsd.jpg" alt="Закуски"></div>
+    <div class="gi"><img src="https://res.cloudinary.com/da4ctmwz5/image/upload/v1775501848/image_converted_3_o5pzjv.png" alt="Морепродукты"></div>
+    <div class="gi"><img src="https://res.cloudinary.com/da4ctmwz5/image/upload/v1775501829/image_converted_7_wfgqqo.png" alt="Гриль"></div>
+  </div>
+</div>
+
+<!-- ═══ APPROACH ═══ -->
+<section id="approach">
+  <div class="decor" aria-hidden="true">30</div>
+  <div class="app-w">
+    <div class="s-eyebrow app-ey rv" data-i18n="ap_ey">Подход</div>
+    <h2 class="s-title app-title rv" data-i18n="ap_title">КАК<br>Я РАБОТАЮ</h2>
+    <div class="pillars">
+      <div class="pill rv"><div class="pill-n">01</div><h3 data-i18n="p1h">Диагностика</h3><p data-i18n="p1p">Начинаю с аудита: цифры, процессы, команда, меню.</p></div>
+      <div class="pill rv"><div class="pill-n">02</div><h3 data-i18n="p2h">Системное мышление</h3><p data-i18n="p2p">Кухня — это производство. Выстраиваю её по законам эффективного бизнеса.</p></div>
+      <div class="pill rv"><div class="pill-n">03</div><h3 data-i18n="p3h">Работа с цифрами</h3><p data-i18n="p3p">Каждое решение — через данные. Food cost, себестоимость — это управление.</p></div>
+      <div class="pill rv"><div class="pill-n">04</div><h3 data-i18n="p4h">Понимание рынка</h3><p data-i18n="p4p">30+ лет — это видение трендов и чутьё на изменения в индустрии.</p></div>
+    </div>
+    <div class="app-bq">
+      <div class="rv">
+        <blockquote data-i18n="ap_bq">Хороший ресторан — это не случайность. Это результат правильно выстроенной системы.</blockquote>
+        <cite>— Denis Ivankov · ID Chef</cite>
+      </div>
+      <div class="app-yr rv-s">
+        <div class="app-yr-big">30</div>
+        <div class="app-yr-lbl" data-i18n="ap_yr_lbl">Лет в индустрии</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact">
+  <div class="decor" aria-hidden="true">CONTACT</div>
+  <div class="ct-w">
+    <div class="s-eyebrow rv" data-i18n="c_ey">Контакт</div>
+    <h2 class="s-title rv" data-i18n="c_title">ДАВАЙТЕ<br>НАЧНЁМ</h2>
+    <div class="ct-grid">
+      <div class="rv-l">
+        <p data-i18n="c_intro">Расскажите о проекте — отвечу в течение 24 часов.</p>
+        <div class="ct-dets">
+          <div class="ct-row"><span class="ct-lbl" data-i18n="c_phone_lbl">Тел.</span><span class="ct-v"><a href="tel:+37125745745">+371 2 5745745</a></span></div>
+          <div class="ct-row"><span class="ct-lbl">Email</span><span class="ct-v"><a href="mailto:info@idchef.lv">info@idchef.lv</a></span></div>
+          <div class="ct-row"><span class="ct-lbl">Instagram</span><span class="ct-v"><a href="#" target="_blank">@idchef</a></span></div>
+          <div class="ct-row"><span class="ct-lbl">WhatsApp</span><span class="ct-v"><a href="https://wa.me/37125745745" target="_blank" data-i18n="c_write">Написать</a></span></div>
+        </div>
+      </div>
+      <div class="rv-r">
+        <form class="ct-form" onsubmit="handleForm(event)">
+          <div><label class="fl" data-i18n="f_name">Ваше имя</label><input type="text" class="fi" placeholder="Иван Петров" required data-i18n-ph="f_name_ph"/></div>
+          <div><label class="fl" data-i18n="f_contact">Контакт</label><input type="text" class="fi" placeholder="+371 XX XXX XXX" required data-i18n-ph="f_contact_ph"/></div>
+          <div><label class="fl" data-i18n="f_msg">О проекте</label><textarea class="ft" placeholder="Формат, задача, сроки..." data-i18n-ph="f_msg_ph"></textarea></div>
+          <div><button type="submit" class="btn-ink"><span data-i18n="f_submit">Отправить заявку</span></button><div id="fsuccess" data-i18n="f_ok">Спасибо! Свяжусь с вами в ближайшее время.</div></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="fl-logo"><em>ID</em> CHEF</div>
+  <ul class="fl-links">
+    <li><a href="#about"    data-i18n="nav_about">О шефе</a></li>
+    <li><a href="#services" data-i18n="nav_services">Услуги</a></li>
+    <li><a href="#contact"  data-i18n="nav_contact">Контакт</a></li>
+  </ul>
+  <p class="fl-copy">© 2026 ID Chef · idchef.lv</p>
+</footer>
+
+<script>
+const TR={
+  ru:{
+    nav_about:"О шефе",nav_services:"Услуги",nav_approach:"Подход",nav_contact:"Контакт",
+    h_line3:"ИВАНКОВ",h_role:"Роль",h_role_val:"Шеф-повар",h_exp:"Опыт (лет)",h_fmt:"Форматов",h_start:"С нуля",
+    h_offer:"Запускаю рестораны с нуля, выстраиваю кухонные процессы и превращаю операционный хаос в прибыльную систему.",
+    cta1:"Оставить заявку",cta2:"Узнать больше",
+    t1:"Запуск ресторанов",t2:"Разработка меню",t3:"Оптимизация затрат",t4:"Обучение команды",t5:"Финансовый анализ",t6:"Работа с поставщиками",t7:"30+ лет экспертизы",
+    a_ey:"О себе",a_title:"ДЕНИС\nИВАНКОВ",
+    a_pull:"Кухня — не место для вдохновения. Это место для системы, результата и цифр.",
+    a_p1:"Более 30 лет в сфере общественного питания — от линейного повара до шеф-консультанта. Прошёл через все форматы: от небольших кафе до крупных ресторанных проектов.",
+    a_p2:"Запускал кухни с нуля, оптимизировал действующие проекты, выводил рестораны из кризиса. Моя работа — связка между гастрономией и бизнесом.",
+    a_mono:"— системный подход. всегда.",
+    sv_ey:"Услуги",sv_title:"ЧЕМ\nПОМОГАЮ",
+    s1t:"Запуск проекта",s1d:"Открытие кухни с нуля: процессы, оборудование, команда, стандарты.",s1a:"Кухня с нуля",s1b:"Процессы",s1c:"Стандарты",
+    s2t:"Оптимизация бизнеса",s2d:"Аудит ресторана: снижение себестоимости, устранение потерь, повышение эффективности.",s2a:"Снижение затрат",s2b:"Эффективность",s2c:"Аудит",
+    s3t:"Разработка меню",s3d:"Меню как коммерческий инструмент: концепция, калькуляция, дегустации.",s3a:"Концепция",s3b:"Дегустации",s3c:"Калькуляция",
+    s4t:"Команда и обучение",s4d:"Подбор, обучение персонала. Регламенты, стандарты, система контроля качества.",s4a:"Обучение",s4b:"Стандарты",s4c:"Контроль",
+    s5t:"Аналитика и закупки",s5d:"Финансовый анализ, управленческая отчётность, оптимизация закупок.",s5a:"Финансы",s5b:"Закупки",s5c:"Отчётность",
+    s6t:"Консалтинг",s6d:"Стратегическое сопровождение: позиционирование, маркетинг, управление проектом.",s6a:"Стратегия",s6b:"Маркетинг",s6c:"Управление",
+    gl_lbl:"/// Блюда — Процессы — Результат",
+    ap_ey:"Подход",ap_title:"КАК\nЯ РАБОТАЮ",
+    p1h:"Диагностика",p1p:"Начинаю с аудита: цифры, процессы, команда, меню.",
+    p2h:"Системное мышление",p2p:"Кухня — это производство. Выстраиваю её по законам эффективного бизнеса.",
+    p3h:"Работа с цифрами",p3p:"Каждое решение — через данные. Food cost, себестоимость — это управление.",
+    p4h:"Понимание рынка",p4p:"30+ лет — это видение трендов и чутьё на изменения в индустрии.",
+    ap_bq:"Хороший ресторан — это не случайность. Это результат правильно выстроенной системы.",
+    ap_yr_lbl:"Лет в индустрии",
+    c_ey:"Контакт",c_title:"ДАВАЙТЕ\nНАЧНЁМ",c_intro:"Расскажите о проекте — отвечу в течение 24 часов.",
+    c_phone_lbl:"Тел.",c_write:"Написать",
+    f_name:"Ваше имя",f_name_ph:"Иван Петров",f_contact:"Контакт",f_contact_ph:"+371 XX XXX XXX",f_msg:"О проекте",f_msg_ph:"Формат, задача, сроки...",
+    f_submit:"Отправить заявку",f_ok:"Спасибо! Свяжусь с вами в ближайшее время.",
+  },
+  lv:{
+    nav_about:"Par šefu",nav_services:"Pakalpojumi",nav_approach:"Pieeja",nav_contact:"Kontakts",
+    h_line3:"IVANKOVS",h_role:"Loma",h_role_val:"Šefpavārs",h_exp:"Pieredze",h_fmt:"Formāti",h_start:"No nulles",
+    h_offer:"Atveru restorānus no nulles, veidoju virtuves procesus un pārvērtu haosu par ienesīgu sistēmu.",
+    cta1:"Atstāt pieteikumu",cta2:"Uzzināt vairāk",
+    t1:"Restorānu palaišana",t2:"Ēdienkartes izstrāde",t3:"Izmaksu optimizācija",t4:"Komandas apmācība",t5:"Finanšu analīze",t6:"Darbs ar piegādātājiem",t7:"30+ gadi pieredzē",
+    a_ey:"Par mani",a_title:"DENISS\nIVANKOVS",
+    a_pull:"Virtuve nav vieta iedvesmai. Tā ir vieta sistēmai, rezultātam un skaitļiem.",
+    a_p1:"Vairāk nekā 30 gadus strādāju sabiedriskās ēdināšanas jomā — no līnijas pavāra līdz šefpavāra konsultantam.",
+    a_p2:"Esmu palaists virtuves no nulles, optimizēts projektus, vedis restorānus no krīzes.",
+    a_mono:"— sistemātiska pieeja. vienmēr.",
+    sv_ey:"Pakalpojumi",sv_title:"KĀ ES\nVARU PALĪDZĒT",
+    s1t:"Projekta palaišana",s1d:"Virtuves atvēršana no nulles: procesi, aprīkojums, komanda.",s1a:"No nulles",s1b:"Procesi",s1c:"Standarti",
+    s2t:"Biznesa optimizācija",s2d:"Esošā restorāna audits: pašizmaksas samazināšana, efektivitātes uzlabošana.",s2a:"Izmaksu samazināšana",s2b:"Efektivitāte",s2c:"Audits",
+    s3t:"Ēdienkartes izstrāde",s3d:"Ēdienkarte kā komerciāls instruments: koncepcija, kalkulācija, degustācijas.",s3a:"Koncepcija",s3b:"Degustācijas",s3c:"Kalkulācija",
+    s4t:"Komanda un apmācība",s4d:"Personāla atlase, apmācība, kvalitātes kontroles ieviešana.",s4a:"Apmācība",s4b:"Standarti",s4c:"Kontrole",
+    s5t:"Analītika un iepirkumi",s5d:"Finanšu analīze, vadības atskaites un iepirkumu optimizācija.",s5a:"Finanses",s5b:"Iepirkumi",s5c:"Atskaites",
+    s6t:"Konsultācijas",s6d:"Stratēģiskā pavadīšana: pozicionēšana, mārketings, projektu vadība.",s6a:"Stratēģija",s6b:"Mārketings",s6c:"Vadība",
+    gl_lbl:"/// Ēdieni — Procesi — Rezultāts",
+    ap_ey:"Pieeja",ap_title:"KĀ ES\nSTRĀDĀJU",
+    p1h:"Diagnostika",p1p:"Sāku ar auditu: skaitļi, procesi, komanda, ēdienkarte.",
+    p2h:"Sistēmiskā domāšana",p2p:"Virtuve ir ražošana. Veidoju to pēc efektīva biznesa likumiem.",
+    p3h:"Darbs ar skaitļiem",p3p:"Katrs lēmums — caur datiem. Food cost — tas ir vadība.",
+    p4h:"Tirgus izpratne",p4p:"30+ gadi — tendenču redzējums un intuīcija par nozares izmaiņām.",
+    ap_bq:"Labs restorāns nav nejaušība. Tas ir pareizi uzbūvētas sistēmas rezultāts.",
+    ap_yr_lbl:"Gadi nozarē",
+    c_ey:"Kontakts",c_title:"SĀKSIM\nKOPĀ",c_intro:"Pastāstiet par projektu — atbildēšu 24 stundu laikā.",
+    c_phone_lbl:"Tāl.",c_write:"Rakstīt",
+    f_name:"Jūsu vārds",f_name_ph:"Jānis Bērziņš",f_contact:"Kontakts",f_contact_ph:"+371 XX XXX XXX",f_msg:"Par projektu",f_msg_ph:"Formāts, uzdevums, termiņi...",
+    f_submit:"Nosūtīt pieteikumu",f_ok:"Paldies! Sazināšos drīzumā.",
+  },
+  en:{
+    nav_about:"About",nav_services:"Services",nav_approach:"Approach",nav_contact:"Contact",
+    h_line3:"IVANKOV",h_role:"Role",h_role_val:"Executive Chef",h_exp:"Experience",h_fmt:"Formats",h_start:"From Zero",
+    h_offer:"I launch restaurants from scratch, build kitchen systems and turn operational chaos into profitable operations.",
+    cta1:"Get in Touch",cta2:"Learn More",
+    t1:"Restaurant Launch",t2:"Menu Development",t3:"Cost Optimisation",t4:"Team Training",t5:"Financial Analysis",t6:"Supplier Management",t7:"30+ Years Expertise",
+    a_ey:"About",a_title:"DENIS\nIVANKOV",
+    a_pull:"A kitchen is not a place for inspiration. It is a place for systems, results and numbers.",
+    a_p1:"Over 30 years in the food service industry — from line cook to executive consultant. Every format from small cafés to large projects.",
+    a_p2:"Launched kitchens from zero, optimised existing operations, turned struggling restaurants around.",
+    a_mono:"— systems approach. always.",
+    sv_ey:"Services",sv_title:"HOW I\nCAN HELP",
+    s1t:"Project Launch",s1d:"Opening a kitchen from scratch: process design, equipment, team, standards.",s1a:"Zero to Open",s1b:"Processes",s1c:"Standards",
+    s2t:"Business Optimisation",s2d:"Restaurant audit: reducing cost of goods, eliminating waste, improving efficiency.",s2a:"Cost Reduction",s2b:"Efficiency",s2c:"Audit",
+    s3t:"Menu Development",s3d:"Menu as a commercial tool: concept, costing, tastings, seasonal updates.",s3a:"Concept",s3b:"Tastings",s3c:"Costing",
+    s4t:"Team & Training",s4d:"Staff selection, training. Implementing SOPs and quality control systems.",s4a:"Training",s4b:"Standards",s4c:"Quality",
+    s5t:"Analytics & Purchasing",s5d:"Financial analysis, management reporting and purchasing optimisation.",s5a:"Finance",s5b:"Purchasing",s5c:"Reporting",
+    s6t:"Consulting",s6d:"Strategic advisory: concept positioning, marketing, project management.",s6a:"Strategy",s6b:"Marketing",s6c:"Management",
+    gl_lbl:"/// Dishes — Processes — Results",
+    ap_ey:"Approach",ap_title:"HOW I\nWORK",
+    p1h:"Diagnosis",p1p:"I start with an audit: numbers, processes, team, menu.",
+    p2h:"Systems Thinking",p2p:"A kitchen is a production facility. I build it according to efficient business laws.",
+    p3h:"Data-Driven",p3p:"Every decision through data. Food cost, COGS — that is management.",
+    p4h:"Market Insight",p4p:"30+ years is trend vision and an instinct for industry shifts.",
+    ap_bq:"A great restaurant is not an accident. It is the result of a well-built system.",
+    ap_yr_lbl:"Years in the industry",
+    c_ey:"Contact",c_title:"LET'S\nBEGIN",c_intro:"Tell me about your project — I will reply within 24 hours.",
+    c_phone_lbl:"Phone",c_write:"Message",
+    f_name:"Your name",f_name_ph:"John Smith",f_contact:"Contact",f_contact_ph:"+371 XX XXX XXX",f_msg:"About the project",f_msg_ph:"Format, goal, timeline...",
+    f_submit:"Send Request",f_ok:"Thank you! I will be in touch shortly.",
+  }
+};
+
+let lang='ru';
+function setLang(l){
+  lang=l;const d=TR[l];
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k=el.getAttribute('data-i18n');if(d[k]===undefined)return;
+    el.tagName==='H2'?el.innerHTML=d[k].replace(/\n/g,'<br>'):el.textContent=d[k];
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{const k=el.getAttribute('data-i18n-ph');if(d[k])el.placeholder=d[k];});
+  document.documentElement.lang=l;
+  document.querySelectorAll('.lb').forEach(b=>b.classList.toggle('on',b.textContent.toLowerCase()===l));
+}
+
+/* scroll reveal */
+const ro=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      e.target.style.transitionDelay=(i*.07)+'s';
+      e.target.classList.add('in');
+      ro.unobserve(e.target);
+    }
+  });
+},{threshold:.1});
+document.querySelectorAll('.rv,.rv-l,.rv-r,.rv-s').forEach(el=>ro.observe(el));
+
+/* nav */
+const navEl=document.getElementById('main-nav');
+window.addEventListener('scroll',()=>{
+  navEl.style.background=window.scrollY>50?'rgba(240,236,227,.98)':'rgba(240,236,227,.95)';
+},{passive:true});
+
+/* parallax ghost */
+const ghost=document.querySelector('.h-ghost');
+window.addEventListener('scroll',()=>{
+  if(ghost)ghost.style.transform=`translateY(${window.scrollY*.1}px)`;
+},{passive:true});
+
+function handleForm(e){
+  e.preventDefault();
+  const s=document.getElementById('fsuccess');s.style.display='block';
+  e.target.reset();setTimeout(()=>s.style.display='none',5000);
+}
+</script>
+</body>
+</html>
