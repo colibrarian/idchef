@@ -857,18 +857,22 @@ footer{
 }
 
 
-/* ── Mobile hero canvas animation ── */
+/* ── Hero canvas animation — all screen sizes ── */
 #hero-canvas{
   position:absolute;
   inset:0;
   width:100%;height:100%;
-  z-index:0;   /* behind the PNG (z-index:1) */
-  display:none; /* shown only on mobile via JS */
+  z-index:0;
+  pointer-events:none;
+  display:block;
 }
-.h-mobile-circle img{
-  position:relative;
-  z-index:1;
-}
+/* Ensure all hero content sits above canvas */
+.h-ghost{z-index:0}
+.h-top{z-index:1}
+.h-stats{position:relative;z-index:1}
+.h-bottom{position:relative;z-index:1}
+.h-mobile-block{position:relative;z-index:1}
+.h-mobile-circle img{position:relative;z-index:1}
 
 </style>
 </head>
@@ -895,6 +899,7 @@ footer{
 
 <!-- ══ HERO ══ -->
 <section id="hero">
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
   <div class="h-ghost" aria-hidden="true">
     <span>ID CHEF</span>
     <span>ИВАНКОВ</span>
@@ -911,7 +916,6 @@ footer{
       </div>
     </div>
     <div class="h-mobile-circle">
-      <canvas id="hero-canvas" aria-hidden="true"></canvas>
       <img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/id%20hero%20block.png" alt="Денис Иванков"/>
     </div>
     <div class="h-mobile-bottom">
@@ -1569,114 +1573,118 @@ function openPrivacyLang(){
 </script>
 <script>window.formspree=window.formspree||function(){(formspree.q=formspree.q||[]).push(arguments)};</script>
 <script src="https://unpkg.com/@formspree/ajax@1" defer>
-/* ── Mobile hero canvas: particles + sweep lines behind chef ── */
+/* ── Hero canvas animation — desktop + tablet + mobile ── */
 (function(){
-  function initCanvas(){
-    var c=document.getElementById('hero-canvas');
-    if(!c)return;
-    // only run on mobile
-    if(window.innerWidth>640){c.style.display='none';return;}
-    c.style.display='block';
-    var ctx=c.getContext('2d');
-    function resize(){
-      c.width=c.offsetWidth;
-      c.height=c.offsetHeight;
-    }
-    resize();
-    window.addEventListener('resize',resize,{passive:true});
+  var c, ctx, W, H, frame=0, P=[], sweeps=[], running=false;
 
-    // Particles
-    var P=[];
-    var N=38;
-    var acc='rgba(200,169,110,';
-    var red='rgba(184,52,26,';
-    for(var i=0;i<N;i++){
+  function setup(){
+    c = document.getElementById('hero-canvas');
+    if(!c) return;
+    ctx = c.getContext('2d');
+    resize();
+
+    // particles
+    P = [];
+    var acc='rgba(200,169,110,', red='rgba(184,52,26,';
+    for(var i=0;i<55;i++){
       P.push({
-        x:Math.random(),
-        y:Math.random(),
-        r:Math.random()*1.8+.4,
-        vx:(Math.random()-.5)*.0004,
-        vy:-(Math.random()*.0006+.0002),
-        o:Math.random()*.5+.15,
-        col:Math.random()>.75?red:acc,
+        x:Math.random(), y:Math.random()+.1,
+        r:Math.random()*2+.5,
+        vx:(Math.random()-.5)*.00035,
+        vy:-(Math.random()*.00055+.00015),
+        o:Math.random()*.55+.1,
+        col:Math.random()>.8?red:acc,
         life:Math.random()
       });
     }
 
-    // Sweep lines state
-    var sweeps=[
-      {y:.15,speed:.0003,w:.55,o:.0,dir:1},
-      {y:.55,speed:.0002,w:.4, o:.0,dir:-1},
-      {y:.8, speed:.00035,w:.35,o:.0,dir:1},
+    // sweep lines
+    sweeps = [
+      {y:.18, s:.00028, w:.7,  o:.0, dir:1},
+      {y:.42, s:.00018, w:.5,  o:.0, dir:-1},
+      {y:.68, s:.00032, w:.6,  o:.0, dir:1},
+      {y:.88, s:.00022, w:.4,  o:.0, dir:-1},
     ];
 
-    var frame=0;
-    function tick(){
-      var W=c.width, H=c.height;
-      ctx.clearRect(0,0,W,H);
-
-      // --- sweep horizontal lines ---
-      sweeps.forEach(function(s){
-        s.o+=s.speed*s.dir*60;
-        if(s.o>0.22)s.dir=-1;
-        if(s.o<0)  {s.dir=1;s.o=0;}
-        var gy=s.y*H;
-        var grd=ctx.createLinearGradient(0,gy,W,gy);
-        grd.addColorStop(0,'transparent');
-        grd.addColorStop(.2,acc+s.o+')');
-        grd.addColorStop(.5,acc+(s.o*.6)+')');
-        grd.addColorStop(1,'transparent');
-        ctx.beginPath();
-        ctx.moveTo(0,gy);ctx.lineTo(W,gy);
-        ctx.strokeStyle=grd;
-        ctx.lineWidth=s.w;
-        ctx.stroke();
-      });
-
-      // --- particles ---
-      P.forEach(function(p){
-        p.x+=p.vx; p.y+=p.vy;
-        p.life+=.004;
-        // reset when off top
-        if(p.y<-.02){
-          p.y=1.02; p.x=Math.random();
-          p.life=0;
-        }
-        var fade=Math.sin(p.life*Math.PI);
-        ctx.beginPath();
-        ctx.arc(p.x*W, p.y*H, p.r, 0, 6.28);
-        ctx.fillStyle=p.col+(p.o*fade)+')';
-        ctx.fill();
-      });
-
-      // --- radial pulse glow behind figure (center) ---
-      frame++;
-      var pulse=Math.sin(frame*.018)*.5+.5;
-      var cx=W*.5, cy=H*.55;
-      var grd2=ctx.createRadialGradient(cx,cy,0,cx,cy,W*.55);
-      grd2.addColorStop(0,acc+(pulse*.08)+')');
-      grd2.addColorStop(.5,acc+(pulse*.03)+')');
-      grd2.addColorStop(1,'transparent');
-      ctx.fillStyle=grd2;
-      ctx.fillRect(0,0,W,H);
-
-      requestAnimationFrame(tick);
-    }
-    tick();
+    if(!running){ running=true; tick(); }
   }
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded',initCanvas);
-  } else {
-    initCanvas();
+
+  function resize(){
+    if(!c) return;
+    var hero = document.getElementById('hero');
+    c.width  = hero ? hero.offsetWidth  : window.innerWidth;
+    c.height = hero ? hero.offsetHeight : window.innerHeight;
+    W=c.width; H=c.height;
   }
-  // re-init on resize crossing 640px boundary
-  var wasM=window.innerWidth<=640;
-  window.addEventListener('resize',function(){
-    var isM=window.innerWidth<=640;
-    if(isM!==wasM){wasM=isM;initCanvas();}
+
+  function tick(){
+    if(!ctx){running=false;return;}
+    W=c.width; H=c.height;
+    ctx.clearRect(0,0,W,H);
+
+    // sweep lines
+    sweeps.forEach(function(s){
+      s.o += s.s*s.dir*1.2;
+      if(s.o>0.28){s.dir=-1;}
+      if(s.o<0)   {s.dir=1;s.o=0;}
+      var y=s.y*H;
+      var g=ctx.createLinearGradient(0,0,W,0);
+      g.addColorStop(0,'transparent');
+      g.addColorStop(.15,'rgba(200,169,110,'+s.o+')');
+      g.addColorStop(.5, 'rgba(200,169,110,'+(s.o*.5)+')');
+      g.addColorStop(.85,'rgba(200,169,110,'+s.o+')');
+      g.addColorStop(1,'transparent');
+      ctx.beginPath();
+      ctx.moveTo(0,y); ctx.lineTo(W,y);
+      ctx.strokeStyle=g; ctx.lineWidth=s.w;
+      ctx.stroke();
+    });
+
+    // particles
+    P.forEach(function(p){
+      p.x+=p.vx; p.y+=p.vy;
+      p.life+=.003;
+      if(p.y<-.02){ p.y=1.04; p.x=Math.random(); p.life=0; }
+      if(p.x<-.02||p.x>1.02){ p.x=Math.random(); }
+      var fade=Math.sin(Math.min(p.life,1)*Math.PI);
+      ctx.beginPath();
+      ctx.arc(p.x*W, p.y*H, p.r, 0, 6.2832);
+      ctx.fillStyle=p.col+(p.o*fade)+')';
+      ctx.fill();
+    });
+
+    // radial pulse glow — centre of hero
+    frame++;
+    var pulse=Math.sin(frame*.015)*.5+.5;
+    var cx=W*.5, cy=H*.48;
+    var gr=ctx.createRadialGradient(cx,cy,0, cx,cy, W*.62);
+    gr.addColorStop(0,'rgba(200,169,110,'+(pulse*.1)+')');
+    gr.addColorStop(.45,'rgba(200,169,110,'+(pulse*.04)+')');
+    gr.addColorStop(1,'transparent');
+    ctx.fillStyle=gr;
+    ctx.fillRect(0,0,W,H);
+
+    // subtle red accent glow — lower right
+    var pulse2=Math.sin(frame*.011+1.2)*.5+.5;
+    var gr2=ctx.createRadialGradient(W*.78,H*.72,0, W*.78,H*.72, W*.35);
+    gr2.addColorStop(0,'rgba(184,52,26,'+(pulse2*.08)+')');
+    gr2.addColorStop(1,'transparent');
+    ctx.fillStyle=gr2;
+    ctx.fillRect(0,0,W,H);
+
+    requestAnimationFrame(tick);
+  }
+
+  window.addEventListener('resize', function(){
+    resize();
   },{passive:true});
-})();
 
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', setup);
+  } else {
+    setup();
+  }
+})();
 </script>
 </body>
 </html>
