@@ -618,13 +618,18 @@ footer{
   display:flex;align-items:center;gap:.3rem;
 }
 .fl-logo .dot{color:var(--acc)}
-.fl-links{display:flex;gap:2rem;list-style:none}
+.fl-links{display:flex;flex-wrap:wrap;gap:.6rem 1.5rem;list-style:none}
 .fl-links a{
   font-size:.62rem;font-weight:400;letter-spacing:.15em;
   text-transform:uppercase;color:var(--tx3);text-decoration:none;
-  transition:color .2s;
+  transition:color .2s;white-space:nowrap;
 }
 .fl-links a:hover{color:var(--acc)}
+@media(max-width:640px){
+  footer{flex-direction:column;align-items:flex-start;gap:1.2rem;padding:2rem 1.2rem}
+  .fl-links{display:grid;grid-template-columns:1fr 1fr;gap:.6rem .8rem}
+  .fl-links a{font-size:.6rem;letter-spacing:.1em}
+}
 .fl-copy{font-size:.6rem;letter-spacing:.1em;color:var(--tx3)}
 
 /* ─────────────────────────────────────────
@@ -656,28 +661,26 @@ footer{
 @media(max-width:640px){
   section{padding:4rem 1.2rem}
   /* Hero mobile: photo hidden, content at bottom */
-  .h-photo{width:clamp(180px,60vw,280px);opacity:.3;right:-1rem}
-  .h-stats{flex-wrap:wrap}
-  .h-stat{flex:0 0 50%;border-right:none;padding:1rem 1.2rem}
+  .h-photo{display:none!important}
+  .h-stats{display:none!important}
   .h-bottom{flex-direction:column;align-items:flex-start;padding:1.2rem 1.2rem 3rem}
   nav{padding:0 1rem}
   .lb{padding:.28rem .45rem;font-size:.58rem}
   /* Services mobile */
   .svc-row{grid-template-columns:1fr;gap:.6rem;padding:1.5rem 0}
   .sn{font-size:1rem;margin-bottom:.2rem}
-  /* Career mobile: photo top, text below */
-  .exp-timeline{padding-left:0}
-  .exp-timeline::before{display:none}
+  /* Career mobile: gold line stays, photo full-width, text below */
+  .exp-timeline{padding-left:1.8rem}
+  .exp-timeline::before{display:block}
+  .exp-dot-line{display:flex}
   .exp-entry{
     grid-template-columns:1fr;
     gap:0;
     padding-bottom:2.5rem;
-    border-bottom:1px solid var(--c3);
   }
-  .exp-entry:last-child{border-bottom:none;padding-bottom:0}
-  .exp-dot-line{display:none}
+  .exp-entry:last-child{padding-bottom:0}
   .exp-photo{width:100%;max-width:100%}
-  .exp-photo img{aspect-ratio:4/5;border-radius:8px}
+  .exp-photo img{aspect-ratio:4/5;border-radius:8px;max-height:60vw;width:100%;object-fit:cover}
   .exp-text{padding-top:1rem}
   .exp-title-tl{font-size:clamp(1.1rem,5vw,1.5rem)}
 }
@@ -726,6 +729,15 @@ footer{
 .modal-content p{font-size:.82rem;font-weight:300;line-height:1.8;color:var(--tx2);margin-bottom:.6rem}
 .modal-content a{color:var(--acc)}
 .modal-date{font-size:.7rem;color:var(--tx3);margin-bottom:1rem!important}
+
+
+.f-gdpr-error{
+  font-size:.72rem;color:#e05050;
+  padding:.3rem .6rem;
+  border-left:2px solid #e05050;
+  margin-top:.2rem;
+  display:none;
+}
 
 </style>
 </head>
@@ -1039,15 +1051,18 @@ footer{
           <div><label class="fl" data-i18n="f_name">Ваше имя</label><input type="text" class="fi" name="name" placeholder="Иван Петров" required data-i18n-ph="f_name_ph" data-fs-field/></div>
           <div><label class="fl" data-i18n="f_contact">Контакт</label><input type="text" class="fi" name="contact" placeholder="+371 XX XXX XXX" required data-i18n-ph="f_contact_ph" data-fs-field/></div>
           <div><label class="fl" data-i18n="f_msg">О проекте</label><textarea class="ft" name="message" placeholder="Формат, задача, сроки..." data-i18n-ph="f_msg_ph" data-fs-field></textarea></div>
-          <!-- GDPR checkbox -->
+          <!-- GDPR checkbox with custom validation -->
           <div class="f-check-wrap">
-            <label class="f-check-label">
-              <input type="checkbox" class="f-check" required/>
-              <span data-i18n="f_gdpr">Я согласен на обработку моих персональных данных в соответствии с <button type="button" class="f-pp-link" onclick="openPrivacy()">Политикой конфиденциальности</button> и понимаю, что данные будут обработаны через Formspree.</span>
+            <input type="checkbox" id="gdpr-check" class="f-check"/>
+            <label for="gdpr-check" class="f-check-label">
+              <span data-i18n="f_gdpr_pre">Я даю согласие на обработку моих персональных данных в соответствии с</span>
+              <button type="button" class="f-pp-link" onclick="openPrivacyLang()" data-i18n="f_gdpr_link">Политикой конфиденциальности</button>
+              <span data-i18n="f_gdpr_post">и понимаю, что данные будут обработаны через Formspree.</span>
             </label>
           </div>
+          <div id="gdpr-error" class="f-gdpr-error" style="display:none" data-i18n="f_gdpr_err">Пожалуйста, подтвердите согласие с Политикой конфиденциальности.</div>
           <div>
-            <button type="submit" class="btn-primary" data-fs-submit-btn><span data-i18n="f_submit">Записаться на консультацию</span></button>
+            <button type="submit" id="form-submit" class="btn-primary" data-fs-submit-btn><span data-i18n="f_submit">Записаться на консультацию</span></button>
             <div data-fs-success style="display:none;color:var(--acc);font-size:.8rem;margin-top:.5rem" data-i18n="f_ok">Спасибо! Свяжусь с вами в ближайшее время.</div>
             <div data-fs-error style="display:none;color:#c83030;font-size:.75rem;margin-top:.4rem">Ошибка отправки. Попробуйте ещё раз.</div>
           </div>
@@ -1120,6 +1135,7 @@ footer{
       <p>Jums ir tiesības piekļūt saviem datiem, pieprasīt to labošanu vai dzēšanu. Sazināties: <a href="mailto:consult@idchef13.com">consult@idchef13.com</a></p>
       <h3>Sīkdatnes</h3>
       <p>Vietne neizmanto analītiskās vai izsekošanas sīkdatnes.</p>
+    </div>
     <div class="modal-content" id="pp-ru" style="display:none">
       <h2>Политика конфиденциальности</h2>
       <p class="modal-date">Последнее обновление: 06/05/2026</p>
@@ -1161,6 +1177,7 @@ footer{
     <div class="modal-content" id="ck-lv" style="display:none">
       <h2>Sīkdatnes</h2>
       <p>Šī vietne neizmanto analītiskās vai izsekošanas sīkdatnes. Var tikt izmantotas tikai tehniskās sīkdatnes vietnes darbībai.</p>
+    </div>
     <div class="modal-content" id="ck-ru" style="display:none">
       <h2>Файлы cookie</h2>
       <p>Этот сайт не использует аналитические или отслеживающие файлы cookie. Могут использоваться только технические файлы cookie для обеспечения корректной работы сайта.</p>
@@ -1213,7 +1230,7 @@ const TR={
     f_msg:"О проекте",f_msg_ph:"Формат, задача, сроки...",
     f_submit:"Записаться на консультацию",f_ok:"Спасибо! Свяжусь с вами в ближайшее время.",
     nav_privacy:"Политика конфиденциальности",nav_cookies:"Cookies",
-    f_gdpr:"Я согласен на обработку моих персональных данных в соответствии с Политикой конфиденциальности и понимаю, что данные будут обработаны через Formspree.",
+    f_gdpr_pre:"Я даю согласие на обработку моих персональных данных в соответствии с",f_gdpr_link:"Политикой конфиденциальности",f_gdpr_post:"и понимаю, что данные будут обработаны через Formspree.",f_gdpr_err:"Пожалуйста, подтвердите согласие с Политикой конфиденциальности, чтобы продолжить.",
   },
   lv:{
     nav_about:"Par šefu",nav_exp:"Pieredze",nav_services:"Pakalpojumi",nav_approach:"Pieeja",nav_contact:"Kontakts",
@@ -1256,7 +1273,7 @@ const TR={
     f_msg:"Par projektu",f_msg_ph:"Formāts, uzdevums, termiņi...",
     f_submit:"Pieteikties konsultācijai",f_ok:"Paldies! Sazināšos ar jums drīzumā.",
     nav_privacy:"Privātuma politika",nav_cookies:"Sīkdatnes",
-    f_gdpr:"Es piekrītu savu personas datu apstrādei saskaņā ar Privātuma politiku un saprotu, ka dati tiks apstrādāti, izmantojot Formspree.",
+    f_gdpr_pre:"Es piekrītu savu personas datu apstrādei saskaņā ar",f_gdpr_link:"Privātuma politiku",f_gdpr_post:"un saprotu, ka dati tiks apstrādāti, izmantojot Formspree.",f_gdpr_err:"Lūdzu, apstipriniet piekrišanu Privātuma politikai, lai turpinātu.",
   },
   en:{
     nav_about:"About",nav_exp:"Experience",nav_services:"Services",nav_approach:"Approach",nav_contact:"Contact",
@@ -1299,7 +1316,7 @@ const TR={
     f_msg:"About the project",f_msg_ph:"Format, goal, timeline...",
     f_submit:"Book a Consultation",f_ok:"Thank you! I will be in touch shortly.",
     nav_privacy:"Privacy Policy",nav_cookies:"Cookies",
-    f_gdpr:"I agree to the processing of my personal data in accordance with the Privacy Policy and understand that my data will be processed via Formspree.",
+    f_gdpr_pre:"I agree to the processing of my personal data in accordance with the",f_gdpr_link:"Privacy Policy",f_gdpr_post:"and understand that my data will be processed via Formspree.",f_gdpr_err:"Please confirm your agreement with the Privacy Policy to continue.",
   }
 };
 
@@ -1360,7 +1377,46 @@ function switchTab(btn,contentId){
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('pp-modal');closeModal('ck-modal')}});
 
-/* ── FORM handled by Formspree AJAX ── */
+/* ── FORM: checkbox validation + Formspree ── */
+document.addEventListener('DOMContentLoaded',function(){
+  var form = document.getElementById('ct-form');
+  if(!form) return;
+  form.addEventListener('submit', function(e){
+    var cb = document.getElementById('gdpr-check');
+    var err = document.getElementById('gdpr-error');
+    if(cb && !cb.checked){
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      err.style.display='block';
+      cb.closest('.f-check-wrap').scrollIntoView({behavior:'smooth',block:'center'});
+      return false;
+    }
+    if(err) err.style.display='none';
+  });
+  // Hide error when checkbox clicked
+  var cb2 = document.getElementById('gdpr-check');
+  if(cb2) cb2.addEventListener('change',function(){
+    var err2=document.getElementById('gdpr-error');
+    if(this.checked && err2) err2.style.display='none';
+  });
+});
+
+/* Open privacy from modal synced to current language */
+function openPrivacyLang(){
+  openPrivacy();
+  // Switch to current lang tab
+  var tabs={'en':'pp-en','lv':'pp-lv','ru':'pp-ru'};
+  var target = tabs[lang] || 'pp-en';
+  var box = document.querySelector('#pp-modal .modal-box');
+  if(!box) return;
+  box.querySelectorAll('.mtab').forEach(b=>b.classList.remove('on'));
+  box.querySelectorAll('.modal-content').forEach(c=>c.style.display='none');
+  var tBtn = box.querySelector('[onclick*="'+target+'"]');
+  if(tBtn) tBtn.classList.add('on');
+  var tContent = document.getElementById(target);
+  if(tContent) tContent.style.display='block';
+}
+
 </script>
 <script>window.formspree=window.formspree||function(){(formspree.q=formspree.q||[]).push(arguments)};</script>
 <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
