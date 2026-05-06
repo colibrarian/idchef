@@ -646,6 +646,12 @@ footer{
 /* ─────────────────────────────────────────
    RESPONSIVE
 ───────────────────────────────────────── */
+/* Mobile-only hero elements — hidden by default on desktop */
+.h-mobile-block{display:none}
+.h-mobile-circle{display:none}
+.h-mobile-pre{display:none}
+.h-title-mobile{display:none}
+
 @media(max-width:1024px){
   .svc-row{grid-template-columns:48px 1fr;gap:1.5rem}
   /* descriptions stay visible */
@@ -769,10 +775,7 @@ footer{
   .exp-title-tl{font-size:clamp(1.1rem,5vw,1.5rem)}
 }
 
-/* Mobile hero block — hidden on desktop */
-.h-mobile-block{display:none}
-.h-mobile-circle{display:none}
-.h-mobile-pre{display:none}
+/* Mobile hero block — hidden on desktop, revealed inside @media(max-width:640px) above */
 
 /* ── FORM GDPR checkbox ── */
 .f-check-wrap{
