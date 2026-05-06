@@ -1,0 +1,1698 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ID Chef — Иванков Денис | idchef13.lv</title>
+<meta name="description" content="ID Chef — Иванков Денис. Шеф-повар, консультант. 30+ лет. Запуск ресторанов, оптимизация, разработка меню. Рига, Латвия."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Денис Иванков","jobTitle":"Шеф-повар, консультант","brand":{"@type":"Brand","name":"ID Chef"},"url":"https://idchef13.lv","telephone":"+37125745745","email":"info@idchef13.lv"}</script>
+
+<!-- Fonts: Noto Sans supports Cyrillic + Latin perfectly, Playfair Display for display headers -->
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700;900&family=Noto+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet"/>
+
+<style>
+/* ─────────────────────────────────────────
+   TOKENS
+───────────────────────────────────────── */
+:root{
+  --c0:#08080a;        /* near-black */
+  --c1:#111114;        /* dark bg */
+  --c2:#1c1c20;        /* card bg */
+  --c3:#2a2a30;        /* border */
+  --tx:#e8e4dc;        /* primary text */
+  --tx2:#9e9a94;       /* muted text */
+  --tx3:#5a5752;       /* ghost text */
+  --acc:#c8a96e;       /* gold accent */
+  --acc2:#a07840;      /* gold dark */
+  --red:#b8341a;       /* red accent */
+  --nav-h:60px;
+  --font-head:'Unbounded', sans-serif;
+  --font-body:'Noto Sans', sans-serif;
+}
+
+/* ─────────────────────────────────────────
+   RESET
+───────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px;overflow-x:hidden}
+body{
+  background:var(--c0);
+  color:var(--tx);
+  font-family:var(--font-body);
+  font-weight:300;
+  overflow-x:hidden;
+  max-width:100vw;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ─────────────────────────────────────────
+   GRAIN — no blend mode, no isolation issues
+───────────────────────────────────────── */
+#grain{
+  position:fixed;inset:0;z-index:8000;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='.06'/%3E%3C/svg%3E");
+  opacity:1;
+}
+
+/* ─────────────────────────────────────────
+   NAV
+───────────────────────────────────────── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:9000;
+  height:var(--nav-h);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2.5rem;
+  background:rgba(8,8,10,.88);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--c3);
+  transition:background .3s;
+}
+.n-logo{
+  font-family:var(--font-head);font-size:1.1rem;font-weight:900;
+  letter-spacing:.06em;color:var(--tx);text-decoration:none;
+  display:flex;align-items:center;gap:.3rem;
+}
+.n-logo .dot{color:var(--acc)}
+.n-links{display:flex;gap:2rem;list-style:none}
+.n-links a{
+  font-family:var(--font-body);font-size:.68rem;font-weight:400;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--tx2);text-decoration:none;transition:color .2s;
+}
+.n-links a:hover{color:var(--acc)}
+/* Lang */
+.lang-sw{display:flex;gap:0;border:1px solid var(--c3);flex-shrink:0}
+.lb{
+  background:transparent;border:none;border-right:1px solid var(--c3);
+  color:var(--tx3);font-family:var(--font-body);
+  font-size:.62rem;font-weight:600;letter-spacing:.12em;
+  padding:.35rem .7rem;cursor:pointer;text-transform:uppercase;
+  transition:all .15s;
+}
+.lb:last-child{border-right:none}
+.lb.on{background:var(--acc);color:var(--c0)}
+.lb:hover:not(.on){color:var(--tx);background:rgba(200,169,110,.08)}
+
+/* ─────────────────────────────────────────
+   REVEAL
+───────────────────────────────────────── */
+.rv{opacity:0;transform:translateY(2rem);transition:opacity .75s ease,transform .75s ease}
+.rv.in{opacity:1;transform:none}
+.rv-l{opacity:0;transform:translateX(-2rem);transition:opacity .7s ease,transform .7s ease}
+.rv-l.in{opacity:1;transform:none}
+.rv-r{opacity:0;transform:translateX(2rem);transition:opacity .7s ease,transform .7s ease}
+.rv-r.in{opacity:1;transform:none}
+.rv-s{opacity:0;transform:scale(.94);transition:opacity .8s ease,transform .8s ease}
+.rv-s.in{opacity:1;transform:scale(1)}
+
+/* ─────────────────────────────────────────
+   SHARED SECTION
+───────────────────────────────────────── */
+section{position:relative;padding:7rem 2.5rem}
+.eyebrow{
+  font-size:.6rem;font-weight:600;letter-spacing:.38em;
+  text-transform:uppercase;color:var(--acc);
+  margin-bottom:.75rem;
+  display:flex;align-items:center;gap:.8rem;
+}
+.eyebrow::before{content:'';display:block;width:2rem;height:1px;background:var(--acc)}
+.section-title{
+  font-family:var(--font-head);
+  font-size:clamp(2.4rem,7vw,7.5rem);
+  font-weight:900;line-height:.9;
+  letter-spacing:-.02em;color:var(--tx);
+  text-transform:none;
+}
+/* Sentence case helper — JS will handle actual text, CSS prevents forced caps */
+.h-title{text-transform:none}
+.exp-title-sl{text-transform:none}
+.st{text-transform:none}
+.pill h3{text-transform:none}
+.inner{max-width:1320px;margin:0 auto;position:relative;z-index:1}
+
+/* ─────────────────────────────────────────
+   HERO
+───────────────────────────────────────── */
+#hero{
+  min-height:100vh;padding:0;
+  position:relative;
+  background:var(--c1);
+  display:flex;flex-direction:column;
+  justify-content:flex-end;
+  overflow:hidden;
+}
+
+/* Texture overlay — pure CSS halftone dots */
+#hero::before{
+  content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:radial-gradient(circle,rgba(200,169,110,.06) 1px,transparent 1px);
+  background-size:28px 28px;
+}
+
+/* Photo */
+.h-photo{
+  position:absolute;
+  right:0;top:0;bottom:0;
+  width:clamp(300px,42vw,600px);
+  z-index:1;
+  pointer-events:none;
+}
+.h-photo img{
+  display:block;width:100%;height:100%;
+  object-fit:contain;
+  object-position:bottom right;
+  transition:transform 1.4s cubic-bezier(.16,1,.3,1);
+}
+#hero:hover .h-photo img{transform:scale(1.02) translateY(-6px)}
+
+/* Ghost lines in bg */
+.h-ghost{
+  position:absolute;inset:0;z-index:0;
+  pointer-events:none;user-select:none;
+  overflow:hidden;max-width:100%;
+}
+.h-ghost span{
+  display:block;
+  font-family:var(--font-head);font-weight:900;
+  font-size:clamp(5rem,12vw,16rem);
+  line-height:.85;white-space:nowrap;
+  color:transparent;
+  -webkit-text-stroke:.8px rgba(200,169,110,.07);
+}
+.h-ghost span:nth-child(2){padding-left:14vw;-webkit-text-stroke-width:.5px;opacity:.7}
+.h-ghost span:nth-child(3){padding-left:4vw;-webkit-text-stroke-width:.3px;opacity:.4}
+
+/* Hero top row: text left, photo right */
+.h-top{
+  flex:1;
+  position:relative;z-index:1;
+  min-height:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+}
+/* Content */
+.h-content{
+  position:relative;z-index:2;
+  padding:calc(var(--nav-h) + 2rem) 2.5rem 1.5rem;
+}
+.h-pre{
+  display:flex;align-items:center;gap:1rem;
+  font-size:.62rem;font-weight:600;letter-spacing:.35em;
+  text-transform:uppercase;color:var(--acc);
+  margin-bottom:1.5rem;
+}
+.h-pre::before{content:'';display:block;width:2.5rem;height:1px;background:var(--acc)}
+.h-title{
+  font-family:var(--font-head);font-weight:900;
+  font-size:clamp(4.5rem,15vw,18rem);
+  line-height:.85;letter-spacing:-.03em;
+  color:var(--tx);
+  margin-bottom:.5rem;
+}
+.h-title .acc{color:var(--acc)}
+.h-title .line2{display:block;padding-left:8vw}
+.h-title .line3{display:block;font-size:.48em;font-weight:300;letter-spacing:.01em;color:var(--tx2);margin-top:.3em;padding-left:.1em}
+
+/* Stats bar */
+.h-stats{
+  display:flex;gap:0;
+  border-top:1px solid var(--c3);
+  border-bottom:1px solid var(--c3);
+  margin-top:3rem;
+  position:relative;z-index:1;
+}
+.h-stat{
+  flex:1;padding:1.5rem 2.5rem;
+  border-right:1px solid var(--c3);
+  display:flex;flex-direction:column;gap:.3rem;
+}
+.h-stat:last-child{border-right:none}
+.h-stat-n{
+  font-family:var(--font-head);font-size:clamp(1.8rem,3.5vw,3rem);
+  font-weight:900;color:var(--acc);line-height:1;
+}
+.h-stat-l{font-size:.58rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--tx3)}
+
+/* Offer + CTAs */
+.h-bottom{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:2rem;flex-wrap:wrap;
+  padding:2rem 2.5rem 4rem;
+  position:relative;z-index:1;
+}
+.h-offer{
+  max-width:480px;
+  font-size:.95rem;font-weight:300;line-height:1.8;color:var(--tx2);
+}
+.h-ctas{display:flex;gap:1rem;flex-wrap:wrap}
+/* CTA buttons */
+.btn-primary{
+  display:inline-flex;align-items:center;gap:.6rem;
+  padding:.9rem 2rem;
+  background:var(--acc);color:var(--c0);
+  font-family:var(--font-body);font-size:.72rem;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;text-decoration:none;
+  border:none;cursor:pointer;
+  transition:background .25s,transform .2s;
+  white-space:nowrap;
+}
+.btn-primary:hover{background:var(--acc2);transform:translateY(-2px)}
+.btn-secondary{
+  display:inline-flex;align-items:center;gap:.6rem;
+  padding:.9rem 2rem;
+  background:transparent;color:var(--tx);
+  font-family:var(--font-body);font-size:.72rem;font-weight:400;
+  letter-spacing:.14em;text-transform:uppercase;text-decoration:none;
+  border:1px solid var(--c3);cursor:pointer;
+  transition:border-color .25s,color .25s,transform .2s;
+  white-space:nowrap;
+}
+.btn-secondary:hover{border-color:var(--acc);color:var(--acc);transform:translateY(-2px)}
+
+/* ─────────────────────────────────────────
+   TICKER
+───────────────────────────────────────── */
+.ticker{
+  overflow:hidden;background:var(--acc);
+  padding:.55rem 0;border-top:none;border-bottom:none;
+}
+.t-track{
+  display:flex;white-space:nowrap;
+  animation:ticker 24s linear infinite;width:max-content;
+}
+.t-track:hover{animation-play-state:paused}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ti{font-family:var(--font-head);font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--c0);padding:0 1.8rem}
+.td{color:rgba(8,8,10,.35);padding:0 .2rem}
+
+/* ─────────────────────────────────────────
+   ABOUT
+───────────────────────────────────────── */
+#about{background:var(--c1)}
+.about-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:5rem;
+  align-items:start;
+}
+.about-text .pull{
+  font-family:var(--font-head);font-weight:700;
+  font-size:clamp(1.2rem,2.2vw,2rem);
+  line-height:1.15;color:var(--tx);
+  border-left:3px solid var(--acc);
+  padding-left:1.5rem;margin:2rem 0;
+}
+.about-text p{
+  font-size:.92rem;font-weight:300;line-height:1.9;
+  color:var(--tx2);margin-bottom:1rem;
+}
+.about-text .mono{
+  font-size:.8rem;font-style:italic;
+  color:var(--tx3);display:block;margin-top:.5rem;
+}
+/* Photo pile */
+.p-pile{position:relative;height:520px}
+.pc{
+  position:absolute;overflow:hidden;
+  border:1px solid var(--c3);
+  transition:transform .4s ease,box-shadow .4s ease;
+  background:var(--c2);
+}
+.pc:hover{transform:rotate(0deg) scale(1.03)!important;box-shadow:0 20px 60px rgba(0,0,0,.6);z-index:10!important}
+.pc img{display:block;width:100%;height:100%;object-fit:cover}
+.pc1{width:65%;height:380px;top:50px;left:0;transform:rotate(-3.5deg);z-index:1}
+.pc2{width:55%;height:300px;top:0;right:5%;transform:rotate(4.5deg);z-index:2}
+.pc3{width:36%;height:200px;bottom:0;right:18%;transform:rotate(-1.5deg);z-index:3}
+
+/* ─────────────────────────────────────────
+   EXPERIENCE — vertical timeline
+───────────────────────────────────────── */
+#experience{
+  background:var(--c1);padding:7rem 2.5rem;position:relative;
+}
+.exp-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1}
+
+/* The vertical gold line */
+.exp-timeline{
+  position:relative;
+  margin-top:4rem;
+  padding-left:2.5rem;
+}
+.exp-timeline::before{
+  content:'';
+  position:absolute;left:0;top:8px;bottom:8px;
+  width:1px;background:linear-gradient(to bottom,transparent,var(--acc) 6%,var(--acc) 94%,transparent);
+}
+
+/* Single entry */
+.exp-entry{
+  position:relative;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:0 2.5rem;
+  padding-bottom:3.5rem;
+}
+.exp-entry:last-child{padding-bottom:0}
+
+/* Dot on the line */
+.exp-dot-line{
+  position:absolute;left:-2.5rem;top:0;
+  display:flex;flex-direction:column;align-items:center;
+  gap:0;
+}
+.exp-dot-circle{
+  width:10px;height:10px;border-radius:50%;
+  background:var(--c1);border:2px solid var(--acc);
+  flex-shrink:0;
+  transition:background .3s;
+}
+.exp-entry:hover .exp-dot-circle{background:var(--acc)}
+
+/* Photo — vertical portrait, large on desktop */
+.exp-photo{
+  width:clamp(140px,18vw,260px);
+  flex-shrink:0;
+}
+.exp-photo img{
+  display:block;width:100%;
+  aspect-ratio:4/5;
+  object-fit:cover;object-position:top center;
+  border-radius:6px;
+  filter:grayscale(15%) contrast(1.05);
+  transition:filter .4s ease,transform .4s ease;
+}
+.exp-entry:hover .exp-photo img{
+  filter:grayscale(0%) contrast(1);
+  transform:scale(1.02);
+}
+
+/* Text block */
+.exp-text{display:flex;flex-direction:column;gap:.7rem;padding-top:.15rem}
+.exp-num{
+  font-family:var(--font-head);font-size:.58rem;font-weight:900;
+  letter-spacing:.3em;color:var(--tx3);text-transform:uppercase;
+}
+.exp-place-line{
+  display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;
+}
+.exp-place{
+  font-size:.62rem;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--acc);
+}
+.exp-title-tl{
+  font-family:var(--font-head);font-weight:900;
+  font-size:clamp(1.2rem,2.5vw,2rem);
+  line-height:.95;color:var(--tx);letter-spacing:-.01em;
+}
+.exp-hl-tl{
+  font-style:italic;font-size:.88rem;
+  color:rgba(232,228,220,.5);line-height:1.5;
+  border-left:2px solid var(--acc);padding-left:.9rem;
+}
+.exp-desc-tl{
+  font-size:.82rem;font-weight:300;line-height:1.8;
+  color:var(--tx2);max-width:580px;
+}
+
+/* ─────────────────────────────────────────
+   SERVICES
+───────────────────────────────────────── */
+#services{background:var(--c1)}
+/* Kitchen photo as section bg */
+#services::before{
+  content:'';position:absolute;inset:0;z-index:0;
+  background:url('https://res.cloudinary.com/da4ctmwz5/image/upload/v1775493224/pexels-cottonbro-4790056_rvv1p6.jpg') center/cover;
+  opacity:.06;pointer-events:none;
+}
+
+.svc-list{border-top:1px solid var(--c3);margin-top:3rem}
+.svc-row{
+  display:grid;grid-template-columns:56px 1fr;
+  align-items:center;gap:2rem;
+  padding:2.2rem 0;border-bottom:1px solid var(--c3);
+  transition:background .2s;cursor:default;
+}
+.svc-row:hover{background:rgba(200,169,110,.04)}
+.svc-row:hover .sn{-webkit-text-stroke-color:var(--acc)}
+.svc-row:hover .sa{transform:translateX(6px);color:var(--acc)}
+.sn{
+  font-family:var(--font-head);font-size:1.5rem;font-weight:900;
+  color:transparent;-webkit-text-stroke:1px var(--c3);line-height:1;
+  transition:-webkit-text-stroke-color .2s;
+}
+.st{
+  font-family:var(--font-head);
+  font-size:clamp(1.1rem,2.5vw,2rem);
+  font-weight:700;line-height:1;color:var(--tx);
+}
+.sd{font-size:.8rem;font-weight:300;line-height:1.7;color:var(--tx2)}
+.stags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.6rem}
+.stag{
+  font-size:.55rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  background:rgba(200,169,110,.08);color:var(--acc);
+  padding:.22rem .65rem;border-radius:2px;
+}
+.sa{display:none!important}
+
+/* ─────────────────────────────────────────
+   GALLERY
+───────────────────────────────────────── */
+.gstrip{
+  overflow:hidden;padding:5rem 0;
+  background:var(--c0);
+  border-top:1px solid var(--c3);
+}
+.g-lbl{
+  font-size:.58rem;font-weight:600;letter-spacing:.35em;
+  text-transform:uppercase;color:var(--tx3);
+  text-align:center;margin-bottom:2.5rem;
+}
+.g-track{
+  display:flex;align-items:center;gap:16px;
+  animation:gscroll 42s linear infinite;width:max-content;padding:0 16px;
+}
+.g-track:hover{animation-play-state:paused}
+@keyframes gscroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.gi{
+  width:190px;height:285px;flex-shrink:0;
+  border:1px solid var(--c3);border-radius:8px;
+  overflow:hidden;background:var(--c2);
+  transition:transform .3s ease,box-shadow .3s ease,border-color .3s;
+  cursor:pointer;
+}
+.gi:hover{
+  transform:translateY(-10px) scale(1.02);
+  box-shadow:0 24px 60px rgba(0,0,0,.5);
+  border-color:var(--acc);
+}
+.gi img{display:block;width:100%;height:100%;object-fit:cover}
+
+/* ─────────────────────────────────────────
+   APPROACH
+───────────────────────────────────────── */
+#approach{background:var(--c2)}
+/* Ghost 30 */
+.app-decor{
+  position:absolute;right:-3rem;bottom:-4rem;z-index:0;
+  font-family:var(--font-head);font-weight:900;font-size:42vw;
+  color:transparent;-webkit-text-stroke:1px rgba(200,169,110,.04);
+  pointer-events:none;user-select:none;line-height:1;
+}
+.pillars{
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:var(--c3);margin-top:3rem;
+}
+.pill{
+  background:var(--c2);padding:2.5rem;
+  transition:background .3s;
+}
+.pill:hover{background:rgba(200,169,110,.04)}
+.pill-n{
+  font-family:var(--font-head);font-size:2.5rem;font-weight:900;
+  color:var(--acc);opacity:.5;line-height:1;margin-bottom:.75rem;
+}
+.pill h3{
+  font-family:var(--font-head);font-size:.95rem;font-weight:700;
+  color:var(--tx);margin-bottom:.6rem;letter-spacing:.02em;
+}
+.pill p{font-size:.82rem;font-weight:300;line-height:1.8;color:var(--tx2)}
+.app-bq{
+  margin-top:5rem;display:grid;
+  grid-template-columns:1.3fr 1fr;gap:5rem;align-items:center;
+  border-top:1px solid var(--c3);padding-top:4rem;
+}
+.app-bq blockquote{
+  font-family:var(--font-head);font-weight:700;
+  font-size:clamp(1.5rem,2.8vw,2.6rem);
+  line-height:1.1;color:var(--tx);
+}
+.app-bq cite{
+  display:block;margin-top:1.5rem;font-style:normal;
+  font-size:.6rem;font-weight:600;letter-spacing:.25em;
+  text-transform:uppercase;color:var(--acc);
+}
+.app-yr{text-align:right}
+.app-yr-n{
+  font-family:var(--font-head);font-weight:900;
+  font-size:clamp(5rem,12vw,11rem);
+  color:transparent;
+  -webkit-text-stroke:2px var(--acc);
+  line-height:.9;
+  animation:strokepulse 3s ease-in-out infinite;
+}
+@keyframes strokepulse{0%,100%{-webkit-text-stroke-width:1.5px}50%{-webkit-text-stroke-width:3px}}
+.app-yr-l{
+  font-size:.6rem;font-weight:400;letter-spacing:.28em;
+  text-transform:uppercase;color:var(--tx3);margin-top:.5rem;
+}
+
+/* ─────────────────────────────────────────
+   CONTACT
+───────────────────────────────────────── */
+#contact{background:var(--c1)}
+/* Ghost CONTACT */
+.ct-decor{
+  position:absolute;right:-2rem;bottom:-4rem;z-index:0;
+  font-family:var(--font-head);font-weight:900;font-size:14vw;
+  color:transparent;-webkit-text-stroke:1px rgba(200,169,110,.04);
+  pointer-events:none;user-select:none;
+}
+.ct-grid{
+  display:grid;grid-template-columns:1fr 1.1fr;gap:6rem;
+  margin-top:3.5rem;position:relative;z-index:1;
+}
+.ct-info p{
+  font-size:.9rem;font-weight:300;line-height:1.85;
+  color:var(--tx2);margin-bottom:2.5rem;
+}
+.ct-dets{display:flex;flex-direction:column;gap:1.3rem}
+.ct-row{display:flex;align-items:baseline;gap:1.2rem}
+.ct-lbl{
+  font-size:.58rem;font-weight:600;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--tx3);min-width:68px;
+}
+.ct-v{font-size:.88rem;font-weight:300;color:var(--tx)}
+.ct-v a{
+  color:var(--tx);text-decoration:none;
+  border-bottom:1px solid var(--c3);
+  transition:border-color .2s,color .2s;
+}
+.ct-v a:hover{color:var(--acc);border-color:var(--acc)}
+/* Form */
+.ct-form{display:flex;flex-direction:column;gap:1.6rem}
+.fl{
+  display:block;font-size:.58rem;font-weight:600;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--tx3);margin-bottom:.45rem;
+}
+.fi,.ft{
+  width:100%;background:transparent;
+  border:none;border-bottom:1px solid var(--c3);
+  color:var(--tx);font-family:var(--font-body);
+  font-size:.95rem;font-weight:300;
+  padding:.55rem 0;outline:none;
+  transition:border-color .2s;
+}
+.fi:focus,.ft:focus{border-color:var(--acc)}
+.fi::placeholder,.ft::placeholder{color:var(--tx3)}
+.ft{min-height:100px;resize:none}
+#fsuccess{
+  display:none;font-size:.75rem;letter-spacing:.1em;
+  color:var(--acc);margin-top:.5rem;
+}
+
+/* ─────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────── */
+footer{
+  background:var(--c0);color:var(--tx);
+  padding:2.5rem 2.5rem;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:1rem;
+  border-top:1px solid var(--c3);
+}
+.fl-logo{
+  font-family:var(--font-head);font-size:1.2rem;
+  font-weight:900;letter-spacing:.06em;
+  display:flex;align-items:center;gap:.3rem;
+}
+.fl-logo .dot{color:var(--acc)}
+.fl-links{display:flex;flex-wrap:wrap;gap:.6rem 1.5rem;list-style:none}
+.fl-links a{
+  font-size:.62rem;font-weight:400;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--tx3);text-decoration:none;
+  transition:color .2s;white-space:nowrap;
+}
+.fl-links a:hover{color:var(--acc)}
+/* Mobile hero block — hidden on desktop */
+.h-mobile-block{display:none}
+.h-mobile-top{display:none}
+.h-mobile-circle{display:none}
+.h-mobile-bottom{display:none}
+.h-mobile-pre{display:none}
+.h-title-mobile{display:none}
+
+@media(max-width:640px){
+  section{padding:4rem 1.2rem}
+
+  /* ── Hero mobile — variant 1 ── */
+  /* Hide desktop photo (PNG), stats, ghost */
+  .h-photo{display:none!important}
+  .h-stats{display:none!important}
+  .h-ghost{display:none}
+
+  /* Hero: full viewport, flex-column */
+  #hero{
+    min-height:100svh;
+    justify-content:flex-start;
+    padding:0;
+    overflow:hidden;
+  }
+
+  /* Hide desktop h-top / h-content / h-bottom */
+  .h-top{display:none!important}
+  .h-bottom{display:none!important}
+
+  /* Mobile block: fills hero, stacks top-text / png / bottom-cta */
+  .h-mobile-block{
+    display:flex;
+    flex-direction:column;
+    min-height:100svh;
+    padding:0;
+    position:relative;
+  }
+
+  /* TOP — explicitly shown */
+  .h-mobile-top{
+    display:block;
+    padding:calc(var(--nav-h) + .4rem) 1.2rem .2rem;
+    position:relative;z-index:3;
+    flex-shrink:0;
+  }
+  .h-mobile-pre{
+    display:flex;align-items:center;gap:.55rem;
+    font-size:.54rem;font-weight:600;letter-spacing:.24em;
+    text-transform:uppercase;color:var(--acc);
+    margin-bottom:.5rem;
+  }
+  .h-mobile-pre::before{content:'';display:block;width:1.2rem;height:1px;background:var(--acc);flex-shrink:0}
+
+  /* Big ID CHEF title */
+  .h-title-mobile{
+    display:block;
+    font-family:var(--font-head);font-weight:900;
+    font-size:clamp(2.5rem,13vw,4.5rem);
+    line-height:.86;letter-spacing:-.025em;color:var(--tx);
+  }
+  .h-title-mobile .acc{color:var(--acc)}
+  .h-title-mobile .line2{display:block;padding-left:5vw}
+  .h-title-mobile .line3{
+    display:block;font-size:.36em;font-weight:300;
+    letter-spacing:.02em;color:var(--tx2);margin-top:.4em;padding-left:.1em;
+  }
+
+  /* MIDDLE: PNG — full figure, head clears nav bar */
+  .h-mobile-circle{
+    display:block;
+    flex:1;
+    position:relative;
+    min-height:0;
+    z-index:2;
+    overflow:visible;   /* allow head to breathe above */
+    padding-top:.6rem;  /* small gap between title and top of PNG */
+  }
+  .h-mobile-circle img{
+    display:block;
+    /* PNG sits bottom-anchored, width fills container */
+    position:absolute;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:100%;
+    height:auto;
+    max-width:none;
+  }
+
+  /* BOTTOM — CTA zone overlapping lower part of figure */
+  .h-mobile-bottom{
+    display:block;
+    position:relative;z-index:4;
+    padding:3rem 1.2rem 2.5rem;
+    margin-top:-3rem;   /* pull up to overlap figure's lower body */
+    background:linear-gradient(to top,
+      var(--c1) 0%,
+      var(--c1) 45%,
+      rgba(17,17,20,.85) 65%,
+      transparent 100%
+    );
+    flex-shrink:0;
+  }
+  .h-mobile-bottom .btn-primary{
+    display:flex;width:100%;justify-content:center;
+  }
+  .h-mobile-bottom .h-offer-mob{
+    font-size:.78rem;font-weight:300;line-height:1.7;
+    color:var(--tx2);margin-bottom:.8rem;
+  }
+
+  nav{padding:0 1rem}
+  .lb{padding:.28rem .45rem;font-size:.58rem}
+
+  /* Services */
+  .svc-row{grid-template-columns:1fr;gap:.6rem;padding:1.5rem 0}
+  .sn{font-size:1rem;margin-bottom:.2rem}
+
+  /* Career */
+  .exp-timeline{padding-left:1.8rem}
+  .exp-timeline::before{display:block}
+  .exp-dot-line{display:flex}
+  .exp-entry{grid-template-columns:1fr;gap:0;padding-bottom:2.5rem}
+  .exp-entry:last-child{padding-bottom:0}
+  .exp-photo{width:100%;max-width:100%}
+  .exp-photo img{aspect-ratio:4/5;border-radius:8px;width:100%;object-fit:cover}
+  .exp-text{padding-top:1rem}
+  .exp-title-tl{font-size:clamp(1.1rem,5vw,1.5rem)}
+}
+
+/* ── FORM GDPR checkbox ── */
+.f-check-wrap{
+  display:flex;align-items:flex-start;
+  gap:.75rem;margin:.5rem 0;
+  cursor:pointer;
+}
+.f-check-wrap:hover .f-check{border-color:var(--acc)}
+.f-check{
+  width:16px;height:16px;flex-shrink:0;
+  margin-top:.25rem;accent-color:var(--acc);cursor:pointer;
+}
+.f-check-text{
+  font-size:.78rem;font-weight:300;line-height:1.65;
+  color:var(--tx2);margin:0;cursor:default;
+}
+.f-check-text span{display:inline}
+.f-pp-link{
+  background:none;border:none;padding:0;
+  color:var(--acc);text-decoration:underline;
+  cursor:pointer;font-size:.78rem;font-weight:400;
+  font-family:inherit;display:inline;
+  line-height:inherit;
+}
+.f-pp-link:hover{color:var(--acc2)}
+
+/* ── MODALS ── */
+.modal-backdrop{
+  position:fixed;inset:0;z-index:20000;
+  background:rgba(0,0,0,.72);
+  display:flex;align-items:center;justify-content:center;
+  padding:1.5rem;
+  backdrop-filter:blur(4px);
+}
+.modal-box{
+  background:var(--c1);
+  border:1px solid var(--c3);
+  max-width:680px;width:100%;
+  max-height:80vh;overflow-y:auto;
+  padding:2.5rem;
+  position:relative;
+  scrollbar-width:thin;scrollbar-color:var(--c3) transparent;
+}
+.modal-close{
+  position:absolute;top:1rem;right:1rem;
+  background:none;border:none;color:var(--tx2);
+  font-size:1.1rem;cursor:pointer;
+  width:32px;height:32px;display:flex;align-items:center;justify-content:center;
+  transition:color .2s;
+}
+.modal-close:hover{color:var(--tx)}
+.modal-tabs{display:flex;gap:.3rem;margin-bottom:1.5rem;border-bottom:1px solid var(--c3);padding-bottom:.8rem}
+.mtab{
+  background:transparent;border:1px solid var(--c3);
+  color:var(--tx2);font-size:.65rem;font-weight:600;
+  letter-spacing:.12em;padding:.3rem .8rem;cursor:pointer;
+  transition:all .15s;
+}
+.mtab.on{background:var(--acc);color:var(--c0);border-color:var(--acc)}
+.modal-content h2{font-family:var(--font-head);font-size:1.4rem;font-weight:900;color:var(--tx);margin-bottom:.5rem}
+.modal-content h3{font-family:var(--font-head);font-size:.9rem;font-weight:700;color:var(--tx);margin:1.2rem 0 .4rem}
+.modal-content p{font-size:.82rem;font-weight:300;line-height:1.8;color:var(--tx2);margin-bottom:.6rem}
+.modal-content a{color:var(--acc)}
+.modal-date{font-size:.7rem;color:var(--tx3);margin-bottom:1rem!important}
+
+
+.f-gdpr-error{
+  font-size:.72rem;color:#e05050;
+  padding:.3rem .6rem;
+  border-left:2px solid #e05050;
+  margin-top:.2rem;
+  display:none;
+}
+
+
+/* ── Nav: hide non-essential links on tablet ── */
+@media(max-width:900px){
+  .nav-hide-sm{display:none}
+}
+
+/* ── About: tablet — photos below text ── */
+@media(max-width:900px){
+  .about-grid{grid-template-columns:1fr;gap:3rem}
+  .p-pile{height:420px}
+}
+
+/* ── About: mobile — hide photo pile ── */
+@media(max-width:640px){
+  .p-pile{display:none}
+}
+
+/* ── Contact: mobile — form first, details below ── */
+@media(max-width:640px){
+  .ct-grid{
+    display:flex;
+    flex-direction:column-reverse; /* form comes first visually */
+    gap:2.5rem;
+  }
+  .ct-grid .rv-l{order:2}   /* details go below */
+  .ct-grid .rv-r{order:1}   /* form goes above */
+}
+
+
+/* ── Hero canvas animation — all screen sizes ── */
+#hero-canvas{
+  position:absolute;
+  top:0;left:0;
+  pointer-events:none;
+  display:block;
+  z-index:0;
+}
+/* Ensure hero content sits above canvas */
+.h-ghost,.h-top,.h-stats,.h-bottom,.h-mobile-block{
+  position:relative;
+  z-index:1;
+}
+
+</style>
+</head>
+<body>
+
+<div id="grain" aria-hidden="true"></div>
+
+<!-- ══ NAV ══ -->
+<nav id="main-nav">
+  <a href="#hero" class="n-logo">ID<span class="dot">.</span>CHEF</a>
+  <ul class="n-links">
+    <li class="nav-hide-sm"><a href="#about"      data-i18n="nav_about">О шефе</a></li>
+    <li class="nav-hide-sm"><a href="#experience" data-i18n="nav_exp">Опыт</a></li>
+    <li><a href="#services"   data-i18n="nav_services">Услуги</a></li>
+    <li class="nav-hide-sm"><a href="#approach"   data-i18n="nav_approach">Подход</a></li>
+    <li><a href="#contact"    data-i18n="nav_contact">Контакт</a></li>
+  </ul>
+  <div class="lang-sw">
+    <button class="lb" onclick="setLang('lv')">LV</button>
+    <button class="lb on" onclick="setLang('en')">EN</button>
+    <button class="lb" onclick="setLang('ru')">RU</button>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <div class="h-ghost" aria-hidden="true">
+    <span>ID CHEF</span>
+    <span>ИВАНКОВ</span>
+    <span>ID CHEF</span>
+  </div>
+  <!-- Mobile hero — variant 1: title top, PNG full, CTA+text bottom overlay -->
+  <div class="h-mobile-block">
+    <div class="h-mobile-top">
+      <p class="h-mobile-pre" data-i18n="h_pre">Executive Chef · Consultant · idchef13.lv</p>
+      <div class="h-title-mobile">
+        <span class="acc">ID</span><br>
+        <span class="line2">CHEF</span>
+        <span class="line3" data-i18n="h_line3">Иванков Денис</span>
+      </div>
+    </div>
+    <div class="h-mobile-circle">
+      <img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/id%20hero%20block.png" alt="Денис Иванков"/>
+    </div>
+    <div class="h-mobile-bottom">
+      <p class="h-offer-mob" data-i18n="h_offer">Запускаю рестораны с нуля, выстраиваю кухонные процессы и превращаю операционный хаос в прибыльную систему.</p>
+      <a href="#contact" class="btn-primary"><span data-i18n="cta1">Записаться на консультацию</span></a>
+    </div>
+  </div>
+  <div class="h-top">
+    <div class="h-content">
+      <p class="h-pre" data-i18n="h_pre">Шеф-повар · Консультант · idchef13.lv</p>
+      <div class="h-title">
+        <span class="acc">ID</span><br>
+        <span class="line2">CHEF</span>
+        <span class="line3" data-i18n="h_line3">Иванков Денис</span>
+      </div>
+    </div>
+    <div class="h-photo">
+      <img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/id%20hero%20block.png" alt="Денис Иванков"/>
+    </div>
+  </div>
+  <div class="h-stats">
+    <div class="h-stat">
+      <span class="h-stat-n">30+</span>
+      <span class="h-stat-l" data-i18n="h_exp">Лет опыта</span>
+    </div>
+    <div class="h-stat">
+      <span class="h-stat-n">6</span>
+      <span class="h-stat-l" data-i18n="h_fmt">Форматов работы</span>
+    </div>
+    <div class="h-stat">
+      <span class="h-stat-n">LV·EN·RU</span>
+      <span class="h-stat-l" data-i18n="h_langs">Языки работы</span>
+    </div>
+  </div>
+  <div class="h-bottom">
+    <p class="h-offer" data-i18n="h_offer">Запускаю рестораны с нуля, выстраиваю кухонные процессы и превращаю операционный хаос в прибыльную систему.</p>
+    <div class="h-ctas">
+      <a href="#contact" class="btn-primary"><span data-i18n="cta1">Записаться на консультацию</span></a>
+      <a href="#services" class="btn-secondary" data-i18n="cta2">Узнать больше</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TICKER ══ -->
+<div class="ticker">
+  <div class="t-track">
+    <span class="ti" data-i18n="t1">Запуск ресторанов</span><span class="td"> · </span>
+    <span class="ti" data-i18n="t2">Разработка меню</span><span class="td"> · </span>
+    <span class="ti" data-i18n="t3">Оптимизация затрат</span><span class="td"> · </span>
+    <span class="ti" data-i18n="t4">Обучение команды</span><span class="td"> · </span>
+    <span class="ti" data-i18n="t5">Финансовый анализ</span><span class="td"> · </span>
+    <span class="ti" data-i18n="t6">Работа с поставщиками</span><span class="td"> · </span>
+    <span class="ti" data-i18n="t7">30+ лет экспертизы</span><span class="td"> · </span>
+    <span class="ti" data-i18n="t1">Запуск ресторанов</span><span class="td"> · </span>
+    <span class="ti" data-i18n="t2">Разработка меню</span><span class="td"> · </span>
+    <span class="ti" data-i18n="t3">Оптимизация затрат</span><span class="td"> · </span>
+    <span class="ti" data-i18n="t4">Обучение команды</span><span class="td"> · </span>
+    <span class="ti" data-i18n="t5">Финансовый анализ</span><span class="td"> · </span>
+    <span class="ti" data-i18n="t6">Работа с поставщиками</span><span class="td"> · </span>
+    <span class="ti" data-i18n="t7">30+ лет экспертизы</span><span class="td"> · </span>
+  </div>
+</div>
+
+<!-- ══ ABOUT ══ -->
+<section id="about">
+  <div class="inner">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="eyebrow rv" data-i18n="a_ey">О себе</div>
+        <h2 class="section-title rv" data-i18n="a_title">Денис<br>Иванков</h2>
+        <blockquote class="pull rv" data-i18n="a_pull">Кухня — не место для вдохновения. Это место для системы, результата и цифр.</blockquote>
+        <p class="rv" data-i18n="a_p1">Более 30 лет в сфере общественного питания — от линейного повара до шеф-консультанта. Прошёл через все форматы: от небольших кафе до крупных ресторанных проектов.</p>
+        <p class="rv" data-i18n="a_p2">Запускал кухни с нуля, оптимизировал действующие проекты, выводил рестораны из кризиса. Моя работа — связка между гастрономией и бизнесом: меню как инструмент продаж, кухня как производство, команда как актив.</p>
+        <span class="mono rv" data-i18n="a_mono">— системный подход. всегда.</span>
+      </div>
+      <div class="rv-r">
+        <div class="p-pile">
+          <div class="pc pc1"><img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/IMG_1156.JPG?updatedAt=1778052280459" alt="Денис Иванков"/></div>
+          <div class="pc pc2"><img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/klubs%201.jpeg" alt="Кухня"/></div>
+          <div class="pc pc3"><img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/IMG_1163.JPG" alt="Блюдо"/></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ EXPERIENCE ══ -->
+<section id="experience">
+  <div class="exp-inner">
+    <div class="eyebrow rv" data-i18n="ex_ey">Опыт</div>
+    <h2 class="section-title rv" data-i18n="ex_title">Карьерный<br>путь</h2>
+
+    <div class="exp-timeline">
+
+      <!-- 01 Manchester United -->
+      <div class="exp-entry rv">
+        <div class="exp-dot-line"><div class="exp-dot-circle"></div></div>
+        <div class="exp-photo">
+          <img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/IMG_1160.JPG" alt="Manchester United"/>
+        </div>
+        <div class="exp-text">
+          <div class="exp-num">01</div>
+          <div class="exp-place-line">
+            <span class="exp-place" data-i18n="ex1_place">Manchester United — Kitchen Manager</span>
+          </div>
+          <h3 class="exp-title-tl" data-i18n="ex1_title">Кухня, где нельзя ошибаться</h3>
+          <p class="exp-hl-tl" data-i18n="ex1_hl">Система. Скорость. Ноль права на сбой.</p>
+          <p class="exp-desc-tl" data-i18n="ex1_desc">Сотни блюд каждый день, чёткие процессы и строгая дисциплина. Это не про творчество — это про стабильность под давлением. Кухня как отлаженный механизм.</p>
+        </div>
+      </div>
+
+      <!-- 02 Grand Poet Hotel -->
+      <div class="exp-entry rv">
+        <div class="exp-dot-line"><div class="exp-dot-circle"></div></div>
+        <div class="exp-photo">
+          <img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/IMG_0108.JPG" alt="Grand Poet Hotel"/>
+        </div>
+        <div class="exp-text">
+          <div class="exp-num">02</div>
+          <div class="exp-place-line">
+            <span class="exp-place" data-i18n="ex2_place">Grand Poet Hotel — Head Chef</span>
+          </div>
+          <h3 class="exp-title-tl" data-i18n="ex2_title">Гастрономия как сервис</h3>
+          <p class="exp-hl-tl" data-i18n="ex2_hl">Первые шаги в высокой кухне</p>
+          <p class="exp-desc-tl" data-i18n="ex2_desc">Кухня отеля — это не просто еда. Это ожидания гостей со всего мира. Подача, баланс и ощущение уровня становятся частью работы.</p>
+        </div>
+      </div>
+
+      <!-- 03 Hereford -->
+      <div class="exp-entry rv">
+        <div class="exp-dot-line"><div class="exp-dot-circle"></div></div>
+        <div class="exp-photo">
+          <img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/IMG_1161.JPG" alt="Hereford"/>
+        </div>
+        <div class="exp-text">
+          <div class="exp-num">03</div>
+          <div class="exp-place-line">
+            <span class="exp-place" data-i18n="ex3_place">Hereford — Head Chef</span>
+          </div>
+          <h3 class="exp-title-tl" data-i18n="ex3_title">Огонь и продукт</h3>
+          <p class="exp-hl-tl" data-i18n="ex3_hl">Характер через мясо</p>
+          <p class="exp-desc-tl" data-i18n="ex3_desc">Работа с мясом требует точности и уважения к продукту. Температура, текстура, вкус — каждое решение имеет значение. Здесь формируется стиль.</p>
+        </div>
+      </div>
+
+      <!-- 04 Casa Argentina -->
+      <div class="exp-entry rv">
+        <div class="exp-dot-line"><div class="exp-dot-circle"></div></div>
+        <div class="exp-photo">
+          <img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/IMG_1177.JPG" alt="Casa Argentina"/>
+        </div>
+        <div class="exp-text">
+          <div class="exp-num">04</div>
+          <div class="exp-place-line">
+            <span class="exp-place" data-i18n="ex4_place">Casa Argentina — Executive Head Chef / Partner</span>
+          </div>
+          <h3 class="exp-title-tl" data-i18n="ex4_title">Кухня как система</h3>
+          <p class="exp-hl-tl" data-i18n="ex4_hl">Ответственность за результат</p>
+          <p class="exp-desc-tl" data-i18n="ex4_desc">Это уже не только про блюда. Это про команду, процессы и решения, влияющие на весь ресторан. Полная ответственность за результат.</p>
+        </div>
+      </div>
+
+      <!-- 05 Посольство Франции -->
+      <div class="exp-entry rv">
+        <div class="exp-dot-line"><div class="exp-dot-circle"></div></div>
+        <div class="exp-photo">
+          <img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/viestnieciba.png" alt="Посольство Франции"/>
+        </div>
+        <div class="exp-text">
+          <div class="exp-num">05</div>
+          <div class="exp-place-line">
+            <span class="exp-place" data-i18n="ex5_place">Посольство Франции — Personal Chef to the Ambassador</span>
+          </div>
+          <h3 class="exp-title-tl" data-i18n="ex5_title">Уровень доверия</h3>
+          <p class="exp-hl-tl" data-i18n="ex5_hl">Кухня как часть дипломатии</p>
+          <p class="exp-desc-tl" data-i18n="ex5_desc">Работа в посольстве — это больше, чем гастрономия. Каждое блюдо становится частью культурного представления. Точность, контекст и внимание к деталям.</p>
+        </div>
+      </div>
+
+      <!-- 06 Latvijas Pavāru klubs — Член совета директоров -->
+      <div class="exp-entry rv">
+        <div class="exp-dot-line"><div class="exp-dot-circle"></div></div>
+        <div class="exp-photo">
+          <img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/IMG_1153.JPG" alt="Latvijas Pavāru klubs"/>
+        </div>
+        <div class="exp-text">
+          <div class="exp-num">06</div>
+          <div class="exp-place-line">
+            <span class="exp-place" data-i18n="ex6_place">Latvijas Pavāru klubs — Член совета директоров</span>
+          </div>
+          <h3 class="exp-title-tl" data-i18n="ex6_title">Профессиональное сообщество</h3>
+          <p class="exp-hl-tl" data-i18n="ex6_hl">Гастрономическая сцена Латвии</p>
+          <p class="exp-desc-tl" data-i18n="ex6_desc">Сообщество шеф-поваров, формирующих современную гастрономию страны. Развитие культуры и присутствие Латвии на международной гастрономической арене.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ SERVICES ══ -->
+<section id="services">
+  <div class="inner">
+    <div class="eyebrow rv" data-i18n="sv_ey">Услуги</div>
+    <h2 class="section-title rv" data-i18n="sv_title">Чем<br>помогаю</h2>
+    <div class="svc-list">
+      <div class="svc-row rv"><div class="sn">01</div><div class="svc-body"><h3 class="st" data-i18n="s1t">Запуск проекта</h3><p class="sd" data-i18n="s1d">Открытие кухни с нуля: процессы, оборудование, команда, стандарты.</p></div><div class="sa">→</div></div>
+      <div class="svc-row rv"><div class="sn">02</div><div class="svc-body"><h3 class="st" data-i18n="s2t">Оптимизация бизнеса</h3><p class="sd" data-i18n="s2d">Аудит ресторана: снижение себестоимости, устранение потерь, повышение эффективности.</p></div><div class="sa">→</div></div>
+      <div class="svc-row rv"><div class="sn">03</div><div class="svc-body"><h3 class="st" data-i18n="s3t">Разработка меню</h3><p class="sd" data-i18n="s3d">Меню как коммерческий инструмент: концепция, калькуляция, дегустации.</p></div><div class="sa">→</div></div>
+      <div class="svc-row rv"><div class="sn">04</div><div class="svc-body"><h3 class="st" data-i18n="s4t">Команда и обучение</h3><p class="sd" data-i18n="s4d">Подбор, обучение персонала. Регламенты, стандарты, система контроля качества.</p></div><div class="sa">→</div></div>
+      <div class="svc-row rv"><div class="sn">05</div><div class="svc-body"><h3 class="st" data-i18n="s5t">Аналитика и закупки</h3><p class="sd" data-i18n="s5d">Финансовый анализ, управленческая отчётность, оптимизация закупок.</p></div><div class="sa">→</div></div>
+      <div class="svc-row rv"><div class="sn">06</div><div class="svc-body"><h3 class="st" data-i18n="s6t">Консалтинг</h3><p class="sd" data-i18n="s6d">Стратегическое сопровождение: позиционирование, маркетинг, управление проектом.</p></div><div class="sa">→</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ GALLERY ══ -->
+<div class="gstrip">
+  <div class="g-lbl" data-i18n="gl_lbl">Блюда · Процессы · Результат</div>
+  <div class="g-track">
+    <div class="gi"><img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/IMG_1174.JPG?updatedAt=1778053530959" alt=""></div>
+    <div class="gi"><img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/IMG_0111.JPG?updatedAt=1778052280458" alt=""></div>
+    <div class="gi"><img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/0cedb621-a920-4754-b636-73aadb33a35e.JPG?updatedAt=1778052280475" alt=""></div>
+    <div class="gi"><img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/IMG_1164.JPG?updatedAt=1778052280485" alt=""></div>
+    <div class="gi"><img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/11e9261e-9228-4777-831a-5b6ca42886f8.JPG?updatedAt=1778052280461" alt=""></div>
+    <div class="gi"><img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/e39f441a-ad8c-49b9-96b9-3b4dfbcfd89a.JPG?updatedAt=1778052280451" alt=""></div>
+    <div class="gi"><img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/d562dc49-4300-495b-8b60-97b605e92c10.JPG?updatedAt=1778052280467" alt=""></div>
+    <div class="gi"><img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/b5464eff-60ab-4c3d-9736-492a4b529fa8.JPG?updatedAt=1778052280447" alt=""></div>
+    <div class="gi"><img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/82c840a3-1652-4421-b324-67cc7993ca9a.JPG?updatedAt=1778052280440" alt=""></div>
+    <!-- duplicate for seamless loop -->
+    <div class="gi"><img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/IMG_1174.JPG?updatedAt=1778053530959" alt=""></div>
+    <div class="gi"><img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/IMG_0111.JPG?updatedAt=1778052280458" alt=""></div>
+    <div class="gi"><img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/0cedb621-a920-4754-b636-73aadb33a35e.JPG?updatedAt=1778052280475" alt=""></div>
+    <div class="gi"><img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/IMG_1164.JPG?updatedAt=1778052280485" alt=""></div>
+    <div class="gi"><img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/11e9261e-9228-4777-831a-5b6ca42886f8.JPG?updatedAt=1778052280461" alt=""></div>
+    <div class="gi"><img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/e39f441a-ad8c-49b9-96b9-3b4dfbcfd89a.JPG?updatedAt=1778052280451" alt=""></div>
+    <div class="gi"><img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/d562dc49-4300-495b-8b60-97b605e92c10.JPG?updatedAt=1778052280467" alt=""></div>
+    <div class="gi"><img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/b5464eff-60ab-4c3d-9736-492a4b529fa8.JPG?updatedAt=1778052280447" alt=""></div>
+    <div class="gi"><img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/82c840a3-1652-4421-b324-67cc7993ca9a.JPG?updatedAt=1778052280440" alt=""></div>
+  </div>
+</div>
+
+<!-- ══ APPROACH ══ -->
+<section id="approach">
+  <div class="app-decor" aria-hidden="true">30</div>
+  <div class="inner">
+    <div class="eyebrow rv" data-i18n="ap_ey">Подход</div>
+    <h2 class="section-title rv" data-i18n="ap_title">Как<br>я работаю</h2>
+    <div class="pillars">
+      <div class="pill rv"><div class="pill-n">01</div><h3 data-i18n="p1h">Диагностика</h3><p data-i18n="p1p">Начинаю с аудита: цифры, процессы, команда, меню.</p></div>
+      <div class="pill rv"><div class="pill-n">02</div><h3 data-i18n="p2h">Системное мышление</h3><p data-i18n="p2p">Кухня — это производство. Выстраиваю её по законам эффективного бизнеса.</p></div>
+      <div class="pill rv"><div class="pill-n">03</div><h3 data-i18n="p3h">Работа с цифрами</h3><p data-i18n="p3p">Каждое решение — через данные. Food cost, себестоимость — это управление.</p></div>
+      <div class="pill rv"><div class="pill-n">04</div><h3 data-i18n="p4h">Понимание рынка</h3><p data-i18n="p4p">30+ лет — это видение трендов и чутьё на изменения в индустрии.</p></div>
+    </div>
+    <div class="app-bq">
+      <div class="rv">
+        <blockquote data-i18n="ap_bq">Хороший ресторан — это не случайность. Это результат правильно выстроенной системы.</blockquote>
+        <cite>— Denis Ivankov · ID Chef</cite>
+      </div>
+      <div class="app-yr rv-s">
+        <div class="app-yr-n">30</div>
+        <div class="app-yr-l" data-i18n="ap_yr_lbl">Лет в индустрии</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact">
+  <div class="ct-decor" aria-hidden="true">CONTACT</div>
+  <div class="inner">
+    <div class="eyebrow rv" data-i18n="c_ey">Контакт</div>
+    <h2 class="section-title rv" data-i18n="c_title">Давайте<br>начнём</h2>
+    <div class="ct-grid">
+      <div class="rv-l">
+        <p data-i18n="c_intro" style="margin-bottom:1.8rem">Расскажите о проекте — отвечу в течение 24 часов.</p>
+        <div class="ct-dets">
+          <div class="ct-row"><span class="ct-lbl" data-i18n="c_phone_lbl">Тел.</span><span class="ct-v"><a href="tel:+37125745745">+371 2 5745745</a></span></div>
+          <div class="ct-row"><span class="ct-lbl">Instagram</span><span class="ct-v"><a href="https://www.instagram.com/idchef13?igsh=NW15OHZqNXh5Z2tt" target="_blank">@idchef13</a></span></div>
+          <div class="ct-row"><span class="ct-lbl">WhatsApp</span><span class="ct-v"><a href="https://wa.me/37125745745" target="_blank" data-i18n="c_write">Написать</a></span></div>
+        </div>
+      </div>
+      <div class="rv-r">
+        <form id="ct-form" class="ct-form" action="https://formspree.io/f/mlgznvjr" method="POST">
+          <input type="hidden" name="_subject" value="Новая заявка с idchef13.lv"/>
+          <input type="hidden" name="_language" id="form-lang" value="en"/>
+          <div><label class="fl" data-i18n="f_name">Ваше имя</label><input type="text" class="fi" name="name" placeholder="Иван Петров" required data-i18n-ph="f_name_ph" data-fs-field/></div>
+          <div><label class="fl" data-i18n="f_contact">Контакт</label><input type="text" class="fi" name="contact" placeholder="+371 XX XXX XXX" required data-i18n-ph="f_contact_ph" data-fs-field/></div>
+          <div><label class="fl" data-i18n="f_msg">О проекте</label><textarea class="ft" name="message" placeholder="Формат, задача, сроки..." data-i18n-ph="f_msg_ph" data-fs-field></textarea></div>
+          <!-- GDPR checkbox -->
+          <div class="f-check-wrap">
+            <input type="checkbox" id="gdpr-check" class="f-check"/>
+            <p class="f-check-text">
+              <span data-i18n="f_gdpr_pre">Я даю согласие на обработку моих персональных данных в соответствии с</span>
+              <button type="button" class="f-pp-link" onclick="openPrivacyLang()" data-i18n="f_gdpr_link">Политикой конфиденциальности</button><span data-i18n="f_gdpr_post"> и понимаю, что данные будут обработаны через Formspree.</span>
+            </p>
+          </div>
+          <div id="gdpr-error" class="f-gdpr-error" style="display:none" data-i18n="f_gdpr_err">Пожалуйста, подтвердите согласие с Политикой конфиденциальности.</div>
+          <div>
+            <button type="submit" id="form-submit" class="btn-primary" data-fs-submit-btn><span data-i18n="f_submit">Записаться на консультацию</span></button>
+            <div data-fs-success style="display:none;color:var(--acc);font-size:.8rem;margin-top:.5rem" data-i18n="f_ok">Спасибо! Свяжусь с вами в ближайшее время.</div>
+            <div data-fs-error style="display:none;color:#c83030;font-size:.75rem;margin-top:.4rem">Ошибка отправки. Попробуйте ещё раз.</div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="fl-logo">ID<span class="dot">.</span>CHEF</div>
+  <ul class="fl-links">
+    <li><a href="#about"    data-i18n="nav_about">О шефе</a></li>
+    <li><a href="#services" data-i18n="nav_services">Услуги</a></li>
+    <li><a href="#contact"  data-i18n="nav_contact">Контакт</a></li>
+    <li><a href="javascript:void(0)" onclick="openPrivacy()" data-i18n="nav_privacy">Политика конфиденциальности</a></li>
+    <li><a href="javascript:void(0)" onclick="openCookies()" data-i18n="nav_cookies">Cookies</a></li>
+  </ul>
+  <p class="fl-copy">© 2026 ID Chef · idchef13.lv</p>
+</footer>
+
+<!-- ══ PRIVACY MODAL ══ -->
+<div id="pp-modal" class="modal-backdrop" onclick="closeModal('pp-modal')" style="display:none">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal('pp-modal')">✕</button>
+    <div class="modal-tabs">
+      <button class="mtab on" onclick="switchTab(this,'pp-en')">EN</button>
+      <button class="mtab" onclick="switchTab(this,'pp-lv')">LV</button>
+      <button class="mtab" onclick="switchTab(this,'pp-ru')">RU</button>
+    </div>
+    <div class="modal-content" id="pp-en">
+      <h2>Privacy Policy</h2>
+      <p class="modal-date">Last updated: 06/05/2026</p>
+      <p>This website is operated by <strong>ID Chef</strong>. We respect your privacy and are committed to protecting your personal data.</p>
+      <h3>What data we collect</h3>
+      <p>We collect only the personal data you voluntarily provide through our contact form or email: name, phone number (if provided), and any information included in your message.</p>
+      <h3>How we use your data</h3>
+      <p>We use your data only to respond to your inquiry and communicate with you regarding requested services. We do not use your data for marketing or automated decision-making.</p>
+      <h3>Legal basis</h3>
+      <p>Processing is based on your consent when you submit a form or contact us.</p>
+      <h3>Data processing services</h3>
+      <p>We use <strong>Formspree</strong> to process and deliver form submissions. This provider processes data on our behalf in accordance with applicable data protection laws.</p>
+      <h3>Data sharing</h3>
+      <p>We do not sell or share your personal data with third parties, except service providers necessary for communication.</p>
+      <h3>Data storage</h3>
+      <p>Your data is stored only as long as necessary to respond to your request.</p>
+      <h3>Your rights (GDPR)</h3>
+      <p>You have the right to access, correct, or delete your personal data, and to withdraw your consent. Contact us at: <a href="mailto:consult@idchef13.com">consult@idchef13.com</a></p>
+      <h3>Cookies</h3>
+      <p>This website does not use tracking or analytics cookies.</p>
+    </div>
+    <div class="modal-content" id="pp-lv" style="display:none">
+      <h2>Privātuma politika</h2>
+      <p class="modal-date">Pēdējo reizi atjaunināts: 06/05/2026</p>
+      <p>Šo vietni pārvalda <strong>ID Chef</strong>. Mēs cienām jūsu privātumu un aizsargājam jūsu personas datus.</p>
+      <h3>Kādi dati tiek vākti</h3>
+      <p>Mēs apkopojam tikai tos datus, kurus jūs brīvprātīgi iesniedzat: vārds, telefona numurs (ja norādīts) un ziņas saturs.</p>
+      <h3>Kā mēs izmantojam datus</h3>
+      <p>Dati tiek izmantoti tikai, lai atbildētu uz jūsu pieprasījumu un sazinātos par pakalpojumiem. Dati netiek izmantoti mārketingā.</p>
+      <h3>Tiesiskais pamats</h3>
+      <p>Datu apstrāde balstās uz jūsu piekrišanu, iesniedzot formu.</p>
+      <h3>Datu apstrādes pakalpojumi</h3>
+      <p>Mēs izmantojam <strong>Formspree</strong>, lai apstrādātu formu iesniegumus mūsu vārdā.</p>
+      <h3>Datu nodošana</h3>
+      <p>Dati netiek pārdoti vai nodoti trešajām personām, izņemot tehniskos pakalpojumu sniedzējus.</p>
+      <h3>Datu glabāšana</h3>
+      <p>Dati tiek glabāti tikai tik ilgi, cik nepieciešams atbildei.</p>
+      <h3>Jūsu tiesības</h3>
+      <p>Jums ir tiesības piekļūt saviem datiem, pieprasīt to labošanu vai dzēšanu. Sazināties: <a href="mailto:consult@idchef13.com">consult@idchef13.com</a></p>
+      <h3>Sīkdatnes</h3>
+      <p>Vietne neizmanto analītiskās vai izsekošanas sīkdatnes.</p>
+    </div>
+    <div class="modal-content" id="pp-ru" style="display:none">
+      <h2>Политика конфиденциальности</h2>
+      <p class="modal-date">Последнее обновление: 06/05/2026</p>
+      <p>Этот сайт управляется компанией <strong>ID Chef</strong>. Мы уважаем вашу конфиденциальность и защищаем ваши персональные данные.</p>
+      <h3>Какие данные мы собираем</h3>
+      <p>Мы собираем только те данные, которые вы добровольно предоставляете через контактную форму: имя, номер телефона (если указан) и содержание сообщения.</p>
+      <h3>Как мы используем данные</h3>
+      <p>Данные используются исключительно для ответа на ваш запрос и связи по запрошенным услугам. Данные не используются в маркетинговых целях.</p>
+      <h3>Правовое основание</h3>
+      <p>Обработка данных основана на вашем согласии при отправке формы.</p>
+      <h3>Сервисы обработки данных</h3>
+      <p>Мы используем <strong>Formspree</strong> для обработки и доставки форм. Провайдер обрабатывает данные от нашего имени в соответствии с законодательством о защите данных.</p>
+      <h3>Передача данных</h3>
+      <p>Мы не продаём и не передаём ваши данные третьим лицам, за исключением поставщиков технических услуг, необходимых для коммуникации.</p>
+      <h3>Хранение данных</h3>
+      <p>Данные хранятся только в течение времени, необходимого для ответа на ваш запрос.</p>
+      <h3>Ваши права (GDPR)</h3>
+      <p>Вы имеете право на доступ, исправление или удаление своих данных, а также на отзыв согласия. Контакт: <a href="mailto:consult@idchef13.com">consult@idchef13.com</a></p>
+      <h3>Файлы cookie</h3>
+      <p>Этот сайт не использует аналитические или отслеживающие файлы cookie.</p>
+    </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ COOKIES MODAL ══ -->
+<div id="ck-modal" class="modal-backdrop" onclick="closeModal('ck-modal')" style="display:none">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal('ck-modal')">✕</button>
+    <div class="modal-tabs">
+      <button class="mtab on" onclick="switchTab(this,'ck-en')">EN</button>
+      <button class="mtab" onclick="switchTab(this,'ck-lv')">LV</button>
+      <button class="mtab" onclick="switchTab(this,'ck-ru')">RU</button>
+    </div>
+    <div class="modal-content" id="ck-en">
+      <h2>Cookies</h2>
+      <p>This website does not use tracking or analytics cookies. Basic technical cookies may be used to ensure proper website functionality.</p>
+    </div>
+    <div class="modal-content" id="ck-lv" style="display:none">
+      <h2>Sīkdatnes</h2>
+      <p>Šī vietne neizmanto analītiskās vai izsekošanas sīkdatnes. Var tikt izmantotas tikai tehniskās sīkdatnes vietnes darbībai.</p>
+    </div>
+    <div class="modal-content" id="ck-ru" style="display:none">
+      <h2>Файлы cookie</h2>
+      <p>Этот сайт не использует аналитические или отслеживающие файлы cookie. Могут использоваться только технические файлы cookie для обеспечения корректной работы сайта.</p>
+    </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── TRANSLATIONS ── */
+const TR={
+  ru:{
+    nav_about:"О шефе",nav_exp:"Опыт",nav_services:"Услуги",nav_approach:"Подход",nav_contact:"Контакт",
+    h_pre:"Шеф-повар · Консультант · idchef13.lv",
+    h_line3:"Иванков Денис",
+    h_exp:"Лет опыта",h_fmt:"Форматов работы",h_langs:"Языки работы",
+    h_offer:"Запускаю рестораны с нуля, выстраиваю кухонные процессы и превращаю операционный хаос в прибыльную систему.",
+    cta1:"Записаться на консультацию",cta2:"Узнать больше",
+    t1:"Запуск ресторанов",t2:"Разработка меню",t3:"Оптимизация затрат",t4:"Обучение команды",t5:"Финансовый анализ",t6:"Работа с поставщиками",t7:"30+ лет экспертизы",
+    a_ey:"О себе",a_title:"Денис\nИванков",
+    a_pull:"Кухня — не место для вдохновения. Это место для системы, результата и цифр.",
+    a_p1:"Более 30 лет в сфере общественного питания — от линейного повара до шеф-консультанта. Прошёл через все форматы: от небольших кафе до крупных ресторанных проектов.",
+    a_p2:"Запускал кухни с нуля, оптимизировал действующие проекты, выводил рестораны из кризиса. Моя работа — связка между гастрономией и бизнесом: меню как инструмент продаж, кухня как производство, команда как актив.",
+    a_mono:"— системный подход. всегда.",
+    ex_ey:"Опыт",ex_title:"Карьерный\nпуть",ex_logo:"Логотип",
+    ex1_place:"Manchester United — Kitchen Manager",ex1_title:"Кухня, где нельзя ошибаться",ex1_hl:"Система. Скорость. Ноль права на сбой.",ex1_desc:"Сотни блюд каждый день, чёткие процессы и строгая дисциплина. Это не про творчество — это про стабильность под давлением. Кухня как отлаженный механизм.",
+    ex2_place:"Grand Poet Hotel — Head Chef",ex2_title:"Гастрономия как сервис",ex2_hl:"Первые шаги в высокой кухне",ex2_desc:"Кухня отеля — это не просто еда. Это ожидания гостей со всего мира. Подача, баланс и ощущение уровня становятся частью работы.",
+    ex3_place:"Hereford — Head Chef",ex3_title:"Огонь и продукт",ex3_hl:"Характер через мясо",ex3_desc:"Работа с мясом требует точности и уважения к продукту. Температура, текстура, вкус — каждое решение имеет значение. Здесь формируется стиль.",
+    ex4_place:"Casa Argentina — Executive Head Chef / Partner",ex4_title:"Кухня как система",ex4_hl:"Ответственность за результат",ex4_desc:"Это уже не только про блюда. Это про команду, процессы и решения, влияющие на весь ресторан. Полная ответственность за результат.",
+    ex5_place:"Посольство Франции — Personal Chef to the Ambassador",ex5_title:"Уровень доверия",ex5_hl:"Кухня как часть дипломатии",ex5_desc:"Работа в посольстве — это больше, чем гастрономия. Каждое блюдо становится частью культурного представления. Точность, контекст и внимание к деталям.",
+    ex6_place:"Latvijas Pavāru klubs — biedrs",ex6_title:"Профессиональное сообщество",ex6_hl:"Гастрономическая сцена Латвии",ex6_desc:"Сообщество шеф-поваров, формирующих современную гастрономию страны. Развитие культуры и присутствие Латвии на международной гастрономической арене.",
+    sv_ey:"Услуги",sv_title:"Чем\nпомогаю",
+    s1t:"Запуск проекта",s1d:"Открытие кухни с нуля: процессы, оборудование, команда, стандарты.",
+    s2t:"Оптимизация бизнеса",s2d:"Аудит ресторана: снижение себестоимости, устранение потерь, повышение эффективности.",
+    s3t:"Разработка меню",s3d:"Меню как коммерческий инструмент: концепция, калькуляция, дегустации.",
+    s4t:"Команда и обучение",s4d:"Подбор, обучение персонала. Регламенты, стандарты, система контроля качества.",
+    s5t:"Аналитика и закупки",s5d:"Финансовый анализ, управленческая отчётность, оптимизация закупок.",
+    s6t:"Консалтинг",s6d:"Стратегическое сопровождение: позиционирование, маркетинг, управление проектом.",
+    gl_lbl:"Блюда · Процессы · Результат",
+    ap_ey:"Подход",ap_title:"Как\nя работаю",
+    p1h:"Диагностика",p1p:"Начинаю с аудита: цифры, процессы, команда, меню.",
+    p2h:"Системное мышление",p2p:"Кухня — это производство. Выстраиваю её по законам эффективного бизнеса.",
+    p3h:"Работа с цифрами",p3p:"Каждое решение — через данные. Food cost, себестоимость — это управление.",
+    p4h:"Понимание рынка",p4p:"30+ лет — это видение трендов и чутьё на изменения в индустрии.",
+    ap_bq:"Хороший ресторан — это не случайность. Это результат правильно выстроенной системы.",
+    ap_yr_lbl:"Лет в индустрии",
+    c_ey:"Контакт",c_title:"Давайте\nначнём",c_intro:"Расскажите о проекте — отвечу в течение 24 часов.",
+    c_phone_lbl:"Тел.",c_write:"Написать",
+    f_name:"Ваше имя",f_name_ph:"Иван Петров",f_contact:"Контакт",f_contact_ph:"+371 XX XXX XXX",
+    f_msg:"О проекте",f_msg_ph:"Формат, задача, сроки...",
+    f_submit:"Записаться на консультацию",f_ok:"Спасибо! Свяжусь с вами в ближайшее время.",
+    nav_privacy:"Политика конфиденциальности",nav_cookies:"Cookies",
+    f_gdpr_pre:"Я даю согласие на обработку моих персональных данных в соответствии с",f_gdpr_link:"Политикой конфиденциальности",f_gdpr_post:"и понимаю, что данные будут обработаны через Formspree.",f_gdpr_err:"Пожалуйста, подтвердите согласие с Политикой конфиденциальности, чтобы продолжить.",
+  },
+  lv:{
+    nav_about:"Par šefu",nav_exp:"Pieredze",nav_services:"Pakalpojumi",nav_approach:"Pieeja",nav_contact:"Kontakti",
+    h_pre:"Šefpavārs · Konsultants · idchef13.lv",
+    h_line3:"Deniss Ivankovs",
+    h_exp:"Gadi pieredzē",h_fmt:"Darba formāti",h_langs:"Darba valodas",
+    h_offer:"Atveru restorānus no nulles, veidoju virtuves procesus un pārvērtu operatīvo haosu par ienesīgu sistēmu.",
+    cta1:"Pieteikties konsultācijai",cta2:"Uzzināt vairāk",
+    t1:"Restorānu palaišana",t2:"Ēdienkartes izstrāde",t3:"Izmaksu optimizācija",t4:"Komandas apmācība",t5:"Finanšu analīze",t6:"Darbs ar piegādātājiem",t7:"30+ gadi pieredzē",
+    a_ey:"Par mani",a_title:"Deniss\nIvankovs",
+    a_pull:"Virtuve nav vieta iedvesmai. Tā ir vieta sistēmai, rezultātam un skaitļiem.",
+    a_p1:"Vairāk nekā 30 gadus strādāju sabiedriskās ēdināšanas jomā — no līnijas pavāra līdz šefpavāra konsultantam. Esmu izgājis cauri visiem formātiem: no mazām kafejnīcām līdz lieliem restorānu projektiem.",
+    a_p2:"Esmu palaists virtuves no nulles, optimizēts projektus, vedis restorānus no krīzes. Mans darbs — saikne starp gastronomiiju un biznesu: ēdienkarte kā pārdošanas instruments, virtuve kā ražošana, komanda kā aktīvs.",
+    a_mono:"— sistemātiska pieeja. vienmēr.",
+    ex_ey:"Pieredze",ex_title:"Karjeras\nceļš",ex_logo:"Logotips",
+    ex1_place:"Manchester United — Kitchen Manager",ex1_title:"Virtuve, kur kļūdīties nav atļauts",ex1_hl:"Sistēma. Ātrums. Nulles tolerance kļūdām.",ex1_desc:"Simtiem ēdienu katru dienu, skaidri procesi un stingra disciplīna. Tas nav par radošumu — tas ir par stabilitāti zem spiediena. Virtuve kā precīzs mehānisms.",
+    ex2_place:"Grand Poet Hotel — Head Chef",ex2_title:"Gastronomija kā serviss",ex2_hl:"Pirmie soļi augstajā virtuvē",ex2_desc:"Viesnīcas virtuve nav tikai ēdiens. Tās ir viesu no visas pasaules cerības. Pasniegšana, līdzsvars un līmeņa izjūta kļūst par darba daļu.",
+    ex3_place:"Hereford — Head Chef",ex3_title:"Uguns un produkts",ex3_hl:"Raksturs caur gaļu",ex3_desc:"Darbs ar gaļu prasa precizitāti un cieņu pret produktu. Temperatūra, tekstūra, garša — katrs lēmums ir svarīgs. Šeit veidojas stils.",
+    ex4_place:"Casa Argentina — Executive Head Chef / Partner",ex4_title:"Virtuve kā sistēma",ex4_hl:"Atbildība par rezultātu",ex4_desc:"Tas vairs nav tikai par ēdieniem. Tas ir par komandu, procesiem un lēmumiem, kas ietekmē visu restorānu. Pilna atbildība par rezultātu.",
+    ex5_place:"Francijas vēstniecība — Personal Chef to the Ambassador",ex5_title:"Uzticības līmenis",ex5_hl:"Virtuve kā diplomātijas daļa",ex5_desc:"Darbs vēstniecībā ir vairāk nekā gastronomija. Katrs ēdiens kļūst par kultūras reprezentācijas daļu. Precizitāte, konteksts un uzmanība detaļām.",
+    ex6_place:"Latvijas Pavāru klubs — biedrs",ex6_title:"Profesionālā kopiena",ex6_hl:"Latvijas gastronomiskā aina",ex6_desc:"Šefpavāru kopiena, kas veido mūsdienu gastronomiju valstī. Kultūras attīstība un Latvijas klātbūtne starptautiskajā gastronomijas arēnā.",
+    sv_ey:"Pakalpojumi",sv_title:"Kā es\nvaru palīdzēt",
+    s1t:"Projekta palaišana",s1d:"Virtuves atvēršana no nulles: procesi, aprīkojums, komanda, standarti.",
+    s2t:"Biznesa optimizācija",s2d:"Esošā restorāna audits: pašizmaksas samazināšana, zudumu novēršana, efektivitātes uzlabošana.",
+    s3t:"Ēdienkartes izstrāde",s3d:"Ēdienkarte kā komerciāls instruments: koncepcija, kalkulācija, degustācijas.",
+    s4t:"Komanda un apmācība",s4d:"Personāla atlase, apmācība. Reglamenti, standarti, kvalitātes kontroles sistēma.",
+    s5t:"Analītika un iepirkumi",s5d:"Finanšu analīze, vadības atskaites, iepirkumu optimizācija.",
+    s6t:"Konsultācijas",s6d:"Stratēģiskā pavadīšana: pozicionēšana, mārketings, projektu vadība.",
+    gl_lbl:"Ēdieni · Procesi · Rezultāts",
+    ap_ey:"Pieeja",ap_title:"Kā es\nstrādāju",
+    p1h:"Diagnostika",p1p:"Sāku ar auditu: skaitļi, procesi, komanda, ēdienkarte.",
+    p2h:"Sistēmiskā domāšana",p2p:"Virtuve ir ražošana. Veidoju to pēc efektīva biznesa likumiem.",
+    p3h:"Darbs ar skaitļiem",p3p:"Katrs lēmums — caur datiem. Food cost — tas ir vadība.",
+    p4h:"Tirgus izpratne",p4p:"30+ gadi — tendenču redzējums un intuīcija par nozares izmaiņām.",
+    ap_bq:"Labs restorāns nav nejaušība. Tas ir pareizi uzbūvētas sistēmas rezultāts.",
+    ap_yr_lbl:"Gadi nozarē",
+    c_ey:"Kontakts",c_title:"Sāksim\nkopā",c_intro:"Pastāstiet par projektu — atbildēšu 24 stundu laikā.",
+    c_phone_lbl:"Tāl.",c_write:"Rakstīt",
+    f_name:"Jūsu vārds",f_name_ph:"Jānis Bērziņš",f_contact:"Kontakts",f_contact_ph:"+371 XX XXX XXX",
+    f_msg:"Par projektu",f_msg_ph:"Formāts, uzdevums, termiņi...",
+    f_submit:"Pieteikties konsultācijai",f_ok:"Paldies! Sazināšos ar jums drīzumā.",
+    nav_privacy:"Privātuma politika",nav_cookies:"Sīkdatnes",
+    f_gdpr_pre:"Es piekrītu savu personas datu apstrādei saskaņā ar",f_gdpr_link:"Privātuma politiku",f_gdpr_post:"un saprotu, ka dati tiks apstrādāti, izmantojot Formspree.",f_gdpr_err:"Lūdzu, apstipriniet piekrišanu Privātuma politikai, lai turpinātu.",
+  },
+  en:{
+    nav_about:"About",nav_exp:"Experience",nav_services:"Services",nav_approach:"Approach",nav_contact:"Contact",
+    h_pre:"Executive Chef · Consultant · idchef13.lv",
+    h_line3:"Denis Ivankov",
+    h_exp:"Years of exp.",h_fmt:"Work formats",h_langs:"Working languages",
+    h_offer:"I launch restaurants from scratch, build kitchen systems and turn operational chaos into profitable operations.",
+    cta1:"Book a Consultation",cta2:"Learn More",
+    t1:"Restaurant Launch",t2:"Menu Development",t3:"Cost Optimisation",t4:"Team Training",t5:"Financial Analysis",t6:"Supplier Management",t7:"30+ Years Expertise",
+    a_ey:"About",a_title:"Denis\nIvankov",
+    a_pull:"A kitchen is not a place for inspiration. It is a place for systems, results and numbers.",
+    a_p1:"Over 30 years in the food service industry — from line cook to executive consultant. Every format from small cafés to large restaurant projects.",
+    a_p2:"Launched kitchens from zero, optimised existing operations, turned struggling restaurants around. My work bridges gastronomy and business: menus as a sales tool, kitchens as production, teams as assets.",
+    a_mono:"— systems approach. always.",
+    ex_ey:"Experience",ex_title:"Career\njourney",ex_logo:"Logo",
+    ex1_place:"Manchester United — Kitchen Manager",ex1_title:"A kitchen with no room for error",ex1_hl:"Systems. Speed. Zero tolerance for failure.",ex1_desc:"Hundreds of dishes every day, clear processes and strict discipline. This is not about creativity — it is about stability under pressure. A kitchen as a precision machine.",
+    ex2_place:"Grand Poet Hotel — Head Chef",ex2_title:"Gastronomy as a service",ex2_hl:"First steps in fine dining",ex2_desc:"A hotel kitchen is not just food. It is the expectations of guests from around the world. Presentation, balance and a sense of level become part of the work.",
+    ex3_place:"Hereford — Head Chef",ex3_title:"Fire and product",ex3_hl:"Character through meat",ex3_desc:"Working with meat demands precision and respect for the product. Temperature, texture, flavour — every decision matters. This is where style is forged.",
+    ex4_place:"Casa Argentina — Executive Head Chef / Partner",ex4_title:"Kitchen as a system",ex4_hl:"Full accountability for results",ex4_desc:"This is no longer just about dishes. It is about the team, processes and decisions that affect the entire restaurant. Complete ownership of the outcome.",
+    ex5_place:"French Embassy — Personal Chef to the Ambassador",ex5_title:"A level of trust",ex5_hl:"The kitchen as part of diplomacy",ex5_desc:"Working at an embassy is more than gastronomy. Every dish becomes part of a cultural representation. Precision, context and attention to detail.",
+    ex6_place:"Latvijas Pavāru klubs — Member",ex6_title:"Professional community",ex6_hl:"Latvia's gastronomic scene",ex6_desc:"A community of chefs shaping the country's contemporary gastronomy. Developing the culture and Latvia's presence on the international gastronomic stage.",
+    sv_ey:"Services",sv_title:"How I\ncan help",
+    s1t:"Project Launch",s1d:"Opening a kitchen from scratch: process design, equipment, team, standards.",
+    s2t:"Business Optimisation",s2d:"Restaurant audit: reducing cost of goods, eliminating waste, improving efficiency.",
+    s3t:"Menu Development",s3d:"Menu as a commercial tool: concept, costing, tastings, seasonal updates.",
+    s4t:"Team & Training",s4d:"Staff selection, training. Implementing SOPs and quality control systems.",
+    s5t:"Analytics & Purchasing",s5d:"Financial analysis, management reporting and purchasing optimisation.",
+    s6t:"Consulting",s6d:"Strategic advisory: concept positioning, marketing, project management.",
+    gl_lbl:"Dishes · Processes · Results",
+    ap_ey:"Approach",ap_title:"How I\nwork",
+    p1h:"Diagnosis",p1p:"I start with an audit: numbers, processes, team, menu.",
+    p2h:"Systems Thinking",p2p:"A kitchen is a production facility. I build it according to efficient business laws.",
+    p3h:"Data-Driven",p3p:"Every decision through data. Food cost, COGS — that is management.",
+    p4h:"Market Insight",p4p:"30+ years is trend vision and an instinct for industry shifts.",
+    ap_bq:"A great restaurant is not an accident. It is the result of a well-built system.",
+    ap_yr_lbl:"Years in the industry",
+    c_ey:"Contact",c_title:"Let's\nbegin",c_intro:"Tell me about your project — I will reply within 24 hours.",
+    c_phone_lbl:"Phone",c_write:"Message",
+    f_name:"Your name",f_name_ph:"John Smith",f_contact:"Contact",f_contact_ph:"+371 XX XXX XXX",
+    f_msg:"About the project",f_msg_ph:"Format, goal, timeline...",
+    f_submit:"Book a Consultation",f_ok:"Thank you! I will be in touch shortly.",
+    nav_privacy:"Privacy Policy",nav_cookies:"Cookies",
+    f_gdpr_pre:"I agree to the processing of my personal data in accordance with the",f_gdpr_link:"Privacy Policy",f_gdpr_post:"and understand that my data will be processed via Formspree.",f_gdpr_err:"Please confirm your agreement with the Privacy Policy to continue.",
+  }
+};
+
+/* ── LANG ── */
+let lang='en';
+document.addEventListener('DOMContentLoaded',()=>{
+  setLang('en');
+  if(window.formspree)formspree('initForm',{formElement:'#ct-form',formId:'mlgznvjr'});
+});
+function setLang(l){
+  lang=l;
+  const d=TR[l];
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k=el.getAttribute('data-i18n');
+    if(!d[k])return;
+    if(['H1','H2','H3'].includes(el.tagName)) el.innerHTML=d[k].replace(/\n/g,'<br>');
+    else el.textContent=d[k];
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
+    const k=el.getAttribute('data-i18n-ph');if(d[k])el.placeholder=d[k];
+  });
+  document.documentElement.lang=l;
+  document.querySelectorAll('.lb').forEach(b=>b.classList.toggle('on',b.textContent.toLowerCase()===l));
+  const fl=document.getElementById('form-lang');if(fl)fl.value=l;
+}
+
+/* ── REVEAL ── */
+const ro=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      e.target.style.transitionDelay=(i*.07)+'s';
+      e.target.classList.add('in');
+      ro.unobserve(e.target);
+    }
+  });
+},{threshold:.1});
+document.querySelectorAll('.rv,.rv-l,.rv-r,.rv-s').forEach(el=>ro.observe(el));
+
+/* ── NAV scroll ── */
+const navEl=document.getElementById('main-nav');
+window.addEventListener('scroll',()=>{
+  navEl.style.background=window.scrollY>60?'rgba(8,8,10,.97)':'rgba(8,8,10,.88)';
+},{passive:true});
+
+/* experience: now uses vertical timeline, no JS needed */
+
+
+/* ── MODAL ── */
+function openPrivacy(){document.getElementById('pp-modal').style.display='flex'}
+function openCookies(){document.getElementById('ck-modal').style.display='flex'}
+function closeModal(id){document.getElementById(id).style.display='none'}
+function switchTab(btn,contentId){
+  const box=btn.closest('.modal-box');
+  box.querySelectorAll('.mtab').forEach(b=>b.classList.remove('on'));
+  box.querySelectorAll('.modal-content').forEach(c=>c.style.display='none');
+  btn.classList.add('on');
+  document.getElementById(contentId).style.display='block';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('pp-modal');closeModal('ck-modal')}});
+
+/* ── FORM: checkbox validation + Formspree ── */
+document.addEventListener('DOMContentLoaded',function(){
+  var form = document.getElementById('ct-form');
+  if(!form) return;
+  form.addEventListener('submit', function(e){
+    var cb = document.getElementById('gdpr-check');
+    var err = document.getElementById('gdpr-error');
+    if(cb && !cb.checked){
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      err.style.display='block';
+      cb.closest('.f-check-wrap').scrollIntoView({behavior:'smooth',block:'center'});
+      return false;
+    }
+    if(err) err.style.display='none';
+  });
+  // Hide error when checkbox clicked
+  var cb2 = document.getElementById('gdpr-check');
+  if(cb2) cb2.addEventListener('change',function(){
+    var err2=document.getElementById('gdpr-error');
+    if(this.checked && err2) err2.style.display='none';
+  });
+});
+
+/* Open privacy from modal synced to current language */
+function openPrivacyLang(){
+  openPrivacy();
+  // Switch to current lang tab
+  var tabs={'en':'pp-en','lv':'pp-lv','ru':'pp-ru'};
+  var target = tabs[lang] || 'pp-en';
+  var box = document.querySelector('#pp-modal .modal-box');
+  if(!box) return;
+  box.querySelectorAll('.mtab').forEach(b=>b.classList.remove('on'));
+  box.querySelectorAll('.modal-content').forEach(c=>c.style.display='none');
+  var tBtn = box.querySelector('[onclick*="'+target+'"]');
+  if(tBtn) tBtn.classList.add('on');
+  var tContent = document.getElementById(target);
+  if(tContent) tContent.style.display='block';
+}
+
+</script>
+<script>window.formspree=window.formspree||function(){(formspree.q=formspree.q||[]).push(arguments)};</script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer>
+/* ── Hero canvas animation — desktop + tablet + mobile ── */
+(function(){
+  var c, ctx, W, H, frame=0, P=[], sweeps=[], running=false;
+
+  function setup(){
+    c = document.getElementById('hero-canvas');
+    if(!c) return;
+    ctx = c.getContext('2d');
+    resize();
+
+    // particles
+    P = [];
+    var acc='rgba(200,169,110,', red='rgba(184,52,26,';
+    for(var i=0;i<55;i++){
+      P.push({
+        x:Math.random(), y:Math.random()+.1,
+        r:Math.random()*2+.5,
+        vx:(Math.random()-.5)*.0008,
+        vy:-(Math.random()*.0012+.0004),
+        o:Math.random()*.7+.25,
+        col:Math.random()>.8?red:acc,
+        life:Math.random()
+      });
+    }
+
+    // sweep lines
+    sweeps = [
+      {y:.18, s:.0012, w:1.5, o:.12, dir:1},
+      {y:.42, s:.0008, w:1.2, o:.08, dir:-1},
+      {y:.65, s:.0014, w:1.0, o:.10, dir:1},
+      {y:.85, s:.0010, w:.8,  o:.06, dir:-1},
+    ];
+
+    if(!running){ running=true; 
+      // Draw initial state immediately so canvas is visibly active
+      resize();
+      tick();
+    }
+  }
+
+  function resize(){
+    if(!c) return;
+    var hero = document.getElementById('hero');
+    var w = hero ? hero.offsetWidth  : window.innerWidth;
+    var h = hero ? hero.offsetHeight : window.innerHeight;
+    // Fallback if hero has no height yet
+    if(h < 100) h = window.innerHeight;
+    if(w < 100) w = window.innerWidth;
+    c.setAttribute('width',  w);
+    c.setAttribute('height', h);
+    W=w; H=h;
+  }
+
+  function tick(){
+    if(!ctx){running=false;return;}
+    W=c.width; H=c.height;
+    ctx.clearRect(0,0,W,H);
+
+    // sweep lines
+    sweeps.forEach(function(s){
+      s.o += s.s*s.dir;
+      if(s.o>0.45){s.dir=-1;}
+      if(s.o<0)   {s.dir=1;s.o=0;}
+      var y=s.y*H;
+      var g=ctx.createLinearGradient(0,0,W,0);
+      g.addColorStop(0,'transparent');
+      g.addColorStop(.15,'rgba(200,169,110,'+s.o+')');
+      g.addColorStop(.5, 'rgba(200,169,110,'+(s.o*.5)+')');
+      g.addColorStop(.85,'rgba(200,169,110,'+s.o+')');
+      g.addColorStop(1,'transparent');
+      ctx.beginPath();
+      ctx.moveTo(0,y); ctx.lineTo(W,y);
+      ctx.strokeStyle=g; ctx.lineWidth=s.w;
+      ctx.stroke();
+    });
+
+    // particles
+    P.forEach(function(p){
+      p.x+=p.vx; p.y+=p.vy;
+      p.life+=.003;
+      if(p.y<-.02){ p.y=1.02; p.x=Math.random(); p.life=0; p.o=Math.random()*.7+.25; }
+      if(p.x<-.02||p.x>1.02){ p.x=Math.random(); }
+      var fade=Math.sin(Math.min(p.life,1)*Math.PI);
+      ctx.beginPath();
+      ctx.arc(p.x*W, p.y*H, p.r, 0, 6.2832);
+      ctx.fillStyle=p.col+(p.o*fade)+')';
+      ctx.fill();
+    });
+
+    // radial pulse glow — centre of hero
+    frame++;
+    var pulse=Math.sin(frame*.015)*.5+.5;
+    var cx=W*.5, cy=H*.48;
+    var gr=ctx.createRadialGradient(cx,cy,0, cx,cy, W*.62);
+    gr.addColorStop(0,'rgba(200,169,110,'+(pulse*.22)+')');
+    gr.addColorStop(.45,'rgba(200,169,110,'+(pulse*.08)+')');
+    gr.addColorStop(1,'transparent');
+    ctx.fillStyle=gr;
+    ctx.fillRect(0,0,W,H);
+
+    // subtle red accent glow — lower right
+    var pulse2=Math.sin(frame*.011+1.2)*.5+.5;
+    var gr2=ctx.createRadialGradient(W*.78,H*.72,0, W*.78,H*.72, W*.35);
+    gr2.addColorStop(0,'rgba(184,52,26,'+(pulse2*.18)+')');
+    gr2.addColorStop(1,'transparent');
+    ctx.fillStyle=gr2;
+    ctx.fillRect(0,0,W,H);
+
+    requestAnimationFrame(tick);
+  }
+
+  window.addEventListener('resize', function(){
+    resize();
+  },{passive:true});
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', function(){
+      setTimeout(setup, 50);
+    });
+  } else {
+    setTimeout(setup, 50);
+  }
+})();
+</script>
+</body>
+</html>
