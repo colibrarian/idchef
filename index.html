@@ -625,47 +625,14 @@ footer{
   transition:color .2s;white-space:nowrap;
 }
 .fl-links a:hover{color:var(--acc)}
-@media(max-width:640px){
-  footer{flex-direction:column;align-items:flex-start;gap:1.2rem;padding:2rem 1.2rem}
-  .fl-links{display:grid;grid-template-columns:1fr 1fr;gap:.6rem .8rem}
-  .fl-links a{font-size:.6rem;letter-spacing:.1em}
-}
-.fl-copy{font-size:.6rem;letter-spacing:.1em;color:var(--tx3)}
-
-/* ─────────────────────────────────────────
-   ENTRY ANIMATIONS
-───────────────────────────────────────── */
-@keyframes fup{from{opacity:0;transform:translateY(2.5rem)}to{opacity:1;transform:none}}
-@keyframes fin{from{opacity:0}to{opacity:1}}
-.h-pre{animation:fup .7s ease .05s both}
-.h-content .h-title{animation:fup .8s ease .12s both}
-.h-stats{animation:fup .7s ease .35s both}
-.h-bottom{animation:fup .7s ease .5s both}
-.h-photo{animation:fin 1.3s ease .05s both}
-
-/* ─────────────────────────────────────────
-   RESPONSIVE
-───────────────────────────────────────── */
-/* Mobile-only hero elements — hidden by default on desktop */
+/* Mobile hero block — hidden on desktop */
 .h-mobile-block{display:none}
+.h-mobile-top{display:none}
 .h-mobile-circle{display:none}
+.h-mobile-bottom{display:none}
 .h-mobile-pre{display:none}
 .h-title-mobile{display:none}
-.h-mobile-top{display:none}
-.h-mobile-bottom{display:none}
 
-@media(max-width:1024px){
-  .svc-row{grid-template-columns:48px 1fr;gap:1.5rem}
-  /* descriptions stay visible */
-}
-@media(max-width:900px){
-  .h-photo{width:clamp(260px,44vw,480px);opacity:.55}
-  .n-links{display:none}
-  .about-grid,.ct-grid,.app-bq{grid-template-columns:1fr;gap:3rem}
-  .pillars{grid-template-columns:1fr}
-  .h-stats{flex-wrap:wrap}
-  .exp-photo{width:clamp(100px,28vw,180px)}
-}
 @media(max-width:640px){
   section{padding:4rem 1.2rem}
 
@@ -696,9 +663,10 @@ footer{
     position:relative;
   }
 
-  /* TOP: eyebrow + big title */
+  /* TOP — explicitly shown */
   .h-mobile-top{
-    padding:calc(var(--nav-h) + .5rem) 1.2rem 0;
+    display:block;
+    padding:calc(var(--nav-h) + .4rem) 1.2rem .2rem;
     position:relative;z-index:3;
     flex-shrink:0;
   }
@@ -710,7 +678,7 @@ footer{
   }
   .h-mobile-pre::before{content:'';display:block;width:1.2rem;height:1px;background:var(--acc);flex-shrink:0}
 
-  /* Big ID CHEF title — compact so photo gets space */
+  /* Big ID CHEF title */
   .h-title-mobile{
     display:block;
     font-family:var(--font-head);font-weight:900;
@@ -724,44 +692,48 @@ footer{
     letter-spacing:.02em;color:var(--tx2);margin-top:.4em;padding-left:.1em;
   }
 
-  /* MIDDLE: PNG — fixed proportional height, show full figure */
+  /* MIDDLE: PNG — full figure, head clears nav bar */
   .h-mobile-circle{
     display:block;
     flex:1;
     position:relative;
-    min-height:200px;
+    min-height:0;
     z-index:2;
-    overflow:hidden;
+    overflow:visible;   /* allow head to breathe above */
+    padding-top:.6rem;  /* small gap between title and top of PNG */
   }
   .h-mobile-circle img{
     display:block;
+    /* PNG sits bottom-anchored, width fills container */
     position:absolute;
     bottom:0;
     left:50%;
     transform:translateX(-50%);
-    /* Let the full PNG show — width auto so it scales naturally */
-    width:auto;
-    height:100%;
+    width:100%;
+    height:auto;
     max-width:none;
-    object-fit:contain;
   }
 
-  /* BOTTOM: CTA pinned over gradient */
+  /* BOTTOM — CTA zone overlapping lower part of figure */
   .h-mobile-bottom{
-    position:relative;z-index:3;
-    padding:.6rem 1.2rem 2.5rem;
-    background:linear-gradient(to top,var(--c1) 55%,transparent);
+    display:block;
+    position:relative;z-index:4;
+    padding:3rem 1.2rem 2.5rem;
+    margin-top:-3rem;   /* pull up to overlap figure's lower body */
+    background:linear-gradient(to top,
+      var(--c1) 0%,
+      var(--c1) 45%,
+      rgba(17,17,20,.85) 65%,
+      transparent 100%
+    );
     flex-shrink:0;
   }
-  .h-mobile-bottom .btn-primary{width:100%;justify-content:center}
-  .h-mobile-bottom .btn-secondary{
-    display:block;width:100%;text-align:center;
-    margin-top:.6rem;
-    background:transparent;color:var(--tx);
-    font-family:var(--font-body);font-size:.68rem;font-weight:400;
-    letter-spacing:.14em;text-transform:uppercase;text-decoration:none;
-    border:1px solid var(--c3);padding:.7rem;
-    transition:border-color .2s,color .2s;
+  .h-mobile-bottom .btn-primary{
+    display:flex;width:100%;justify-content:center;
+  }
+  .h-mobile-bottom .h-offer-mob{
+    font-size:.78rem;font-weight:300;line-height:1.7;
+    color:var(--tx2);margin-bottom:.8rem;
   }
 
   nav{padding:0 1rem}
@@ -782,8 +754,6 @@ footer{
   .exp-text{padding-top:1rem}
   .exp-title-tl{font-size:clamp(1.1rem,5vw,1.5rem)}
 }
-
-/* Mobile hero block — hidden on desktop, revealed inside @media(max-width:640px) above */
 
 /* ── FORM GDPR checkbox ── */
 .f-check-wrap{
@@ -888,7 +858,7 @@ footer{
     <span>ИВАНКОВ</span>
     <span>ID CHEF</span>
   </div>
-  <!-- Mobile hero — variant 1: title top, PNG center, CTA bottom -->
+  <!-- Mobile hero — variant 1: title top, PNG full, CTA+text bottom overlay -->
   <div class="h-mobile-block">
     <div class="h-mobile-top">
       <p class="h-mobile-pre" data-i18n="h_pre">Executive Chef · Consultant · idchef13.lv</p>
@@ -902,8 +872,8 @@ footer{
       <img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/id%20hero%20block.png" alt="Денис Иванков"/>
     </div>
     <div class="h-mobile-bottom">
-      <a href="#contact" class="btn-primary" style="width:100%;justify-content:center;display:flex"><span data-i18n="cta1">Записаться на консультацию</span></a>
-      <a href="#services" class="btn-secondary" style="display:block;text-align:center;margin-top:.6rem;padding:.7rem;border:1px solid var(--c3);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--tx)" data-i18n="cta2">Узнать больше</a>
+      <p class="h-offer-mob" data-i18n="h_offer">Запускаю рестораны с нуля, выстраиваю кухонные процессы и превращаю операционный хаос в прибыльную систему.</p>
+      <a href="#contact" class="btn-primary"><span data-i18n="cta1">Записаться на консультацию</span></a>
     </div>
   </div>
   <div class="h-top">
