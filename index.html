@@ -155,17 +155,17 @@ section{position:relative;padding:7rem 2.5rem}
 .h-photo{
   position:absolute;
   right:0;top:0;bottom:0;
-  width:clamp(300px,42vw,600px);
+  width:clamp(320px,48vw,660px);
   z-index:1;
   pointer-events:none;
 }
 .h-photo img{
   display:block;width:100%;height:100%;
   object-fit:contain;
-  object-position:bottom right;
+  object-position:bottom center;
   transition:transform 1.4s cubic-bezier(.16,1,.3,1);
 }
-#hero:hover .h-photo img{transform:scale(1.02) translateY(-6px)}
+#hero:hover .h-photo img{transform:scale(1.02)}
 
 /* Ghost lines in bg */
 .h-ghost{
@@ -196,7 +196,7 @@ section{position:relative;padding:7rem 2.5rem}
 /* Content */
 .h-content{
   position:relative;z-index:2;
-  padding:calc(var(--nav-h) + 2rem) 2.5rem 1.5rem;
+  padding:calc(var(--nav-h) + 1rem) 2.5rem 1rem;
 }
 .h-pre{
   display:flex;align-items:center;gap:1rem;
@@ -221,7 +221,7 @@ section{position:relative;padding:7rem 2.5rem}
   display:flex;gap:0;
   border-top:1px solid var(--c3);
   border-bottom:1px solid var(--c3);
-  margin-top:3rem;
+  margin-top:0;
   position:relative;z-index:1;
 }
 .h-stat{
@@ -240,7 +240,7 @@ section{position:relative;padding:7rem 2.5rem}
 .h-bottom{
   display:flex;align-items:center;justify-content:space-between;
   gap:2rem;flex-wrap:wrap;
-  padding:2rem 2.5rem 4rem;
+  padding:1.2rem 2.5rem 3rem;
   position:relative;z-index:1;
 }
 .h-offer{
@@ -654,21 +654,20 @@ footer{
   .h-top{display:none!important}
   .h-bottom{display:none!important}
 
-  /* Mobile block: fills hero, stacks top-text / png / bottom-cta */
+  /* Mobile block: single container, PNG behind, text overlaid */
   .h-mobile-block{
-    display:flex;
-    flex-direction:column;
+    display:block;
     min-height:100svh;
-    padding:0;
     position:relative;
   }
 
-  /* TOP — explicitly shown */
+  /* TOP — eyebrow + title — overlaid top-left, above photo */
   .h-mobile-top{
     display:block;
-    padding:calc(var(--nav-h) + .4rem) 1.2rem .2rem;
-    position:relative;z-index:3;
-    flex-shrink:0;
+    position:absolute;
+    top:calc(var(--nav-h) + .6rem);
+    left:1.2rem;right:1.2rem;
+    z-index:3;
   }
   .h-mobile-pre{
     display:flex;align-items:center;gap:.55rem;
@@ -692,41 +691,38 @@ footer{
     letter-spacing:.02em;color:var(--tx2);margin-top:.4em;padding-left:.1em;
   }
 
-  /* MIDDLE: PNG — full figure, head clears nav bar */
+  /* PNG — fills full hero height, bottom-anchored */
   .h-mobile-circle{
     display:block;
-    flex:1;
-    position:relative;
-    min-height:0;
-    z-index:2;
-    overflow:visible;   /* allow head to breathe above */
-    padding-top:.6rem;  /* small gap between title and top of PNG */
+    position:absolute;
+    inset:0;
+    z-index:1;
+    overflow:hidden;
   }
   .h-mobile-circle img{
     display:block;
-    /* PNG sits bottom-anchored, width fills container */
     position:absolute;
     bottom:0;
     left:50%;
     transform:translateX(-50%);
-    width:100%;
-    height:auto;
+    width:auto;
+    height:95%;
     max-width:none;
   }
 
-  /* BOTTOM — CTA zone overlapping lower part of figure */
+  /* BOTTOM — CTA pinned to bottom of hero, above photo */
   .h-mobile-bottom{
     display:block;
-    position:relative;z-index:4;
-    padding:3rem 1.2rem 2.5rem;
-    margin-top:-3rem;   /* pull up to overlap figure's lower body */
+    position:absolute;
+    bottom:0;left:0;right:0;
+    z-index:4;
+    padding:3.5rem 1.2rem 2.8rem;
     background:linear-gradient(to top,
-      var(--c1) 0%,
-      var(--c1) 45%,
-      rgba(17,17,20,.85) 65%,
+      rgba(17,17,20,.96) 0%,
+      rgba(17,17,20,.88) 40%,
+      rgba(17,17,20,.5) 70%,
       transparent 100%
     );
-    flex-shrink:0;
   }
   .h-mobile-bottom .btn-primary{
     display:flex;width:100%;justify-content:center;
@@ -857,19 +853,7 @@ footer{
 }
 
 
-/* ── Hero canvas animation — all screen sizes ── */
-#hero-canvas{
-  position:absolute;
-  top:0;left:0;
-  pointer-events:none;
-  display:block;
-  z-index:0;
-}
-/* Ensure hero content sits above canvas */
-.h-ghost,.h-top,.h-stats,.h-bottom,.h-mobile-block{
-  position:relative;
-  z-index:1;
-}
+/* canvas animation removed */
 
 </style>
 </head>
@@ -896,7 +880,6 @@ footer{
 
 <!-- ══ HERO ══ -->
 <section id="hero">
-  <canvas id="hero-canvas" aria-hidden="true"></canvas>
   <div class="h-ghost" aria-hidden="true">
     <span>ID CHEF</span>
     <span>ИВАНКОВ</span>
@@ -1570,129 +1553,7 @@ function openPrivacyLang(){
 </script>
 <script>window.formspree=window.formspree||function(){(formspree.q=formspree.q||[]).push(arguments)};</script>
 <script src="https://unpkg.com/@formspree/ajax@1" defer>
-/* ── Hero canvas animation — desktop + tablet + mobile ── */
-(function(){
-  var c, ctx, W, H, frame=0, P=[], sweeps=[], running=false;
-
-  function setup(){
-    c = document.getElementById('hero-canvas');
-    if(!c) return;
-    ctx = c.getContext('2d');
-    resize();
-
-    // particles
-    P = [];
-    var acc='rgba(200,169,110,', red='rgba(184,52,26,';
-    for(var i=0;i<55;i++){
-      P.push({
-        x:Math.random(), y:Math.random()+.1,
-        r:Math.random()*2+.5,
-        vx:(Math.random()-.5)*.0008,
-        vy:-(Math.random()*.0012+.0004),
-        o:Math.random()*.7+.25,
-        col:Math.random()>.8?red:acc,
-        life:Math.random()
-      });
-    }
-
-    // sweep lines
-    sweeps = [
-      {y:.18, s:.0012, w:1.5, o:.12, dir:1},
-      {y:.42, s:.0008, w:1.2, o:.08, dir:-1},
-      {y:.65, s:.0014, w:1.0, o:.10, dir:1},
-      {y:.85, s:.0010, w:.8,  o:.06, dir:-1},
-    ];
-
-    if(!running){ running=true; 
-      // Draw initial state immediately so canvas is visibly active
-      resize();
-      tick();
-    }
-  }
-
-  function resize(){
-    if(!c) return;
-    var hero = document.getElementById('hero');
-    var w = hero ? hero.offsetWidth  : window.innerWidth;
-    var h = hero ? hero.offsetHeight : window.innerHeight;
-    // Fallback if hero has no height yet
-    if(h < 100) h = window.innerHeight;
-    if(w < 100) w = window.innerWidth;
-    c.setAttribute('width',  w);
-    c.setAttribute('height', h);
-    W=w; H=h;
-  }
-
-  function tick(){
-    if(!ctx){running=false;return;}
-    W=c.width; H=c.height;
-    ctx.clearRect(0,0,W,H);
-
-    // sweep lines
-    sweeps.forEach(function(s){
-      s.o += s.s*s.dir;
-      if(s.o>0.45){s.dir=-1;}
-      if(s.o<0)   {s.dir=1;s.o=0;}
-      var y=s.y*H;
-      var g=ctx.createLinearGradient(0,0,W,0);
-      g.addColorStop(0,'transparent');
-      g.addColorStop(.15,'rgba(200,169,110,'+s.o+')');
-      g.addColorStop(.5, 'rgba(200,169,110,'+(s.o*.5)+')');
-      g.addColorStop(.85,'rgba(200,169,110,'+s.o+')');
-      g.addColorStop(1,'transparent');
-      ctx.beginPath();
-      ctx.moveTo(0,y); ctx.lineTo(W,y);
-      ctx.strokeStyle=g; ctx.lineWidth=s.w;
-      ctx.stroke();
-    });
-
-    // particles
-    P.forEach(function(p){
-      p.x+=p.vx; p.y+=p.vy;
-      p.life+=.003;
-      if(p.y<-.02){ p.y=1.02; p.x=Math.random(); p.life=0; p.o=Math.random()*.7+.25; }
-      if(p.x<-.02||p.x>1.02){ p.x=Math.random(); }
-      var fade=Math.sin(Math.min(p.life,1)*Math.PI);
-      ctx.beginPath();
-      ctx.arc(p.x*W, p.y*H, p.r, 0, 6.2832);
-      ctx.fillStyle=p.col+(p.o*fade)+')';
-      ctx.fill();
-    });
-
-    // radial pulse glow — centre of hero
-    frame++;
-    var pulse=Math.sin(frame*.015)*.5+.5;
-    var cx=W*.5, cy=H*.48;
-    var gr=ctx.createRadialGradient(cx,cy,0, cx,cy, W*.62);
-    gr.addColorStop(0,'rgba(200,169,110,'+(pulse*.22)+')');
-    gr.addColorStop(.45,'rgba(200,169,110,'+(pulse*.08)+')');
-    gr.addColorStop(1,'transparent');
-    ctx.fillStyle=gr;
-    ctx.fillRect(0,0,W,H);
-
-    // subtle red accent glow — lower right
-    var pulse2=Math.sin(frame*.011+1.2)*.5+.5;
-    var gr2=ctx.createRadialGradient(W*.78,H*.72,0, W*.78,H*.72, W*.35);
-    gr2.addColorStop(0,'rgba(184,52,26,'+(pulse2*.18)+')');
-    gr2.addColorStop(1,'transparent');
-    ctx.fillStyle=gr2;
-    ctx.fillRect(0,0,W,H);
-
-    requestAnimationFrame(tick);
-  }
-
-  window.addEventListener('resize', function(){
-    resize();
-  },{passive:true});
-
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded', function(){
-      setTimeout(setup, 50);
-    });
-  } else {
-    setTimeout(setup, 50);
-  }
-})();
+/* canvas removed */
 </script>
 </body>
 </html>
