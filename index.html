@@ -651,6 +651,8 @@ footer{
 .h-mobile-circle{display:none}
 .h-mobile-pre{display:none}
 .h-title-mobile{display:none}
+.h-mobile-top{display:none}
+.h-mobile-bottom{display:none}
 
 @media(max-width:1024px){
   .svc-row{grid-template-columns:48px 1fr;gap:1.5rem}
@@ -667,94 +669,93 @@ footer{
 @media(max-width:640px){
   section{padding:4rem 1.2rem}
 
-  /* ── Hero mobile — variant 3 ── */
+  /* ── Hero mobile — variant 1 ── */
+  /* Hide desktop photo (PNG), stats, ghost */
   .h-photo{display:none!important}
   .h-stats{display:none!important}
   .h-ghost{display:none}
 
+  /* Hero: full viewport, flex-column */
   #hero{
+    min-height:100svh;
     justify-content:flex-start;
-    min-height:100vh;
     padding:0;
-  }
-
-  /* Hide desktop elements inside h-top */
-  .h-top{
-    display:block;
-    padding:calc(var(--nav-h) + 1rem) 1.2rem 0;
-    position:relative;z-index:2;
-    flex:0 0 auto;
-  }
-  .h-content{display:none}
-
-  /* Mobile block wrapper */
-  .h-mobile-block{
-    display:block;
-    padding:calc(var(--nav-h) + 1rem) 1.2rem 0;
-    position:relative;z-index:2;
-  }
-
-  /* Pre-line above the photo card */
-  .h-mobile-pre{
-    display:flex;align-items:center;gap:.6rem;
-    font-size:.58rem;font-weight:600;letter-spacing:.28em;
-    text-transform:uppercase;color:var(--acc);
-    margin-bottom:.8rem;
-  }
-  .h-mobile-pre::before{content:'';display:block;width:1.5rem;height:1px;background:var(--acc);flex-shrink:0}
-
-  /* Square photo card — rounded corners, name overlay */
-  .h-mobile-circle{
-    display:block;
-    width:100%;
-    border-radius:16px;
     overflow:hidden;
-    position:relative;
-    aspect-ratio:1/1;
-  }
-  .h-mobile-circle img{
-    display:block;width:100%;height:100%;
-    object-fit:cover;object-position:top center;
-    filter:grayscale(15%) contrast(1.05);
-  }
-  /* Name overlay at bottom of photo */
-  .h-mobile-circle::after{
-    content:'Denis Ivankov · Executive Chef';
-    position:absolute;bottom:0;left:0;right:0;
-    padding:.65rem 1rem;
-    background:linear-gradient(to top,rgba(8,8,10,.9) 0%,transparent 100%);
-    font-size:.6rem;font-weight:600;letter-spacing:.18em;
-    text-transform:uppercase;color:rgba(232,228,220,.82);
-  }
-  /* Gold line top */
-  .h-mobile-circle::before{
-    content:'';
-    position:absolute;top:0;left:0;right:0;
-    height:3px;background:var(--acc);z-index:1;
   }
 
-  /* Mobile title — below photo card, inside h-mobile-block */
+  /* Hide desktop h-top / h-content / h-bottom */
+  .h-top{display:none!important}
+  .h-bottom{display:none!important}
+
+  /* Mobile block: fills hero, stacks top-text / png / bottom-cta */
+  .h-mobile-block{
+    display:flex;
+    flex-direction:column;
+    min-height:100svh;
+    padding:0;
+    position:relative;
+  }
+
+  /* TOP: eyebrow + big title */
+  .h-mobile-top{
+    padding:calc(var(--nav-h) + .8rem) 1.2rem 0;
+    position:relative;z-index:3;
+    flex-shrink:0;
+  }
+  .h-mobile-pre{
+    display:flex;align-items:center;gap:.55rem;
+    font-size:.56rem;font-weight:600;letter-spacing:.26em;
+    text-transform:uppercase;color:var(--acc);
+    margin-bottom:.7rem;
+  }
+  .h-mobile-pre::before{content:'';display:block;width:1.2rem;height:1px;background:var(--acc);flex-shrink:0}
+
+  /* Big ID CHEF title */
   .h-title-mobile{
     display:block;
-    padding:1.2rem 0 0;
     font-family:var(--font-head);font-weight:900;
-    font-size:clamp(2.8rem,14vw,5rem);
-    line-height:.88;letter-spacing:-.02em;
-    color:var(--tx);
+    font-size:clamp(3rem,16vw,5.5rem);
+    line-height:.86;letter-spacing:-.025em;color:var(--tx);
   }
   .h-title-mobile .acc{color:var(--acc)}
-  .h-title-mobile .line2{display:block;padding-left:5vw}
+  .h-title-mobile .line2{display:block;padding-left:6vw}
   .h-title-mobile .line3{
-    display:block;font-size:.38em;font-weight:300;
-    letter-spacing:.02em;color:var(--tx2);margin-top:.45em;
+    display:block;font-size:.36em;font-weight:300;
+    letter-spacing:.02em;color:var(--tx2);margin-top:.5em;padding-left:.1em;
   }
 
-  .h-bottom{
-    flex-direction:column;align-items:flex-start;
-    padding:1.2rem 1.2rem 3rem;
-    position:relative;z-index:2;
+  /* MIDDLE: PNG, grows to fill remaining space */
+  .h-mobile-circle{
+    display:block;
+    flex:1;
+    position:relative;
+    min-height:0;
+    z-index:2;
   }
-  .h-offer{max-width:100%;font-size:.85rem}
+  .h-mobile-circle img{
+    display:block;
+    width:100%;height:100%;
+    object-fit:contain;
+    object-position:bottom center;
+  }
+
+  /* BOTTOM: CTA pinned over gradient */
+  .h-mobile-bottom{
+    position:relative;z-index:3;
+    padding:.6rem 1.2rem 2.5rem;
+    background:linear-gradient(to top,var(--c1) 55%,transparent);
+    flex-shrink:0;
+  }
+  .h-mobile-bottom .btn-primary{width:100%;justify-content:center}
+  .h-mobile-bottom .btn-secondary{
+    display:block;width:100%;text-align:center;
+    margin-top:.6rem;
+    background:transparent;color:var(--tx);
+    font-family:var(--font-body);font-size:.68rem;font-weight:400;
+    letter-spacing:.14em;text-transform:uppercase;text-decoration:none;
+    border:1px solid var(--c3);padding:.7rem;
+    transition:border-color .2s,color .2s;
+  }
 
   nav{padding:0 1rem}
   .lb{padding:.28rem .45rem;font-size:.58rem}
@@ -880,16 +881,22 @@ footer{
     <span>ИВАНКОВ</span>
     <span>ID CHEF</span>
   </div>
-  <!-- Mobile-only hero: pre-line + square photo card -->
+  <!-- Mobile hero — variant 1: title top, PNG center, CTA bottom -->
   <div class="h-mobile-block">
-    <div class="h-mobile-pre" data-i18n="h_pre">Executive Chef · Consultant · idchef13.lv</div>
-    <div class="h-mobile-circle">
-      <img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/deniss-ivankovs.jpg?updatedAt=1778052280390" alt="Денис Иванков"/>
+    <div class="h-mobile-top">
+      <p class="h-mobile-pre" data-i18n="h_pre">Executive Chef · Consultant · idchef13.lv</p>
+      <div class="h-title-mobile">
+        <span class="acc">ID</span><br>
+        <span class="line2">CHEF</span>
+        <span class="line3" data-i18n="h_line3">Иванков Денис</span>
+      </div>
     </div>
-    <div class="h-title-mobile">
-      <span class="acc">ID</span><br>
-      <span class="line2">CHEF</span>
-      <span class="line3" data-i18n="h_line3">Иванков Денис</span>
+    <div class="h-mobile-circle">
+      <img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/id%20hero%20block.png" alt="Денис Иванков"/>
+    </div>
+    <div class="h-mobile-bottom">
+      <a href="#contact" class="btn-primary" style="width:100%;justify-content:center;display:flex"><span data-i18n="cta1">Записаться на консультацию</span></a>
+      <a href="#services" class="btn-secondary" style="display:block;text-align:center;margin-top:.6rem;padding:.7rem;border:1px solid var(--c3);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--tx)" data-i18n="cta2">Узнать больше</a>
     </div>
   </div>
   <div class="h-top">
