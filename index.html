@@ -660,57 +660,105 @@ footer{
 }
 @media(max-width:640px){
   section{padding:4rem 1.2rem}
-  /* Hero mobile: photo as tall atmospheric bg, fades at bottom */
-  .h-photo{
-    display:block!important;
-    position:absolute;
-    top:0;left:0;right:0;
-    height:60%;
-    width:100%;
-    opacity:1;
-  }
-  .h-photo img{
-    width:100%;height:100%;
-    object-fit:cover;object-position:top center;
-    filter:grayscale(25%) contrast(1.05);
-  }
-  /* Gradient mask: photo top, dark bottom where text sits */
-  .h-photo::after{
-    content:'';
-    position:absolute;inset:0;
-    background:linear-gradient(to bottom,
-      transparent 0%,
-      rgba(17,17,20,.4) 50%,
-      var(--c1) 85%,
-      var(--c1) 100%
-    );
-  }
-  /* Text sits in bottom 40%, fully readable */
-  .h-top{justify-content:flex-end}
-  .h-content{padding-top:1.5rem}
-  .h-title{font-size:clamp(3.5rem,18vw,6rem)}
+
+  /* ── Hero mobile ── */
+  /* Hide desktop PNG photo */
+  .h-photo{display:none!important}
   .h-stats{display:none!important}
-  .h-bottom{flex-direction:column;align-items:flex-start;padding:1.2rem 1.2rem 3rem}
+
+  /* Hero becomes a normal flow column, content at top then title at bottom */
+  #hero{
+    justify-content:flex-start;
+    min-height:100vh;
+  }
+
+  /* Top row: pre-line left, circle portrait right */
+  .h-top{
+    display:flex;
+    flex-direction:row;
+    align-items:flex-start;
+    justify-content:space-between;
+    padding:calc(var(--nav-h) + 1.2rem) 1.2rem 0;
+    gap:1rem;
+    position:relative;z-index:2;
+    flex:0 0 auto;
+  }
+
+  /* h-content: only the pre-line, title hidden here */
+  .h-content{
+    padding:0;
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+  }
+  .h-pre{margin-bottom:0;font-size:.58rem;letter-spacing:.25em}
+  /* Title hidden inside h-content on mobile */
+  .h-title{display:none}
+
+  /* Circle portrait — top right */
+  .h-mobile-circle{
+    display:block;
+    width:clamp(90px,30vw,130px);
+    height:clamp(90px,30vw,130px);
+    flex-shrink:0;
+    border-radius:50%;
+    overflow:hidden;
+    border:3px solid var(--acc);
+    box-shadow:0 0 0 5px rgba(200,169,110,.15);
+    position:relative;z-index:2;
+  }
+  .h-mobile-circle img{
+    display:block;width:100%;height:100%;
+    object-fit:cover;object-position:top center;
+  }
+
+  /* Title block — shown separately after h-top, above stats/cta */
+  .h-title-mobile{
+    display:block;
+    position:relative;z-index:2;
+    padding:2rem 1.2rem 0;
+    font-family:var(--font-head);font-weight:900;
+    font-size:clamp(3.2rem,16vw,5.5rem);
+    line-height:.86;letter-spacing:-.02em;
+    color:var(--tx);
+  }
+  .h-title-mobile .acc{color:var(--acc)}
+  .h-title-mobile .line2{display:block;padding-left:6vw}
+  .h-title-mobile .line3{
+    display:block;font-size:.38em;font-weight:300;
+    letter-spacing:.01em;color:var(--tx2);margin-top:.4em;
+  }
+
+  .h-bottom{
+    flex-direction:column;align-items:flex-start;
+    padding:1.5rem 1.2rem 3rem;
+    position:relative;z-index:2;
+  }
+
   nav{padding:0 1rem}
   .lb{padding:.28rem .45rem;font-size:.58rem}
+
   /* Services mobile */
   .svc-row{grid-template-columns:1fr;gap:.6rem;padding:1.5rem 0}
   .sn{font-size:1rem;margin-bottom:.2rem}
-  /* Career mobile: gold line stays, photo 4:5 preserved, text below */
+
+  /* Career mobile */
   .exp-timeline{padding-left:1.8rem}
   .exp-timeline::before{display:block}
   .exp-dot-line{display:flex}
-  .exp-entry{
-    grid-template-columns:1fr;
-    gap:0;
-    padding-bottom:2.5rem;
-  }
+  .exp-entry{grid-template-columns:1fr;gap:0;padding-bottom:2.5rem}
   .exp-entry:last-child{padding-bottom:0}
   .exp-photo{width:100%;max-width:100%}
   .exp-photo img{aspect-ratio:4/5;border-radius:8px;width:100%;object-fit:cover}
   .exp-text{padding-top:1rem}
   .exp-title-tl{font-size:clamp(1.1rem,5vw,1.5rem)}
 }
+
+/* Mobile circle portrait — hidden on desktop */
+.h-mobile-circle{display:none}
+/* Mobile title block — hidden on desktop */
+.h-title-mobile{display:none}
 
 /* ── FORM GDPR checkbox ── */
 .f-check-wrap{
@@ -815,6 +863,10 @@ footer{
     <span>ИВАНКОВ</span>
     <span>ID CHEF</span>
   </div>
+  <!-- Mobile-only circle portrait -->
+  <div class="h-mobile-circle" aria-hidden="true">
+    <img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/deniss-ivankovs.jpg?updatedAt=1778052280390" alt="Денис Иванков"/>
+  </div>
   <div class="h-top">
     <div class="h-content">
       <p class="h-pre" data-i18n="h_pre">Шеф-повар · Консультант · idchef13.lv</p>
@@ -827,6 +879,12 @@ footer{
     <div class="h-photo">
       <img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/id%20hero%20block.png" alt="Денис Иванков"/>
     </div>
+  </div>
+  <!-- Mobile-only title (desktop title is inside h-content → h-title) -->
+  <div class="h-title-mobile">
+    <span class="acc">ID</span><br>
+    <span class="line2">CHEF</span>
+    <span class="line3" data-i18n="h_line3">Иванков Денис</span>
   </div>
   <div class="h-stats">
     <div class="h-stat">
@@ -1086,7 +1144,7 @@ footer{
         <p data-i18n="c_intro" style="margin-bottom:1.8rem">Расскажите о проекте — отвечу в течение 24 часов.</p>
         <div class="ct-dets">
           <div class="ct-row"><span class="ct-lbl" data-i18n="c_phone_lbl">Тел.</span><span class="ct-v"><a href="tel:+37125745745">+371 2 5745745</a></span></div>
-          <div class="ct-row"><span class="ct-lbl">Instagram</span><span class="ct-v"><a href="#" target="_blank">@idchef13</a></span></div>
+          <div class="ct-row"><span class="ct-lbl">Instagram</span><span class="ct-v"><a href="https://www.instagram.com/idchef13?igsh=NW15OHZqNXh5Z2tt" target="_blank">@idchef13</a></span></div>
           <div class="ct-row"><span class="ct-lbl">WhatsApp</span><span class="ct-v"><a href="https://wa.me/37125745745" target="_blank" data-i18n="c_write">Написать</a></span></div>
         </div>
       </div>
