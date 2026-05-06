@@ -660,8 +660,35 @@ footer{
 }
 @media(max-width:640px){
   section{padding:4rem 1.2rem}
-  /* Hero mobile: photo hidden, content at bottom */
-  .h-photo{display:none!important}
+  /* Hero mobile: photo as tall atmospheric bg, fades at bottom */
+  .h-photo{
+    display:block!important;
+    position:absolute;
+    top:0;left:0;right:0;
+    height:60%;
+    width:100%;
+    opacity:1;
+  }
+  .h-photo img{
+    width:100%;height:100%;
+    object-fit:cover;object-position:top center;
+    filter:grayscale(25%) contrast(1.05);
+  }
+  /* Gradient mask: photo top, dark bottom where text sits */
+  .h-photo::after{
+    content:'';
+    position:absolute;inset:0;
+    background:linear-gradient(to bottom,
+      transparent 0%,
+      rgba(17,17,20,.4) 50%,
+      var(--c1) 85%,
+      var(--c1) 100%
+    );
+  }
+  /* Text sits in bottom 40%, fully readable */
+  .h-top{justify-content:flex-end}
+  .h-content{padding-top:1.5rem}
+  .h-title{font-size:clamp(3.5rem,18vw,6rem)}
   .h-stats{display:none!important}
   .h-bottom{flex-direction:column;align-items:flex-start;padding:1.2rem 1.2rem 3rem}
   nav{padding:0 1rem}
@@ -669,7 +696,7 @@ footer{
   /* Services mobile */
   .svc-row{grid-template-columns:1fr;gap:.6rem;padding:1.5rem 0}
   .sn{font-size:1rem;margin-bottom:.2rem}
-  /* Career mobile: gold line stays, photo full-width, text below */
+  /* Career mobile: gold line stays, photo 4:5 preserved, text below */
   .exp-timeline{padding-left:1.8rem}
   .exp-timeline::before{display:block}
   .exp-dot-line{display:flex}
@@ -680,16 +707,35 @@ footer{
   }
   .exp-entry:last-child{padding-bottom:0}
   .exp-photo{width:100%;max-width:100%}
-  .exp-photo img{aspect-ratio:4/5;border-radius:8px;max-height:60vw;width:100%;object-fit:cover}
+  .exp-photo img{aspect-ratio:4/5;border-radius:8px;width:100%;object-fit:cover}
   .exp-text{padding-top:1rem}
   .exp-title-tl{font-size:clamp(1.1rem,5vw,1.5rem)}
 }
 
 /* ── FORM GDPR checkbox ── */
-.f-check-wrap{display:flex;align-items:flex-start;gap:.7rem;margin:.5rem 0}
-.f-check{width:16px;height:16px;flex-shrink:0;margin-top:3px;accent-color:var(--acc);cursor:pointer}
-.f-check-label{display:flex;align-items:flex-start;gap:.7rem;font-size:.78rem;font-weight:300;line-height:1.6;color:var(--tx2);cursor:pointer}
-.f-pp-link{background:none;border:none;padding:0;color:var(--acc);text-decoration:underline;cursor:pointer;font-size:.78rem;font-weight:400;display:inline}
+.f-check-wrap{
+  display:flex;align-items:flex-start;
+  gap:.75rem;margin:.5rem 0;
+  cursor:pointer;
+}
+.f-check-wrap:hover .f-check{border-color:var(--acc)}
+.f-check{
+  width:16px;height:16px;flex-shrink:0;
+  margin-top:.25rem;accent-color:var(--acc);cursor:pointer;
+}
+.f-check-text{
+  font-size:.78rem;font-weight:300;line-height:1.65;
+  color:var(--tx2);margin:0;cursor:default;
+}
+.f-check-text span{display:inline}
+.f-pp-link{
+  background:none;border:none;padding:0;
+  color:var(--acc);text-decoration:underline;
+  cursor:pointer;font-size:.78rem;font-weight:400;
+  font-family:inherit;display:inline;
+  line-height:inherit;
+}
+.f-pp-link:hover{color:var(--acc2)}
 
 /* ── MODALS ── */
 .modal-backdrop{
@@ -1037,7 +1083,7 @@ footer{
     <h2 class="section-title rv" data-i18n="c_title">Давайте<br>начнём</h2>
     <div class="ct-grid">
       <div class="rv-l">
-        <p data-i18n="c_intro">Расскажите о проекте — отвечу в течение 24 часов.</p>
+        <p data-i18n="c_intro" style="margin-bottom:1.8rem">Расскажите о проекте — отвечу в течение 24 часов.</p>
         <div class="ct-dets">
           <div class="ct-row"><span class="ct-lbl" data-i18n="c_phone_lbl">Тел.</span><span class="ct-v"><a href="tel:+37125745745">+371 2 5745745</a></span></div>
           <div class="ct-row"><span class="ct-lbl">Instagram</span><span class="ct-v"><a href="#" target="_blank">@idchef13</a></span></div>
@@ -1051,14 +1097,13 @@ footer{
           <div><label class="fl" data-i18n="f_name">Ваше имя</label><input type="text" class="fi" name="name" placeholder="Иван Петров" required data-i18n-ph="f_name_ph" data-fs-field/></div>
           <div><label class="fl" data-i18n="f_contact">Контакт</label><input type="text" class="fi" name="contact" placeholder="+371 XX XXX XXX" required data-i18n-ph="f_contact_ph" data-fs-field/></div>
           <div><label class="fl" data-i18n="f_msg">О проекте</label><textarea class="ft" name="message" placeholder="Формат, задача, сроки..." data-i18n-ph="f_msg_ph" data-fs-field></textarea></div>
-          <!-- GDPR checkbox with custom validation -->
+          <!-- GDPR checkbox -->
           <div class="f-check-wrap">
             <input type="checkbox" id="gdpr-check" class="f-check"/>
-            <label for="gdpr-check" class="f-check-label">
+            <p class="f-check-text">
               <span data-i18n="f_gdpr_pre">Я даю согласие на обработку моих персональных данных в соответствии с</span>
-              <button type="button" class="f-pp-link" onclick="openPrivacyLang()" data-i18n="f_gdpr_link">Политикой конфиденциальности</button>
-              <span data-i18n="f_gdpr_post">и понимаю, что данные будут обработаны через Formspree.</span>
-            </label>
+              <button type="button" class="f-pp-link" onclick="openPrivacyLang()" data-i18n="f_gdpr_link">Политикой конфиденциальности</button><span data-i18n="f_gdpr_post"> и понимаю, что данные будут обработаны через Formspree.</span>
+            </p>
           </div>
           <div id="gdpr-error" class="f-gdpr-error" style="display:none" data-i18n="f_gdpr_err">Пожалуйста, подтвердите согласие с Политикой конфиденциальности.</div>
           <div>
@@ -1233,7 +1278,7 @@ const TR={
     f_gdpr_pre:"Я даю согласие на обработку моих персональных данных в соответствии с",f_gdpr_link:"Политикой конфиденциальности",f_gdpr_post:"и понимаю, что данные будут обработаны через Formspree.",f_gdpr_err:"Пожалуйста, подтвердите согласие с Политикой конфиденциальности, чтобы продолжить.",
   },
   lv:{
-    nav_about:"Par šefu",nav_exp:"Pieredze",nav_services:"Pakalpojumi",nav_approach:"Pieeja",nav_contact:"Kontakts",
+    nav_about:"Par šefu",nav_exp:"Pieredze",nav_services:"Pakalpojumi",nav_approach:"Pieeja",nav_contact:"Kontakti",
     h_pre:"Šefpavārs · Konsultants · idchef13.lv",
     h_line3:"Deniss Ivankovs",
     h_exp:"Gadi pieredzē",h_fmt:"Darba formāti",h_langs:"Darba valodas",
