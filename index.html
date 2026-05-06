@@ -828,6 +828,48 @@ footer{
   display:none;
 }
 
+
+/* ── Nav: hide non-essential links on tablet ── */
+@media(max-width:900px){
+  .nav-hide-sm{display:none}
+}
+
+/* ── About: tablet — photos below text ── */
+@media(max-width:900px){
+  .about-grid{grid-template-columns:1fr;gap:3rem}
+  .p-pile{height:420px}
+}
+
+/* ── About: mobile — hide photo pile ── */
+@media(max-width:640px){
+  .p-pile{display:none}
+}
+
+/* ── Contact: mobile — form first, details below ── */
+@media(max-width:640px){
+  .ct-grid{
+    display:flex;
+    flex-direction:column-reverse; /* form comes first visually */
+    gap:2.5rem;
+  }
+  .ct-grid .rv-l{order:2}   /* details go below */
+  .ct-grid .rv-r{order:1}   /* form goes above */
+}
+
+
+/* ── Mobile hero canvas animation ── */
+#hero-canvas{
+  position:absolute;
+  inset:0;
+  width:100%;height:100%;
+  z-index:0;   /* behind the PNG (z-index:1) */
+  display:none; /* shown only on mobile via JS */
+}
+.h-mobile-circle img{
+  position:relative;
+  z-index:1;
+}
+
 </style>
 </head>
 <body>
@@ -838,10 +880,10 @@ footer{
 <nav id="main-nav">
   <a href="#hero" class="n-logo">ID<span class="dot">.</span>CHEF</a>
   <ul class="n-links">
-    <li><a href="#about"      data-i18n="nav_about">О шефе</a></li>
-    <li><a href="#experience" data-i18n="nav_exp">Опыт</a></li>
+    <li class="nav-hide-sm"><a href="#about"      data-i18n="nav_about">О шефе</a></li>
+    <li class="nav-hide-sm"><a href="#experience" data-i18n="nav_exp">Опыт</a></li>
     <li><a href="#services"   data-i18n="nav_services">Услуги</a></li>
-    <li><a href="#approach"   data-i18n="nav_approach">Подход</a></li>
+    <li class="nav-hide-sm"><a href="#approach"   data-i18n="nav_approach">Подход</a></li>
     <li><a href="#contact"    data-i18n="nav_contact">Контакт</a></li>
   </ul>
   <div class="lang-sw">
@@ -869,6 +911,7 @@ footer{
       </div>
     </div>
     <div class="h-mobile-circle">
+      <canvas id="hero-canvas" aria-hidden="true"></canvas>
       <img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/id%20hero%20block.png" alt="Денис Иванков"/>
     </div>
     <div class="h-mobile-bottom">
@@ -1525,6 +1568,115 @@ function openPrivacyLang(){
 
 </script>
 <script>window.formspree=window.formspree||function(){(formspree.q=formspree.q||[]).push(arguments)};</script>
-<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer>
+/* ── Mobile hero canvas: particles + sweep lines behind chef ── */
+(function(){
+  function initCanvas(){
+    var c=document.getElementById('hero-canvas');
+    if(!c)return;
+    // only run on mobile
+    if(window.innerWidth>640){c.style.display='none';return;}
+    c.style.display='block';
+    var ctx=c.getContext('2d');
+    function resize(){
+      c.width=c.offsetWidth;
+      c.height=c.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize',resize,{passive:true});
+
+    // Particles
+    var P=[];
+    var N=38;
+    var acc='rgba(200,169,110,';
+    var red='rgba(184,52,26,';
+    for(var i=0;i<N;i++){
+      P.push({
+        x:Math.random(),
+        y:Math.random(),
+        r:Math.random()*1.8+.4,
+        vx:(Math.random()-.5)*.0004,
+        vy:-(Math.random()*.0006+.0002),
+        o:Math.random()*.5+.15,
+        col:Math.random()>.75?red:acc,
+        life:Math.random()
+      });
+    }
+
+    // Sweep lines state
+    var sweeps=[
+      {y:.15,speed:.0003,w:.55,o:.0,dir:1},
+      {y:.55,speed:.0002,w:.4, o:.0,dir:-1},
+      {y:.8, speed:.00035,w:.35,o:.0,dir:1},
+    ];
+
+    var frame=0;
+    function tick(){
+      var W=c.width, H=c.height;
+      ctx.clearRect(0,0,W,H);
+
+      // --- sweep horizontal lines ---
+      sweeps.forEach(function(s){
+        s.o+=s.speed*s.dir*60;
+        if(s.o>0.22)s.dir=-1;
+        if(s.o<0)  {s.dir=1;s.o=0;}
+        var gy=s.y*H;
+        var grd=ctx.createLinearGradient(0,gy,W,gy);
+        grd.addColorStop(0,'transparent');
+        grd.addColorStop(.2,acc+s.o+')');
+        grd.addColorStop(.5,acc+(s.o*.6)+')');
+        grd.addColorStop(1,'transparent');
+        ctx.beginPath();
+        ctx.moveTo(0,gy);ctx.lineTo(W,gy);
+        ctx.strokeStyle=grd;
+        ctx.lineWidth=s.w;
+        ctx.stroke();
+      });
+
+      // --- particles ---
+      P.forEach(function(p){
+        p.x+=p.vx; p.y+=p.vy;
+        p.life+=.004;
+        // reset when off top
+        if(p.y<-.02){
+          p.y=1.02; p.x=Math.random();
+          p.life=0;
+        }
+        var fade=Math.sin(p.life*Math.PI);
+        ctx.beginPath();
+        ctx.arc(p.x*W, p.y*H, p.r, 0, 6.28);
+        ctx.fillStyle=p.col+(p.o*fade)+')';
+        ctx.fill();
+      });
+
+      // --- radial pulse glow behind figure (center) ---
+      frame++;
+      var pulse=Math.sin(frame*.018)*.5+.5;
+      var cx=W*.5, cy=H*.55;
+      var grd2=ctx.createRadialGradient(cx,cy,0,cx,cy,W*.55);
+      grd2.addColorStop(0,acc+(pulse*.08)+')');
+      grd2.addColorStop(.5,acc+(pulse*.03)+')');
+      grd2.addColorStop(1,'transparent');
+      ctx.fillStyle=grd2;
+      ctx.fillRect(0,0,W,H);
+
+      requestAnimationFrame(tick);
+    }
+    tick();
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',initCanvas);
+  } else {
+    initCanvas();
+  }
+  // re-init on resize crossing 640px boundary
+  var wasM=window.innerWidth<=640;
+  window.addEventListener('resize',function(){
+    var isM=window.innerWidth<=640;
+    if(isM!==wasM){wasM=isM;initCanvas();}
+  },{passive:true});
+})();
+
+</script>
 </body>
 </html>
