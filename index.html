@@ -860,19 +860,16 @@ footer{
 /* ── Hero canvas animation — all screen sizes ── */
 #hero-canvas{
   position:absolute;
-  inset:0;
-  width:100%;height:100%;
-  z-index:0;
+  top:0;left:0;
   pointer-events:none;
   display:block;
+  z-index:0;
 }
-/* Ensure all hero content sits above canvas */
-.h-ghost{z-index:0}
-.h-top{z-index:1}
-.h-stats{position:relative;z-index:1}
-.h-bottom{position:relative;z-index:1}
-.h-mobile-block{position:relative;z-index:1}
-.h-mobile-circle img{position:relative;z-index:1}
+/* Ensure hero content sits above canvas */
+.h-ghost,.h-top,.h-stats,.h-bottom,.h-mobile-block{
+  position:relative;
+  z-index:1;
+}
 
 </style>
 </head>
@@ -1590,9 +1587,9 @@ function openPrivacyLang(){
       P.push({
         x:Math.random(), y:Math.random()+.1,
         r:Math.random()*2+.5,
-        vx:(Math.random()-.5)*.00035,
-        vy:-(Math.random()*.00055+.00015),
-        o:Math.random()*.55+.1,
+        vx:(Math.random()-.5)*.0008,
+        vy:-(Math.random()*.0012+.0004),
+        o:Math.random()*.7+.25,
         col:Math.random()>.8?red:acc,
         life:Math.random()
       });
@@ -1600,21 +1597,30 @@ function openPrivacyLang(){
 
     // sweep lines
     sweeps = [
-      {y:.18, s:.00028, w:.7,  o:.0, dir:1},
-      {y:.42, s:.00018, w:.5,  o:.0, dir:-1},
-      {y:.68, s:.00032, w:.6,  o:.0, dir:1},
-      {y:.88, s:.00022, w:.4,  o:.0, dir:-1},
+      {y:.18, s:.0012, w:1.5, o:.12, dir:1},
+      {y:.42, s:.0008, w:1.2, o:.08, dir:-1},
+      {y:.65, s:.0014, w:1.0, o:.10, dir:1},
+      {y:.85, s:.0010, w:.8,  o:.06, dir:-1},
     ];
 
-    if(!running){ running=true; tick(); }
+    if(!running){ running=true; 
+      // Draw initial state immediately so canvas is visibly active
+      resize();
+      tick();
+    }
   }
 
   function resize(){
     if(!c) return;
     var hero = document.getElementById('hero');
-    c.width  = hero ? hero.offsetWidth  : window.innerWidth;
-    c.height = hero ? hero.offsetHeight : window.innerHeight;
-    W=c.width; H=c.height;
+    var w = hero ? hero.offsetWidth  : window.innerWidth;
+    var h = hero ? hero.offsetHeight : window.innerHeight;
+    // Fallback if hero has no height yet
+    if(h < 100) h = window.innerHeight;
+    if(w < 100) w = window.innerWidth;
+    c.setAttribute('width',  w);
+    c.setAttribute('height', h);
+    W=w; H=h;
   }
 
   function tick(){
@@ -1624,8 +1630,8 @@ function openPrivacyLang(){
 
     // sweep lines
     sweeps.forEach(function(s){
-      s.o += s.s*s.dir*1.2;
-      if(s.o>0.28){s.dir=-1;}
+      s.o += s.s*s.dir;
+      if(s.o>0.45){s.dir=-1;}
       if(s.o<0)   {s.dir=1;s.o=0;}
       var y=s.y*H;
       var g=ctx.createLinearGradient(0,0,W,0);
@@ -1644,7 +1650,7 @@ function openPrivacyLang(){
     P.forEach(function(p){
       p.x+=p.vx; p.y+=p.vy;
       p.life+=.003;
-      if(p.y<-.02){ p.y=1.04; p.x=Math.random(); p.life=0; }
+      if(p.y<-.02){ p.y=1.02; p.x=Math.random(); p.life=0; p.o=Math.random()*.7+.25; }
       if(p.x<-.02||p.x>1.02){ p.x=Math.random(); }
       var fade=Math.sin(Math.min(p.life,1)*Math.PI);
       ctx.beginPath();
@@ -1658,8 +1664,8 @@ function openPrivacyLang(){
     var pulse=Math.sin(frame*.015)*.5+.5;
     var cx=W*.5, cy=H*.48;
     var gr=ctx.createRadialGradient(cx,cy,0, cx,cy, W*.62);
-    gr.addColorStop(0,'rgba(200,169,110,'+(pulse*.1)+')');
-    gr.addColorStop(.45,'rgba(200,169,110,'+(pulse*.04)+')');
+    gr.addColorStop(0,'rgba(200,169,110,'+(pulse*.22)+')');
+    gr.addColorStop(.45,'rgba(200,169,110,'+(pulse*.08)+')');
     gr.addColorStop(1,'transparent');
     ctx.fillStyle=gr;
     ctx.fillRect(0,0,W,H);
@@ -1667,7 +1673,7 @@ function openPrivacyLang(){
     // subtle red accent glow — lower right
     var pulse2=Math.sin(frame*.011+1.2)*.5+.5;
     var gr2=ctx.createRadialGradient(W*.78,H*.72,0, W*.78,H*.72, W*.35);
-    gr2.addColorStop(0,'rgba(184,52,26,'+(pulse2*.08)+')');
+    gr2.addColorStop(0,'rgba(184,52,26,'+(pulse2*.18)+')');
     gr2.addColorStop(1,'transparent');
     ctx.fillStyle=gr2;
     ctx.fillRect(0,0,W,H);
@@ -1680,9 +1686,11 @@ function openPrivacyLang(){
   },{passive:true});
 
   if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded', setup);
+    document.addEventListener('DOMContentLoaded', function(){
+      setTimeout(setup, 50);
+    });
   } else {
-    setup();
+    setTimeout(setup, 50);
   }
 })();
 </script>
