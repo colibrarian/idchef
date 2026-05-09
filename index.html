@@ -792,6 +792,16 @@ footer{
 }
 .f-pp-link:hover{color:var(--acc2)}
 
+.cc-pp-link{
+  background:none;border:none;padding:0;
+  color:var(--acc);text-decoration:underline;
+  cursor:pointer;font-size:.75rem;font-weight:300;
+  font-family:inherit;display:inline;
+  line-height:inherit;
+}
+.cc-pp-link:hover{color:var(--acc2)}
+
+
 /* ── MODALS ── */
 .modal-backdrop{
   position:fixed;inset:0;z-index:20000;
@@ -924,7 +934,7 @@ footer{
 <div id="cookie-consent" role="dialog" aria-label="Cookie consent">
   <p class="cc-text">
     By continuing to use this site, you agree to our
-    <button class="cc-text" onclick="openPrivacy()" style="display:inline;padding:0;border:none;background:none;color:var(--acc);text-decoration:underline;cursor:pointer;font-size:.75rem;font-weight:300;">Privacy Policy</button>
+    <button class="cc-pp-link" onclick="openPrivacy()">Privacy Policy</button>
     and the use of cookies to improve your experience.
   </p>
   <div class="cc-actions">
@@ -1270,7 +1280,7 @@ footer{
           <!-- GDPR checkbox -->
           <div class="f-check-wrap">
             <input type="checkbox" id="gdpr-check" class="f-check"/>
-            <p class="f-check-text">
+            <span class="f-check-text">
               <span data-i18n="f_gdpr_pre">Я даю согласие на обработку моих персональных данных в соответствии с</span>
               <button type="button" class="f-pp-link" onclick="openPrivacyLang()" data-i18n="f_gdpr_link">Политикой конфиденциальности</button><span data-i18n="f_gdpr_post"> и понимаю, что данные будут обработаны через Formspree.</span>
             </p>
