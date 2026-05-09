@@ -661,13 +661,9 @@ footer{
     position:relative;
   }
 
-  /* TOP — eyebrow + title — overlaid top-left, above photo */
+  /* TOP — eyebrow + title — hidden on mobile (moved to bottom overlay) */
   .h-mobile-top{
-    display:block;
-    position:absolute;
-    top:calc(var(--nav-h) + .6rem);
-    left:1.2rem;right:1.2rem;
-    z-index:3;
+    display:none;
   }
   .h-mobile-pre{
     display:flex;align-items:center;gap:.55rem;
@@ -716,14 +712,26 @@ footer{
     position:absolute;
     bottom:0;left:0;right:0;
     z-index:4;
-    padding:3.5rem 1.2rem 2.8rem;
+    padding:7rem 1.2rem 2.8rem;
     background:linear-gradient(to top,
-      rgba(17,17,20,.96) 0%,
-      rgba(17,17,20,.88) 40%,
-      rgba(17,17,20,.5) 70%,
+      rgba(17,17,20,.97) 0%,
+      rgba(17,17,20,.94) 35%,
+      rgba(17,17,20,.75) 58%,
+      rgba(17,17,20,.3) 75%,
       transparent 100%
     );
   }
+  /* Title block inside bottom overlay */
+  .h-mobile-bottom-title{
+    margin-bottom:.9rem;
+  }
+  .h-mobile-bottom-title .h-mobile-pre{
+    display:flex;align-items:center;gap:.55rem;
+    font-size:.54rem;font-weight:600;letter-spacing:.24em;
+    text-transform:uppercase;color:var(--acc);
+    margin-bottom:.5rem;
+  }
+  .h-mobile-bottom-title .h-mobile-pre::before{content:'';display:block;width:1.2rem;height:1px;background:var(--acc);flex-shrink:0}
   .h-mobile-bottom .btn-primary{
     display:flex;width:100%;justify-content:center;
   }
@@ -899,6 +907,14 @@ footer{
       <img src="https://ik.imagekit.io/xwsgpirygo/id%20chef/id%20hero%20block.png" alt="Денис Иванков"/>
     </div>
     <div class="h-mobile-bottom">
+      <div class="h-mobile-bottom-title">
+        <p class="h-mobile-pre" data-i18n="h_pre">Executive Chef · Consultant · idchef13.lv</p>
+        <div class="h-title-mobile">
+          <span class="acc">ID</span><br>
+          <span class="line2">CHEF</span>
+          <span class="line3" data-i18n="h_line3">Иванков Денис</span>
+        </div>
+      </div>
       <p class="h-offer-mob" data-i18n="h_offer">Запускаю рестораны с нуля, выстраиваю кухонные процессы и превращаю операционный хаос в прибыльную систему.</p>
       <a href="#contact" class="btn-primary"><span data-i18n="cta1">Записаться на консультацию</span></a>
     </div>
