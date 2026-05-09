@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>ID Chef — Иванков Денис | idchef13.lv</title>
+<title>ID Chef — Иванков Денис | idchef13.com</title>
 <meta name="description" content="ID Chef — Иванков Денис. Шеф-повар, консультант. 30+ лет. Запуск ресторанов, оптимизация, разработка меню. Рига, Латвия."/>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Денис Иванков","jobTitle":"Шеф-повар, консультант","brand":{"@type":"Brand","name":"ID Chef"},"url":"https://idchef13.lv","telephone":"+37125745745","email":"info@idchef13.lv"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Денис Иванков","jobTitle":"Шеф-повар, консультант","brand":{"@type":"Brand","name":"ID Chef"},"url":"https://idchef13.com","telephone":"+37125745745","email":"info@idchef13.com"}</script>
 
 <!-- Fonts: Noto Sans supports Cyrillic + Latin perfectly, Playfair Display for display headers -->
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -661,8 +661,16 @@ footer{
     position:relative;
   }
 
-  /* TOP — eyebrow + title — hidden on mobile (moved to bottom overlay) */
+  /* TOP — eyebrow tag pinned just under the header */
   .h-mobile-top{
+    display:block;
+    position:absolute;
+    top:calc(var(--nav-h) + .6rem);
+    left:1.2rem;right:1.2rem;
+    z-index:3;
+  }
+  /* Hide the title inside h-mobile-top (title lives in bottom overlay) */
+  .h-mobile-top .h-title-mobile{
     display:none;
   }
   .h-mobile-pre{
@@ -863,9 +871,67 @@ footer{
 
 /* canvas animation removed */
 
+/* ── COOKIE CONSENT BANNER ── */
+#cookie-consent{
+  position:fixed;bottom:0;left:0;right:0;z-index:19000;
+  background:rgba(17,17,20,.97);
+  border-top:1px solid var(--c3);
+  padding:1.2rem 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:1.5rem;flex-wrap:wrap;
+  backdrop-filter:blur(12px);
+  transform:translateY(100%);
+  transition:transform .4s cubic-bezier(.16,1,.3,1);
+}
+#cookie-consent.visible{transform:translateY(0)}
+.cc-text{
+  font-size:.75rem;font-weight:300;line-height:1.7;color:var(--tx2);
+  flex:1;min-width:200px;
+}
+.cc-text a{color:var(--acc);text-decoration:underline;cursor:pointer;background:none;border:none;font-size:.75rem;font-family:inherit}
+.cc-actions{display:flex;gap:.7rem;flex-shrink:0}
+.cc-btn-accept{
+  padding:.6rem 1.4rem;
+  background:var(--acc);color:var(--c0);
+  font-family:var(--font-body);font-size:.65rem;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;
+  border:none;cursor:pointer;
+  transition:background .2s;white-space:nowrap;
+}
+.cc-btn-accept:hover{background:var(--acc2)}
+.cc-btn-decline{
+  padding:.6rem 1.2rem;
+  background:transparent;color:var(--tx3);
+  font-family:var(--font-body);font-size:.65rem;font-weight:400;
+  letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid var(--c3);cursor:pointer;
+  transition:border-color .2s,color .2s;white-space:nowrap;
+}
+.cc-btn-decline:hover{border-color:var(--tx2);color:var(--tx2)}
+@media(max-width:640px){
+  #cookie-consent{flex-direction:column;gap:1rem;padding:1.2rem 1.2rem 2rem}
+  .cc-actions{width:100%;flex-direction:column}
+  .cc-btn-accept,.cc-btn-decline{width:100%;text-align:center;padding:.75rem}
+}
+
+
 </style>
 </head>
 <body>
+
+
+<!-- ══ COOKIE CONSENT ══ -->
+<div id="cookie-consent" role="dialog" aria-label="Cookie consent">
+  <p class="cc-text">
+    By continuing to use this site, you agree to our
+    <button class="cc-text" onclick="openPrivacy()" style="display:inline;padding:0;border:none;background:none;color:var(--acc);text-decoration:underline;cursor:pointer;font-size:.75rem;font-weight:300;">Privacy Policy</button>
+    and the use of cookies to improve your experience.
+  </p>
+  <div class="cc-actions">
+    <button class="cc-btn-accept" onclick="acceptCookies()">Accept</button>
+    <button class="cc-btn-decline" onclick="declineCookies()">Decline</button>
+  </div>
+</div>
 
 <div id="grain" aria-hidden="true"></div>
 
@@ -896,7 +962,7 @@ footer{
   <!-- Mobile hero — variant 1: title top, PNG full, CTA+text bottom overlay -->
   <div class="h-mobile-block">
     <div class="h-mobile-top">
-      <p class="h-mobile-pre" data-i18n="h_pre">Executive Chef · Consultant · idchef13.lv</p>
+      <p class="h-mobile-pre" data-i18n="h_pre">Executive Chef · Consultant · idchef13.com</p>
       <div class="h-title-mobile">
         <span class="acc">ID</span><br>
         <span class="line2">CHEF</span>
@@ -908,7 +974,7 @@ footer{
     </div>
     <div class="h-mobile-bottom">
       <div class="h-mobile-bottom-title">
-        <p class="h-mobile-pre" data-i18n="h_pre">Executive Chef · Consultant · idchef13.lv</p>
+        <p class="h-mobile-pre" data-i18n="h_pre">Executive Chef · Consultant · idchef13.com</p>
         <div class="h-title-mobile">
           <span class="acc">ID</span><br>
           <span class="line2">CHEF</span>
@@ -921,7 +987,7 @@ footer{
   </div>
   <div class="h-top">
     <div class="h-content">
-      <p class="h-pre" data-i18n="h_pre">Шеф-повар · Консультант · idchef13.lv</p>
+      <p class="h-pre" data-i18n="h_pre">Шеф-повар · Консультант · idchef13.com</p>
       <div class="h-title">
         <span class="acc">ID</span><br>
         <span class="line2">CHEF</span>
@@ -1196,7 +1262,7 @@ footer{
       </div>
       <div class="rv-r">
         <form id="ct-form" class="ct-form" action="https://formspree.io/f/mlgznvjr" method="POST">
-          <input type="hidden" name="_subject" value="Новая заявка с idchef13.lv"/>
+          <input type="hidden" name="_subject" value="Новая заявка с idchef13.com"/>
           <input type="hidden" name="_language" id="form-lang" value="en"/>
           <div><label class="fl" data-i18n="f_name">Ваше имя</label><input type="text" class="fi" name="name" placeholder="Иван Петров" required data-i18n-ph="f_name_ph" data-fs-field/></div>
           <div><label class="fl" data-i18n="f_contact">Контакт</label><input type="text" class="fi" name="contact" placeholder="+371 XX XXX XXX" required data-i18n-ph="f_contact_ph" data-fs-field/></div>
@@ -1231,7 +1297,7 @@ footer{
     <li><a href="javascript:void(0)" onclick="openPrivacy()" data-i18n="nav_privacy">Политика конфиденциальности</a></li>
     <li><a href="javascript:void(0)" onclick="openCookies()" data-i18n="nav_cookies">Cookies</a></li>
   </ul>
-  <p class="fl-copy">© 2026 ID Chef · idchef13.lv</p>
+  <p class="fl-copy">© 2026 ID Chef · idchef13.com</p>
 </footer>
 
 <!-- ══ PRIVACY MODAL ══ -->
@@ -1340,7 +1406,7 @@ footer{
 const TR={
   ru:{
     nav_about:"О шефе",nav_exp:"Опыт",nav_services:"Услуги",nav_approach:"Подход",nav_contact:"Контакт",
-    h_pre:"Шеф-повар · Консультант · idchef13.lv",
+    h_pre:"Шеф-повар · Консультант · idchef13.com",
     h_line3:"Иванков Денис",
     h_exp:"Лет опыта",h_fmt:"Форматов работы",h_langs:"Языки работы",
     h_offer:"Запускаю рестораны с нуля, выстраиваю кухонные процессы и превращаю операционный хаос в прибыльную систему.",
@@ -1383,7 +1449,7 @@ const TR={
   },
   lv:{
     nav_about:"Par šefu",nav_exp:"Pieredze",nav_services:"Pakalpojumi",nav_approach:"Pieeja",nav_contact:"Kontakti",
-    h_pre:"Šefpavārs · Konsultants · idchef13.lv",
+    h_pre:"Šefpavārs · Konsultants · idchef13.com",
     h_line3:"Deniss Ivankovs",
     h_exp:"Gadi pieredzē",h_fmt:"Darba formāti",h_langs:"Darba valodas",
     h_offer:"Atveru restorānus no nulles, veidoju virtuves procesus un pārvērtu operatīvo haosu par ienesīgu sistēmu.",
@@ -1426,7 +1492,7 @@ const TR={
   },
   en:{
     nav_about:"About",nav_exp:"Experience",nav_services:"Services",nav_approach:"Approach",nav_contact:"Contact",
-    h_pre:"Executive Chef · Consultant · idchef13.lv",
+    h_pre:"Executive Chef · Consultant · idchef13.com",
     h_line3:"Denis Ivankov",
     h_exp:"Years of exp.",h_fmt:"Work formats",h_langs:"Working languages",
     h_offer:"I launch restaurants from scratch, build kitchen systems and turn operational chaos into profitable operations.",
@@ -1512,6 +1578,27 @@ window.addEventListener('scroll',()=>{
 
 /* experience: now uses vertical timeline, no JS needed */
 
+
+
+/* ── COOKIE CONSENT ── */
+(function(){
+  function showBanner(){
+    setTimeout(function(){
+      var b=document.getElementById('cookie-consent');
+      if(b)b.classList.add('visible');
+    },800);
+  }
+  function hideBanner(){
+    var b=document.getElementById('cookie-consent');
+    if(b){b.classList.remove('visible');setTimeout(function(){b.style.display='none'},400);}
+  }
+  window.acceptCookies=function(){localStorage.setItem('cc','accepted');hideBanner();}
+  window.declineCookies=function(){localStorage.setItem('cc','declined');hideBanner();}
+  document.addEventListener('DOMContentLoaded',function(){
+    var cc=localStorage.getItem('cc');
+    if(!cc) showBanner();
+  });
+})();
 
 /* ── MODAL ── */
 function openPrivacy(){document.getElementById('pp-modal').style.display='flex'}
